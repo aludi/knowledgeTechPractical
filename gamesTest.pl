@@ -13,6 +13,7 @@ game(luna, 2, 4, 60, twaalf, fantasy).
 game(betrayal_legacy, 2, 5, 45, twaalf, adventure).
 game(madeup1, 2, 30, 45, twaalf, adventure).
 game(madeup2, 2, 5, 5, vijf, adventure).
+game(madeup3, 1, 2, 10, vijf, strategy).
 
 
 newgame(nieuw, numPlay(A, B, C)).
