@@ -4,50 +4,69 @@ import tkinter as tk
 
 def do_something():
 	print("im doing something")
+	
+def load_knowledge_base():		#implementing knowledge base in separate function
+	prolog.assertz("game(spacecorp, 2, 4, 30, 12, science_fiction)")
+	prolog.assertz("game(luna, 2, 4, 60, 12, fantasy)")
+	prolog.assertz("game(betrayal_legacy, 2, 5, 45, 12, adventure)")
+	prolog.assertz("game(madeup1, 2, 30, 45, 12, adventure)")
+	prolog.assertz("game(madeup2, 2, 5, 5, 4, adventure)")
+	prolog.assertz("game(madeup3, 1, 2, 10, 5, strategy)")
 
-prolog = Prolog()
-#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
-root = tk.Tk()
-w = tk.Label(root, font = "Times 16 bold", fg = "blue", text = "Hello\n I will help you select a boardgame!")
-pic = tk.PhotoImage(file = "img/scaryOwl.gif")
-w1 = tk.Label(root, image = pic).pack(side= "right")
-tk.Button(root, text="ok, let's start!", command = do_something).pack(side = "bottom")
-w.pack()
-root.mainloop()
-#prolog.assertz("father(michael,john)")
-#prolog.assertz("father(michael,gina)")
-#list(prolog.query("father(michael,X)")) == [{'X': 'john'}, {'X': 'gina'}]
-#for soln in prolog.query("father(X,Y)"):
-#    print(soln["X"], "is the father of", soln["Y"])
-# michael is the father of john
-# michael is the father of gina
 
+def query(numberOfPlayers, genre, minAge):		#querying based on 2 things
+	return prolog.query("A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N).".format(numberOfPlayers, genre, minAge)) #inference rule
+
+def gui():
+	#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
+	root = tk.Tk()
+	w = tk.Label(root, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
+	pic = tk.PhotoImage(file = "img/scaryOwl.gif") #must always be a gif, thinter doesn't like other formats.
+	w1 = tk.Label(root, image = pic).pack(side= "right")
+	tk.Button(root, text="ok, let's start!", command = do_something).pack(side = "bottom")
+	w.pack()
+	root.mainloop()
 
 #knowledge base:
+'''
 prolog.assertz("game(spacecorp, 2, 4, 30, twaalf, science_fiction)")
 prolog.assertz("game(luna, 2, 4, 60, twaalf, fantasy)")
 prolog.assertz("game(betrayal_legacy, 2, 5, 45, twaalf, adventure)")
 prolog.assertz("game(madeup1, 2, 30, 45, twaalf, adventure)")
 prolog.assertz("game(madeup2, 2, 5, 5, vijf, adventure)")
-prolog.assertz("game(madeup3, 1, 2, 10, vijf, strategy)")
+prolog.assertz("game(madeup3, 1, 2, 10, vijf, strategy)")'''
 
+prolog = Prolog()
+kb = load_knowledge_base()		#loading the knowledge base
+gui()							#loads the gui
 #rule for min/max
 prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
+# rule for min age
+prolog.assertz("minimumAge(M, N):- N >= M")
 
-#list(prolog.query("A is 4, game(X, B, C,_,_,_), numPlay(A, B, C)"))
 
 
 #unsubtle way of selecting for 
 
 numberOfPlayers = input("with how many players do you want to play?\n")
-print("you want to play with:", numberOfPlayers, "players")
+print("you want to play with ", numberOfPlayers, "players")
 genre = input("what genre do you want?\n")
-print("you want to play:", genre , "genre")
+print("you want to play a ", genre , "game")
+minAge = input("what is the minimum age of the players?\n")
+print("your min age is ", minAge)
 
 
-for soln in prolog.query("A is {}, Z = {}, game(X, B, C,_,_,Z), numPlay(A, B, C)".format(numberOfPlayers, genre)):
+x= 0
+for soln in query(numberOfPlayers, genre, minAge):
 	print("you can play:", (soln["X"]))
+	x = 1
+if x == 0:
+	print("sorry, we couldn't find any games for you")
 
+
+
+## retracting facts?
+## only asserting facts when gui prompts?
 
 '''
 /* queries: 
