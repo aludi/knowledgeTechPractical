@@ -23,7 +23,7 @@ def gui():
 	#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 	root = tk.Tk()
 	w = tk.Label(root, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
-	pic = tk.PhotoImage(file = "img/scaryowl.gif") #must always be a gif, thinter doesn't like other formats.
+	pic = tk.PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
 	w1 = tk.Label(root, image = pic).pack(side= "right")
 	tk.Button(root, text="ok, let's start!", command = do_something).pack(side = "bottom")
 	w.pack()
