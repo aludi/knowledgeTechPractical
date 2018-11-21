@@ -1,11 +1,11 @@
 from pyswip import Prolog
 prolog = Prolog()
 
-prolog.assertz("father(michael,john)")
-prolog.assertz("father(michael,gina)")
-list(prolog.query("father(michael,X)")) == [{'X': 'john'}, {'X': 'gina'}]
-for soln in prolog.query("father(X,Y)"):
-    print(soln["X"], "is the father of", soln["Y"])
+#prolog.assertz("father(michael,john)")
+#prolog.assertz("father(michael,gina)")
+#list(prolog.query("father(michael,X)")) == [{'X': 'john'}, {'X': 'gina'}]
+#for soln in prolog.query("father(X,Y)"):
+#    print(soln["X"], "is the father of", soln["Y"])
 # michael is the father of john
 # michael is the father of gina
 
@@ -23,9 +23,15 @@ prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
 
 #list(prolog.query("A is 4, game(X, B, C,_,_,_), numPlay(A, B, C)"))
 
+
+#unsubtle way of selecting for 
 numberOfPlayers = input("with how many players do you want to play?\n")
 print("you want to play with:", numberOfPlayers, "players\n")
-for soln in prolog.query("A is {}, game(X, B, C,_,_,_), numPlay(A, B, C)".format(numberOfPlayers)):
+genre = input("what genre do you want?\n")
+print("you want to play:", genre , "genre\n")
+
+
+for soln in prolog.query("A is {}, Z = {}, game(X, B, C,_,_,Z), numPlay(A, B, C)".format(numberOfPlayers, genre)):
 	print("you can play:", (soln["X"]))
 
 
