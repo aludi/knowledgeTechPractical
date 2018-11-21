@@ -1,6 +1,15 @@
 from pyswip import Prolog
+import tkinter as tk
 prolog = Prolog()
 
+
+#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
+root = tk.Tk()
+w = tk.Label(root, font = "Times 16 bold", fg = "blue", text = "Hello\n We will help you select a boardgame!")
+pic = tk.PhotoImage(file = "img/scaryOwl.gif")
+w1 = tk.Label(root, image = pic).pack(side= "right")
+w.pack()
+root.mainloop()
 #prolog.assertz("father(michael,john)")
 #prolog.assertz("father(michael,gina)")
 #list(prolog.query("father(michael,X)")) == [{'X': 'john'}, {'X': 'gina'}]
@@ -25,10 +34,11 @@ prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
 
 
 #unsubtle way of selecting for 
+
 numberOfPlayers = input("with how many players do you want to play?\n")
-print("you want to play with:", numberOfPlayers, "players\n")
+print("you want to play with:", numberOfPlayers, "players")
 genre = input("what genre do you want?\n")
-print("you want to play:", genre , "genre\n")
+print("you want to play:", genre , "genre")
 
 
 for soln in prolog.query("A is {}, Z = {}, game(X, B, C,_,_,Z), numPlay(A, B, C)".format(numberOfPlayers, genre)):
