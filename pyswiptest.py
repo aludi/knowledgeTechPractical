@@ -1,13 +1,17 @@
 from pyswip import Prolog
 import tkinter as tk
+
+
+def do_something():
+	print("im doing something")
+
 prolog = Prolog()
-
-
 #TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 root = tk.Tk()
-w = tk.Label(root, font = "Times 16 bold", fg = "blue", text = "Hello\n We will help you select a boardgame!")
+w = tk.Label(root, font = "Times 16 bold", fg = "blue", text = "Hello\n I will help you select a boardgame!")
 pic = tk.PhotoImage(file = "img/scaryOwl.gif")
 w1 = tk.Label(root, image = pic).pack(side= "right")
+tk.Button(root, text="ok, let's start!", command = do_something).pack(side = "bottom")
 w.pack()
 root.mainloop()
 #prolog.assertz("father(michael,john)")
