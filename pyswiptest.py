@@ -12,6 +12,8 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 	prolog.assertz("game(madeup1, 2, 30, 45, 12, adventure)")
 	prolog.assertz("game(madeup2, 2, 5, 5, 4, adventure)")
 	prolog.assertz("game(madeup3, 1, 2, 10, 5, strategy)")
+	prolog.assertz("game(madeup4, 2, 5, 5, 4, adventure)")
+	prolog.assertz("game(madeup5, 1, 2, 10, 5, strategy)")
 
 
 def query(numberOfPlayers, genre, minAge):		#querying based on 2 things
