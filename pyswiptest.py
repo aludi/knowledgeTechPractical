@@ -66,7 +66,7 @@ if x == 0:
 
 
 ## retracting facts?
-## only asserting facts when gui prompts?
+## only asserting facts when gui prompts or something?
 
 '''
 /* queries: 
