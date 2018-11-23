@@ -29,14 +29,6 @@ def gui():
 	w.pack()
 	root.mainloop()
 
-#knowledge base:
-'''
-prolog.assertz("game(spacecorp, 2, 4, 30, twaalf, science_fiction)")
-prolog.assertz("game(luna, 2, 4, 60, twaalf, fantasy)")
-prolog.assertz("game(betrayal_legacy, 2, 5, 45, twaalf, adventure)")
-prolog.assertz("game(madeup1, 2, 30, 45, twaalf, adventure)")
-prolog.assertz("game(madeup2, 2, 5, 5, vijf, adventure)")
-prolog.assertz("game(madeup3, 1, 2, 10, vijf, strategy)")'''
 
 prolog = Prolog()
 kb = load_knowledge_base()		#loading the knowledge base
