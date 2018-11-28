@@ -28,7 +28,6 @@ def do_something():
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
 	#               game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-	#game/11
 	prolog.assertz("game(spacecorp, 2, 4, 30, 12, science_fiction)")
 	prolog.assertz("game(luna, 2, 4, 60, 12, fantasy)")
 	prolog.assertz("game(betrayal_legacy, 2, 5, 45, 12, adventure)")
@@ -37,11 +36,21 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 	prolog.assertz("game(madeup3, 1, 2, 10, 5, strategy)")
 	prolog.assertz("game(madeup4, 2, 5, 5, 4, adventure)")
 	prolog.assertz("game(madeup5, 1, 2, 10, 5, strategy)")
+	
+	## testing new predicate below
+	prolog.assertz("game(madeup5, 1, 2, 10, 5, 5, family, 10, T, T, strategy)")
 	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
 
 
-def query(numberOfPlayers, genre, minAge):		#querying based on 2 things
-	return prolog.query("A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N).".format(numberOfPlayers, genre, minAge)) #inference rule
+def queryOld(numberOfPlayers, genre, minAge):		#querying based on 2 things
+	return prolog.query(
+	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
+	.format(numberOfPlayers, genre, minAge)) #inference rule
+	
+def queryNew(numberOfPlayers, genre, minAge):		#querying based on 2 things
+	return prolog.query(
+	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
+	.format(numberOfPlayers, genre, minAge)) #inference rule
 
 def gui():
 	#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
@@ -79,19 +88,38 @@ prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
 prolog.assertz("minimumAge(M, N):- N >= M")
 
 
+	#game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 
 #unsubtle way of selecting for 
 
 numberOfPlayers = input("with how many players do you want to play?\n")
 print("you want to play with ", numberOfPlayers, "players")
-genre = input("what genre do you want?\n")
-print("you want to play a ", genre , "game")
+
+budget = input("what is your budget?\n")
+print("your budget is ", budget, "euros")
+
+typeGame = input("what is your game-type?\n")
+print("your game-type is ", budget)
+
+coop = input("cooperative? T/F\n")
+print(coop)
+
+camp = input("campaign?\n")
+print(camp)
+
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
+prolog.query(
+
+	"A is {},  game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre), numPlay(A, MinP, MaxP),". numberOfPlayers
+
+	game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
+	.format(numberOfPlayers, genre, minAge)) #inference rule
 
 x= 0
-for soln in query(numberOfPlayers, genre, minAge):
+for soln in queryOld(numberOfPlayers, genre, minAge):
 	print("you can play:", (soln["X"]))
 	x = 1
 if x == 0:
