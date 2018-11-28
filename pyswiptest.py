@@ -3,6 +3,8 @@ import tkinter as tk
 from tkinter import *
 
 
+### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
+
 def do_something():
 	print("im doing something")
 	
