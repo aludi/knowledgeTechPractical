@@ -5,10 +5,29 @@ from tkinter import *
 
 ### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
 
+
+### Pick 3 games that you like (from our list) and 1 game that you don't -> complexity rating.
+### Instapkosten, vaste groep of niet (0,1)? 
+# we will help blabal
+# game for yourself or game for other?
+# 3 games yes, 1 game no, (or noob)
+# easier or harder than mean?max?min? game selected?
+# budget max?
+# vaste groep of niet?
+# cooperative vs non-cooperative vs doesn't matter (0,1)
+# how many players?
+# age of players?
+# how much time do you want to spend learning the rules?/watching youtube?
+# how long should it take?
+# potential genres
+
+
+
 def do_something():
 	print("im doing something")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
+	#               game(name, min players, max players, time, min age, genre)
 	prolog.assertz("game(spacecorp, 2, 4, 30, 12, science_fiction)")
 	prolog.assertz("game(luna, 2, 4, 60, 12, fantasy)")
 	prolog.assertz("game(betrayal_legacy, 2, 5, 45, 12, adventure)")
@@ -17,6 +36,7 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 	prolog.assertz("game(madeup3, 1, 2, 10, 5, strategy)")
 	prolog.assertz("game(madeup4, 2, 5, 5, 4, adventure)")
 	prolog.assertz("game(madeup5, 1, 2, 10, 5, strategy)")
+	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
 
 
 def query(numberOfPlayers, genre, minAge):		#querying based on 2 things
