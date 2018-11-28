@@ -1,6 +1,9 @@
 from pyswip import Prolog
 import tkinter as tk
+from tkinter import *
 
+
+### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
 
 def do_something():
 	print("im doing something")
@@ -27,6 +30,22 @@ def gui():
 	w1 = tk.Label(root, image = pic).pack(side= "right")
 	tk.Button(root, text="ok, let's start!", command = do_something).pack(side = "bottom")
 	w.pack()
+	
+	###Derping around
+	def var_states():
+		print("Catan: %d,\n Uno: %d,\n Derp: %d" % (var1.get(), var2.get(), var3.get()))
+	
+	
+	Label(root, text="Which games have you played before?").pack(side = "left")
+	var1 = IntVar()
+	Checkbutton(root, text="Catan", variable=var1).pack(side = "left")
+	var2 = IntVar()
+	Checkbutton(root, text="Uno", variable=var2).pack(side = "left")
+	var3 = IntVar()
+	Checkbutton(root, text="I've never played a game in my life", variable=var3).pack(side = "left")
+	Button(root, text="Blep", command=var_states).pack(side = "left")
+	
+	                  
 	root.mainloop()
 
 
