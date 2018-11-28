@@ -55,7 +55,7 @@ gui()							#loads the gui
 #rule for min/max
 prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
 # rule for min age
-prolog.assertz("minimumAge(M, N):- N >= M")
+prolog.assertz("minimumAge(M, N):- N >= M") 
 
 
 
