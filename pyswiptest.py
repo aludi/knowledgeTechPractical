@@ -27,7 +27,8 @@ def do_something():
 	print("im doing something")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
-	#               game(name, min players, max players, time, min age, genre)
+	#               game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+	#game/11
 	prolog.assertz("game(spacecorp, 2, 4, 30, 12, science_fiction)")
 	prolog.assertz("game(luna, 2, 4, 60, 12, fantasy)")
 	prolog.assertz("game(betrayal_legacy, 2, 5, 45, 12, adventure)")
