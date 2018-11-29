@@ -39,6 +39,8 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 	
 	## testing new predicate below
 	prolog.assertz("game(madeup5, 1, 2, 10, 5, 5, family, 10, T, T, strategy)")
+	
+	
 	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
 
 
@@ -99,7 +101,7 @@ budget = input("what is your budget?\n")
 print("your budget is ", budget, "euros")
 
 typeGame = input("what is your game-type?\n")
-print("your game-type is ", budget)
+print("your game-type is ", typeGame)
 
 coop = input("cooperative? T/F\n")
 print(coop)
@@ -110,14 +112,17 @@ print(camp)
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
-#prolog.query(
-
-	#"A is {},  game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre), numPlay(A, MinP, MaxP),". numberOfPlayers
-
+y = prolog.query("A is {}, M = {}, B = {}, T = {}, CO = {}, CA = {},game(Name, MinP, MaxP, Rime, Minage, Complexity, T, C, CO, CA, Listgenre), C < B, numPlay(A, MinP, MaxP), minimumAge(M, Minage)".format(numberOfPlayers, minAge, budget, typeGame, coop, camp))
 	#game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+	#game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre),
+	
 	#"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
 	#.format(numberOfPlayers, genre, minAge)) #inference rule 
 
+for soln in y:
+	print("you can play:", (soln["Name"]))
+
+'''	
 x= 0
 for soln in queryOld(numberOfPlayers, genre, minAge):
 	print("you can play:", (soln["X"]))
@@ -125,7 +130,7 @@ for soln in queryOld(numberOfPlayers, genre, minAge):
 if x == 0:
 	print("sorry, we couldn't find any games for you")
 
-
+'''
 
 ## retracting facts?
 ## only asserting facts when gui prompts or something?
