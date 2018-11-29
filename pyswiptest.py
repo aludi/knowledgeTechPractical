@@ -110,13 +110,13 @@ print(camp)
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
-prolog.query(
+#prolog.query(
 
-	"A is {},  game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre), numPlay(A, MinP, MaxP),". numberOfPlayers
+	#"A is {},  game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre), numPlay(A, MinP, MaxP),". numberOfPlayers
 
-	game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
-	.format(numberOfPlayers, genre, minAge)) #inference rule
+	#game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+	#"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
+	#.format(numberOfPlayers, genre, minAge)) #inference rule 
 
 x= 0
 for soln in queryOld(numberOfPlayers, genre, minAge):
