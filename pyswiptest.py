@@ -177,7 +177,7 @@ budget = input("what is your budget?\n")
 print("your budget is ", budget, "euros")
 
 typeGame = input("what is your game-type?\n")
-print("your game-type is ", budget)
+print("your game-type is ", typeGame)
 
 coop = input("cooperative? T/F\n")
 print(coop)
@@ -188,7 +188,21 @@ print(camp)
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
+stringQuery ='''A is {},
+ M = {},
+  B = {},
+   T = {}, 
+   CO = {},
+    CA = {},
+    game(Name, MinP, MaxP, Rime, Minage, Complexity, T, C, CO, CA, Listgenre),
+     C < B,
+      numPlay(A, MinP, MaxP), minimumAge(M, Minage)'''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
 
+y = prolog.query(stringQuery)
+
+for soln in y:
+	print("you can play:", (soln["Name"]))
+	
 
 '''
 prolog.query(
@@ -198,7 +212,7 @@ prolog.query(
 	game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
 	.format(numberOfPlayers, genre, minAge)) #inference rule
-'''
+
 x= 0
 for soln in queryOld(numberOfPlayers, genre, minAge):
 	print("you can play:", (soln["X"]))
@@ -206,7 +220,7 @@ for soln in queryOld(numberOfPlayers, genre, minAge):
 if x == 0:
 	print("sorry, we couldn't find any games for you")
 
-
+'''
 
 ## retracting facts?
 ## only asserting facts when gui prompts or something?
