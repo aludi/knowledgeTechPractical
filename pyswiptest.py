@@ -1,7 +1,7 @@
 from pyswip import Prolog
 
-import Tkinter as tk
-from Tkinter import *
+import tkinter as tk
+from tkinter import *
 
 #or
 
@@ -188,15 +188,17 @@ print(camp)
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
-stringQuery ='''A is {},
- M = {},
-  B = {},
-   T = {}, 
-   CO = {},
-    CA = {},
-    game(Name, MinP, MaxP, Rime, Minage, Complexity, T, C, CO, CA, Listgenre),
-     C < B,
-      numPlay(A, MinP, MaxP), minimumAge(M, Minage)'''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
+stringQuery ='''
+NUMPLAY is {},
+ MINAGE = {},
+  BUDGET = {},
+   TYPE = {}, 
+   COOP = {},
+    CAMP = {},
+    game(Name, MinP, MaxP, Time, Minage, Complexity, TYPE, C, COOP, CAMP, Listgenre),
+     C < BUDGET,
+      numPlay(NUMPLAY, MinP, MaxP), minimumAge(MINAGE, Minage)
+      '''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
 
 y = prolog.query(stringQuery)
 
