@@ -32,19 +32,17 @@ def question1():
 	print("I'm clicking stuff")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
-	#               game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-	prolog.assertz("game(spacecorp, 2, 4, 30, 12, science_fiction)")
-	prolog.assertz("game(luna, 2, 4, 60, 12, fantasy)")
-	prolog.assertz("game(betrayal_legacy, 2, 5, 45, 12, adventure)")
-	prolog.assertz("game(madeup1, 2, 30, 45, 12, adventure)")
-	prolog.assertz("game(madeup2, 2, 5, 5, 4, adventure)")
-	prolog.assertz("game(madeup3, 1, 2, 10, 5, strategy)")
-	prolog.assertz("game(madeup4, 2, 5, 5, 4, adventure)")
-	prolog.assertz("game(madeup5, 1, 2, 10, 5, strategy)")
+	#game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+	
+	#testing, loading the knowledge base from a separate file:
+	prolog.consult("startingKB.pl")
 	
 	## testing new predicate below
-	prolog.assertz("game(madeup5, 1, 2, 10, 5, 5, family, 10, T, T, strategy)")
 	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
+	#prolog.assertz("game(madeup5, 1, 2, 10, 5, 5, strategy, 10, true, true, strategy)")
+	#prolog.assertz("game(madeup6, 1, 2, 10, 5, 5, strategy, 10, true, false, adventure)")
+	#prolog.assertz("game(madeup7, 1, 100, 50, 5, 10, strategy, 10, false, true, strategy)")
+	#prolog.assertz("game(madeup8, 1, 10, 20, 5, 4, strategy, 11, false, false, adventure)")
 
 
 def queryOld(numberOfPlayers, genre, minAge):		#querying based on 2 things
@@ -179,15 +177,16 @@ print("your budget is ", budget, "euros")
 typeGame = input("what is your game-type?\n")
 print("your game-type is ", typeGame)
 
-coop = input("cooperative? T/F\n")
+coop = input("cooperative? true/false\n")
 print(coop)
 
-camp = input("campaign?\n")
+camp = input("campaign? true/false\n")
 print(camp)
 
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 
+print(numberOfPlayers, minAge, budget, typeGame, coop, camp)
 stringQuery ='''
 NUMPLAY is {},
  MINAGE = {},
