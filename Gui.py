@@ -4,8 +4,8 @@ from tkinter import *
 class Gui:
 	
 	def __init__(self): 
-		forSelf = True 
-		game1 = None 
+		forSelf = True
+		game1 =	None
 		game2 = None
 		game3 = None
 		
@@ -38,6 +38,11 @@ class Gui:
 		
 	def save_minAge():
 		minAge = minA.get()
+		
+	def callback(*args):
+		print("variable changed")
+		
+	
 	
 	frame1 = tk.Frame(root)
 	frame2 = tk.Frame(root)
@@ -47,9 +52,10 @@ class Gui:
 	frame6 = tk.Frame(root)
 	
 	#question 1 # the forSelf variable is undefined and causes a crash
+	
 	tk.Label(frame1, text="Is the game for yourself or for someone else?").pack()
-	#tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
-	#tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
+	tk.Radiobutton(frame1, text="For me", padx = 20, variable=self.forSelf, value=True).pack(anchor=tk.W)
+	tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=self.forSelf, value=False).pack(anchor=tk.W)
 	tk.Button(frame1, text="Next Question", command=save_person).pack(anchor=tk.W)
 	
 	frame1.pack()
