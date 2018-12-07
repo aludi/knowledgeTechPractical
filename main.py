@@ -6,7 +6,7 @@ from pyswip import Prolog
 
 import tkinter as tk
 #from tkinter import *
-#import Gui
+import Gui
 from PrologInteraction import *
 
 
@@ -41,13 +41,17 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 
 prolog = Prolog()
 #kb = load_knowledge_base()		#loading the knowledge base
-#gui = Gui
+gui = Gui
 prologThing = PrologInteraction()
 
 
 #hard-coded test of prologinteraction class
 game1 = "madeup5"
 prologThing.getAllProperties(game1)
+game2 = "madeup5"
+game3 = "madeup5"
+listGame = [game1, game2, game3]
+prologThing.getAverageComplexity(listGame)
 
 prologThing.setNumPlay(1)
 prologThing.setBudget(100)

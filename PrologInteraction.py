@@ -16,16 +16,23 @@ class PrologInteraction:
 		print(self.minAge)
 		
 	def initPrologRules(self):
-		#rule for min/max (budget and players)
-		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
-		# rule for min age
-		self.prolog.assertz("minimumAge(M, N):- N >= M")
+		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
+		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
 	
 	def getAllProperties(self, nameOfGame):
 		print("am in here")
 		x = self.prolog.query('''game({},MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
-			print(soln["MinP"], soln["MaxP"], soln["Complexity"], soln["Listgenre"], soln["T"])
+			print(soln["MinP"], soln["MaxP"], soln["Time"], soln["Minage"], soln["Complexity"], soln["T"], soln["Listgenre"])
+		
+	def getAverageComplexity(self, listGame):
+		compAv = 0
+		for y in listGame:
+			x = self.prolog.query('''game({},_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+			for soln in x:
+				comp = soln["Complexity"]
+			compAv = compAv + comp
+		print("the average complexity of the three games is... ", compAv/3)
 		
 	
 	def setNumPlay(self, numPlay):
