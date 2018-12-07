@@ -21,6 +21,13 @@ class PrologInteraction:
 		# rule for min age
 		self.prolog.assertz("minimumAge(M, N):- N >= M")
 	
+	def getAllProperties(self, nameOfGame):
+		print("am in here")
+		x = self.prolog.query('''game({},MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x:
+			print(soln["MinP"], soln["MaxP"], soln["Complexity"], soln["Listgenre"], soln["T"])
+		
+	
 	def setNumPlay(self, numPlay):
 		print(numPlay)
 		self.numberOfPlayers = numPlay
@@ -55,6 +62,8 @@ class PrologInteraction:
         minimumAge(M, Minage)'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
 		self.y = prolog.query(stringQuery)
+
+
 
 #game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	def printSol(self):

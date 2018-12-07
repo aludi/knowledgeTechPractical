@@ -46,6 +46,9 @@ prologThing = PrologInteraction()
 
 
 #hard-coded test of prologinteraction class
+game1 = "madeup5"
+prologThing.getAllProperties(game1)
+
 prologThing.setNumPlay(1)
 prologThing.setBudget(100)
 prologThing.setType("family")
