@@ -4,10 +4,10 @@ from pyswip import Prolog
 #from Tkinter import *
 
 #or
-
+#from Test import newtestvar
 import tkinter as tk
 from tkinter import *
-from Gui import *
+import Gui
 
 
 
@@ -65,7 +65,8 @@ def queryNew(numberOfPlayers, genre, minAge):		#querying based on 2 things
 
 prolog = Prolog()
 kb = load_knowledge_base()		#loading the knowledge base
-gui = Gui()
+gui = Gui
+#test = newtestvar
 
 
 #rule for min/max

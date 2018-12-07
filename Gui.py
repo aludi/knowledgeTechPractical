@@ -1,7 +1,7 @@
-class Gui:
+import tkinter as tk
+from tkinter import *
 	
-	import tkinter as tk
-	from tkinter import * 
+class Gui:
 	
 	def __init__(self): 
 		forSelf = True 
@@ -9,6 +9,7 @@ class Gui:
 		game2 = None
 		game3 = None
 		
+	
 	
 	#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 	root = tk.Tk()
@@ -38,17 +39,17 @@ class Gui:
 	def save_minAge():
 		minAge = minA.get()
 	
-	frame1 = Frame(root)
-	frame2 = Frame(root)
-	frame3 = Frame(root)
-	frame4 = Frame(root)
-	frame5 = Frame(root)
-	frame6 = Frame(root)
+	frame1 = tk.Frame(root)
+	frame2 = tk.Frame(root)
+	frame3 = tk.Frame(root)
+	frame4 = tk.Frame(root)
+	frame5 = tk.Frame(root)
+	frame6 = tk.Frame(root)
 	
-	#question 1
+	#question 1 # the forSelf variable is undefined and causes a crash
 	tk.Label(frame1, text="Is the game for yourself or for someone else?").pack()
-	tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
-	tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
+	#tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
+	#tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
 	tk.Button(frame1, text="Next Question", command=save_person).pack(anchor=tk.W)
 	
 	frame1.pack()
