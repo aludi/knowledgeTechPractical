@@ -32,7 +32,25 @@ class PrologInteraction:
 			for soln in x:
 				comp = soln["Complexity"]
 			compAv = compAv + comp
-		print("the average complexity of the three games is... ", compAv/3)
+		print("the average complexity of the three games is... ", compAv/len(listGame))
+		return(compAv/len(listGame))
+		
+	def searchGameByAverageComplexity(self, avComp, prolog):
+		# TODO: finetune range complexity, for now it's ±5
+		print(avComp)
+		
+		stringQuery = '''
+		A is {},
+		game(Name, _, _, _, _, C,_, _, _, _, _),
+		C =< A + 5,
+		C >= A - 5.'''.format(avComp)
+		self.y = self.prolog.query(stringQuery)
+		x= 0
+		for soln in self.y:
+			print("you can play:", (soln["Name"], soln['C']))
+			x = 1
+		if x == 0:
+			print("sorry, we couldn't find any games for you")	
 		
 	
 	def setNumPlay(self, numPlay):

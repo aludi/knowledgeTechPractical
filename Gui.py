@@ -10,7 +10,6 @@ class Gui:
 		game3 = None
 		
 	
-	
 	#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 	root = tk.Tk()
 	w = tk.Label(root, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
