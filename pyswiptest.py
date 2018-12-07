@@ -48,6 +48,9 @@ prologThing = PrologInteraction()
 #hard-coded test of prologinteraction class
 game1 = "madeup5"
 prologThing.getAllProperties(game1)
+game2 = "madeup6"
+game3 = "madeup7"
+prologThing.getAverageComplexity(game1, game2, game3)
 
 prologThing.setNumPlay(1)
 prologThing.setBudget(100)
