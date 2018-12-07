@@ -35,24 +35,9 @@ def question1():
 	print("I'm clicking stuff")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
-	
 	prolog.consult("startingKB.pl")
-	
 	# game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
-
-
-def queryOld(numberOfPlayers, genre, minAge):		#querying based on 2 things
-	return prolog.query(
-	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
-	.format(numberOfPlayers, genre, minAge)) #inference rule
-	
-def queryNew(numberOfPlayers, genre, minAge):		#querying based on 2 things
-	return prolog.query(
-	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
-	.format(numberOfPlayers, genre, minAge)) #inference rule
-
-
 
 
 prolog = Prolog()
@@ -79,10 +64,10 @@ print("your budget is ", budget, "euros")
 typeGame = input("what is your game-type?\n")
 print("your game-type is ", typeGame)
 
-coop = input("cooperative? T/F\n")
+coop = input("cooperative? true/false\n")
 print(coop)
 
-camp = input("campaign?\n")
+camp = input("campaign? true/false\n")
 print(camp)
 
 minAge = input("what is the minimum age of the players?\n")
@@ -95,7 +80,7 @@ A is {},
    T = {}, 
    CO = {},
     CA = {},
-    game(Name, MinP, MaxP, Rime, Minage, Complexity, T, C, CO, CA, Listgenre),
+    game(Name, MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
      C < B,
       numPlay(A, MinP, MaxP), minimumAge(M, Minage)'''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
 
