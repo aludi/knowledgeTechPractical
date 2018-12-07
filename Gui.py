@@ -27,8 +27,8 @@ class Gui:
 	def save_states():
 		print("Catan: %d,\n Uno: %d,\n Derp: %d" % (var1.get(), var2.get(), var3.get()))
 		
-	def save_person():
-		print("v = %d" % v.get())
+	def save_person(forSelf):
+		print("Self = ", bool(forSelf.get()))
 		
 	def save_budget():
 		print("Min price: %s\nMax price: %s" % (e1.get(), e2.get()))
@@ -48,9 +48,10 @@ class Gui:
 	
 	#question 1 # the forSelf variable is undefined and causes a crash
 	tk.Label(frame1, text="Is the game for yourself or for someone else?").pack()
-	#tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
-	#tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
-	tk.Button(frame1, text="Next Question", command=save_person).pack(anchor=tk.W)
+	forSelf = BooleanVar()
+	tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
+	tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
+	tk.Button(frame1, text="Next Question", command=save_person(forSelf)).pack(anchor=tk.W)
 	
 	frame1.pack()
 	
