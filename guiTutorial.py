@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import *
+from functools import partial
 
 
 class Gui: 
+	
+	forSelf = True
 	
 	def __init__(self, master): 
 		
@@ -15,6 +18,36 @@ class Gui:
 		Button(root, text="ok, let's start!").pack(side = "bottom")
 		w.pack()
 		
+		#question 1 # the forSelf variable is undefined and causes a crash
+	
+		Label(master, text="Is the game for yourself or for someone else?").pack()
+		var1 = BooleanVar()
+		Radiobutton(master, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
+		Radiobutton(master, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
+		Button(master, text="Next Question", command= lambda: self.save_person(var1)).pack(anchor=tk.W)	
+		
+		
+
+	
+	def save_states():
+		print("Catan: %d,\n Uno: %d,\n Derp: %d" % (var1.get(), var2.get(), var3.get()))
+		
+	def save_person(self, var1):
+		self.forSelf = var1.get()
+		print("Self = ", forSelf)
+		
+	def save_budget():
+		print("Min price: %s\nMax price: %s" % (e1.get(), e2.get()))
+		
+	def save_numPlayers():
+		numberOfPlayers = num.get()
+		
+	def save_minAge():
+		minAge = minA.get()
+		
+	def callback(*args):
+		print("variable changed")
+		
 		
 		#frame = Frame(master)
 		#frame.pack()
@@ -25,10 +58,15 @@ class Gui:
 		#self.quitButton =  Button(frame, text= "Quit", command = frame.quit)
 		#self.quitButton.pack(side=LEFT)
 		
-	def printMessage(self): 
-		print("wow, this actually worked")
+	#def printMessage(self): 
+		#print("wow, this actually worked")
+		
 
 root = Tk()
 gui = Gui(root)
+while(True):
+	print(gui.forSelf)
+	root.update() 
+	
 root.mainloop()
    
