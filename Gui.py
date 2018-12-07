@@ -53,16 +53,11 @@ class Gui:
 	#question 1 # the forSelf variable is undefined and causes a crash
 	
 	tk.Label(frame1, text="Is the game for yourself or for someone else?").pack()
-<<<<<<< HEAD
 	forSelf = BooleanVar()
 	tk.Radiobutton(frame1, text="For me", padx = 20, variable=forSelf, value=True).pack(anchor=tk.W)
 	tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=forSelf, value=False).pack(anchor=tk.W)
 	tk.Button(frame1, text="Next Question", command=save_person(forSelf)).pack(anchor=tk.W)
-=======
-	tk.Radiobutton(frame1, text="For me", padx = 20, variable=self.forSelf, value=True).pack(anchor=tk.W)
-	tk.Radiobutton(frame1, text="For someone else", padx = 20, variable=self.forSelf, value=False).pack(anchor=tk.W)
-	tk.Button(frame1, text="Next Question", command=save_person).pack(anchor=tk.W)
->>>>>>> 0769dceb057dcf75db78875ea62b1df64084a481
+
 	
 	frame1.pack()
 	
