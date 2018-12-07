@@ -40,8 +40,7 @@ class Gui:
 		minAge = minA.get()
 		
 	def callback(*args):
-		print("variable changed")
-		
+		print("variable changed")	
 	
 	
 	frame1 = tk.Frame(root)
@@ -112,4 +111,5 @@ class Gui:
 	frame6.pack()
 	
 	raise_frame(frame1)
+	
 	root.mainloop()

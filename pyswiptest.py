@@ -3,12 +3,11 @@ from pyswip import Prolog
 #import Tkinter as tk
 #from Tkinter import *
 
-#or
-#from Test import newtestvar
-import tkinter as tk
-from tkinter import *
-import Gui
 
+import tkinter as tk
+#from tkinter import *
+#import Gui
+from PrologInteraction import *
 
 
 ### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
@@ -41,20 +40,34 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 
 
 prolog = Prolog()
-kb = load_knowledge_base()		#loading the knowledge base
-gui = Gui
+#kb = load_knowledge_base()		#loading the knowledge base
+#gui = Gui
+prologThing = PrologInteraction()
+
+
+#hard-coded test of prologinteraction class
+prologThing.setNumPlay(1)
+prologThing.setBudget(100)
+prologThing.setType("family")
+prologThing.setCoop("true")
+prologThing.setCamp("true")
+prologThing.setMinAge("0")
+
+prologThing.stringQuery(prolog)
+prologThing.printSol()
+
 
 
 #rule for min/max
-prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
+#prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
 # rule for min age
-prolog.assertz("minimumAge(M, N):- N >= M")
+#prolog.assertz("minimumAge(M, N):- N >= M")
 
 
 #game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 
 #unsubtle way of selecting for 
-
+'''
 numberOfPlayers = input("with how many players do you want to play?\n")
 print("you want to play with ", numberOfPlayers, "players")
 
@@ -72,8 +85,9 @@ print(camp)
 
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
-
-stringQuery ='''
+'''
+'''
+stringQuery =''''''
 A is {},
  M = {},
   B = {},
@@ -82,7 +96,7 @@ A is {},
     CA = {},
     game(Name, MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
      C < B,
-      numPlay(A, MinP, MaxP), minimumAge(M, Minage)'''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
+      numPlay(A, MinP, MaxP), minimumAge(M, Minage)''''''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
 
 y = prolog.query(stringQuery)
 
@@ -91,5 +105,5 @@ for soln in y:
 	print("you can play:", (soln["Name"]))
 	x = 1
 if x == 0:
-	print("sorry, we couldn't find any games for you")	
+	print("sorry, we couldn't find any games for you")	'''
 
