@@ -109,46 +109,24 @@ stringQuery ='''A is {},
 
 y = prolog.query(stringQuery)
 
+x= 0
 for soln in y:
 	print("you can play:", (soln["Name"]))
-	
+	x = 1
+if x == 0:
+	print("sorry, we couldn't find any games for you")	
 
 '''
 prolog.query(
-
 	"A is {},  game(Name, MinP, MaxP, Rime, Minage, Complexity, Type, Budget, CooperativeTF, CampaignTF, Listgenre), numPlay(A, MinP, MaxP),". numberOfPlayers
-
 	game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	"A is {}, Z = {}, M is {}, game(X, B, C,_,N,Z), numPlay(A, B, C), minimumAge(M, N)."
 	.format(numberOfPlayers, genre, minAge)) #inference rule
-
 x= 0
 for soln in queryOld(numberOfPlayers, genre, minAge):
 	print("you can play:", (soln["X"]))
 	x = 1
 if x == 0:
 	print("sorry, we couldn't find any games for you")
-
-'''
-
-## retracting facts?
-## only asserting facts when gui prompts or something?
-
-'''
-/* queries: 
-* to select a game where number of players is 5: A is 5, game(X, B, C,_,_,_), numPlay(A,B,C).
-* to find the genre of the game luna: game(luna,_,_,_,_,X).
-*
-* Format of game.6: game(name, minNumPlayers, maxNumPlayers, minPlayTime, age, category)
-*/
-
-
-numPlay(A,MIN, MAX):- A >= MIN, A =< MAX.
-game(spacecorp, 2, 4, 30, twaalf, science_fiction).
-game(luna, 2, 4, 60, twaalf, fantasy).
-game(betrayal_legacy, 2, 5, 45, twaalf, adventure).
-game(madeup1, 2, 30, 45, twaalf, adventure).
-game(madeup2, 2, 5, 5, vijf, adventure).
-game(madeup3, 1, 2, 10, vijf, strategy).
 
 '''
