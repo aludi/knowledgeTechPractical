@@ -2,6 +2,8 @@ from pyswip import Prolog
 
 class PrologInteraction:
 	
+	#initialization
+	
 	def __init__(self):
 		self.prolog = Prolog()
 		self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
@@ -19,6 +21,8 @@ class PrologInteraction:
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
 	
+	# some getters
+	
 	def getAllProperties(self, nameOfGame):
 		print("am in here")
 		x = self.prolog.query('''game({},MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
@@ -35,23 +39,8 @@ class PrologInteraction:
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
-	def searchGameByAverageComplexity(self, avComp, prolog):
-		# TODO: finetune range complexity, for now it's ±5
-		print(avComp)
-		
-		stringQuery = '''
-		A is {},
-		game(Name, _, _, _, _, C,_, _, _, _, _),
-		C =< A + 5,
-		C >= A - 5.'''.format(avComp)
-		self.y = self.prolog.query(stringQuery)
-		x= 0
-		for soln in self.y:
-			print("you can play:", (soln["Name"], soln['C']))
-			x = 1
-		if x == 0:
-			print("sorry, we couldn't find any games for you")	
-		
+
+	#some setters
 	
 	def setNumPlay(self, numPlay):
 		print(numPlay)
@@ -72,6 +61,25 @@ class PrologInteraction:
 		
 	def setMinAge(self, minAgeSet):
 		self.minAge = minAgeSet
+		
+		
+	# assorted other functions
+		
+		
+	def searchGameByAverageComplexity(self, avComp, prolog):
+		# TODO: finetune range complexity, for now it's ±5
+		stringQuery = '''
+		A is {},
+		game(Name, _, _, _, _, C,_, _, _, _, _),
+		C =< A + 0.5,
+		C >= A - 0.5.'''.format(avComp)
+		self.y = self.prolog.query(stringQuery)
+		x= 0
+		for soln in self.y:
+			print("you can play:", (soln["Name"], soln['C']))
+			x = 1
+		if x == 0:
+			print("sorry, we couldn't find any games for you")	
 		
 	def stringQuery(self, prolog):
 		stringQuery ='''

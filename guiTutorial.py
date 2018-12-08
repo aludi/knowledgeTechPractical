@@ -47,8 +47,12 @@ class Gui:
 		
 	def callback(*args):
 		print("variable changed")
-		
-		
+	
+	
+	
+	# getters	
+	def getPerson(self):
+		return self.forSelf	
 		#frame = Frame(master)
 		#frame.pack()
 		
