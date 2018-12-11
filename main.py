@@ -1,13 +1,15 @@
 from pyswip import Prolog
 
-#import Tkinter as tk
-#from Tkinter import *
-
-
 import tkinter as tk
-#from tkinter import *
-#import Gui
+from tkinter import *
+
 from PrologInteraction import *
+
+import guiTutorial as gui
+
+#initiate a root and an instance of the class Gui
+root = Tk()
+GUI = gui.Gui(root)
 
 
 ### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
@@ -28,10 +30,6 @@ from PrologInteraction import *
 # how long should it take?
 # potential genres
 
-
-
-def question1():
-	print("I'm clicking stuff")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
 	prolog.consult("startingKB.pl")
@@ -41,7 +39,6 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 
 prolog = Prolog()
 #kb = load_knowledge_base()		#loading the knowledge base
-#gui = Gui
 prologThing = PrologInteraction()
 
 
@@ -55,12 +52,12 @@ val = prologThing.getAverageComplexity(listGame)
 print(val)
 prologThing.searchGameByAverageComplexity(val, prolog)
 
-
-prologThing.setNumPlay(1)
-prologThing.setBudget(100)
-prologThing.setType("family")
-prologThing.setCoop("true")
-prologThing.setCamp("true")
+#getting the answers from the Gui
+prologThing.setNumPlay(GUI.getNumPlayers())
+prologThing.setBudget(GUI.getMaxPrice())
+prologThing.setType(GUI.getGameType())
+prologThing.setCoop(GUI.getCoop())
+prologThing.setCamp(GUI.getCampaign())
 prologThing.setMinAge("0")
 
 prologThing.stringQuery(prolog)
