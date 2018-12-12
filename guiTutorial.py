@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 from functools import partial
+
+from tkinter_autocomplete import AutocompleteEntry
 
 
 class Gui: 
@@ -9,6 +12,7 @@ class Gui:
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		self.__forSelf = True
+		self.__game1 = "scrabble"
 		self.__numPlayers = 1
 		self.__maxPrice = 10
 		self.__gameType = "strategy"
@@ -32,6 +36,19 @@ class Gui:
 		Radiobutton(master, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
 		Radiobutton(master, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_person(master,var1)).pack(anchor=tk.W)	
+		
+		
+		#TEMPORARY
+		games = ("Small world", "Monopoly", "Colonisten van katan", "pandemic", "Agricola", "Wizard")
+		def choseEntry(entry):
+			print(entry)
+		
+		#question 2 previous games
+		Label(master, text="Name three games you like").pack(anchor=tk.W)
+		game1Entry = AutocompleteEntry(master)
+		game1Entry.build(entries=games, no_results_message="<No results found for '{}' >")
+		game1Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
 		
 		#question 2
 		Label(master, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
@@ -79,6 +96,10 @@ class Gui:
 	def save_person(self, master, var1):
 		self.__forSelf = var1.get()
 		master.update
+	
+	def save_game1(self, master, game):
+		self.__game1 = game.text.get()
+		master.update
 		
 	def save_numPlayers(self, master, num):
 		self.__numPlayers = num.get()
@@ -112,6 +133,9 @@ class Gui:
 	# getters	
 	def getPerson(self):
 		return self.__forSelf	
+	
+	def getGame1(self):
+		return self.__game1
 		
 	def getNumPlayers(self):
 		return self.__numPlayers

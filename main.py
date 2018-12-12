@@ -7,6 +7,7 @@ from PrologInteraction import *
 
 import guiTutorial as gui
 
+
 #initiate a root and an instance of the class Gui
 root = Tk()
 GUI = gui.Gui(root)
@@ -54,6 +55,7 @@ prologThing.searchGameByAverageComplexity(val, prolog)
 
 #getting the answers from the Gui
 prologThing.setNumPlay(GUI.getNumPlayers())
+prologThing.setGame1(GUI.getGame1())
 prologThing.setBudget(GUI.getMaxPrice())
 prologThing.setType(GUI.getGameType())
 prologThing.setCoop(GUI.getCoop())
