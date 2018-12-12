@@ -22,6 +22,10 @@ class Gui:
 		self.__Campaign = "true"
 		self.__ListType = prologThing.getTypes() 		#getting types-lists (family, strategy) from prologInteraction
 		self.__ListNames = prologThing.getNamesGamesInList() #getting all names of all games from prologInteraction
+		self.__game1 = "some"
+		self.__game2 = "some"
+		self.__game3 = "some"
+		
 		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
@@ -54,6 +58,16 @@ class Gui:
 		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
 		game1Entry.pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
+		
+		game2Entry = AutocompleteEntry(master)
+		game2Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		game2Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game2(master,game2Entry)).pack(anchor=tk.W)
+		
+		game3Entry = AutocompleteEntry(master)
+		game3Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		game3Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game3(master,game3Entry)).pack(anchor=tk.W)
 		
 		#question 2
 		Label(master, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
@@ -101,9 +115,14 @@ class Gui:
 	def save_person(self, master, var1):
 		self.__forSelf = var1.get()
 		master.update
-	
 	def save_game1(self, master, game):
 		self.__game1 = game.text.get()
+		master.update
+	def save_game2(self, master, game):
+		self.__game2 = game.text.get()
+		master.update
+	def save_game3(self, master, game):
+		self.__game3 = game.text.get()
 		master.update
 		
 	def save_numPlayers(self, master, num):
@@ -141,6 +160,12 @@ class Gui:
 	
 	def getGame1(self):
 		return self.__game1
+	def getGame2(self):
+		return self.__game2
+	def getGame3(self):
+		return self.__game3
+	def getAllGames(self):
+		return [self.__game1, self.__game2, self.__game3]
 		
 	def getNumPlayers(self):
 		return self.__numPlayers
@@ -157,14 +182,3 @@ class Gui:
 	def getCampaign(self):
 		return self.__Campaign
 		
-		#frame = Frame(master)
-		#frame.pack()
-		
-		#self.printButton = Button(frame, text= "Print Message", command=self.printMessage)
-		#self.printButton.pack(side=LEFT)
-		
-		#self.quitButton =  Button(frame, text= "Quit", command = frame.quit)
-		#self.quitButton.pack(side=LEFT)
-		
-	#def printMessage(self): 
-#print("wow, this actually worked")

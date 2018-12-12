@@ -9,6 +9,8 @@ class PrologInteraction:
 		self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
 		prologRules = self.initPrologRules()
 		self.game1 = "some game"
+		self.game2 = "some game"
+		self.game3 = "some game"
 		self.numberOfPlayers = 0
 		self.budget = 0
 		self.typeGame = 0
@@ -71,6 +73,14 @@ class PrologInteraction:
 		print(game)
 		self.game1 = game
 		print(self.game1)
+	def setGame2(self, game):
+		print(game)
+		self.game2 = game
+		print(self.game2)
+	def setGame3(self, game):
+		print(game)
+		self.game3 = game
+		print(self.game3)
 	
 	def setBudget(self, budgetVal):
 		self.budget = budgetVal #to implement: range of budgets
@@ -89,6 +99,9 @@ class PrologInteraction:
 		
 		
 	# assorted other functions
+	
+	def makeListOfGames(self):
+		return [self.game1, self.game2, self.game3]
 		
 		
 	def searchGameByAverageComplexity(self, avComp, prolog):

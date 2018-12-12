@@ -43,12 +43,12 @@ prologThing = PrologInteraction()
 
 
 #hard-coded test of prologinteraction class
-game1 = "madeup6"
-prologThing.getAllProperties(game1)
-game2 = "madeup5"
-game3 = "madeup6"
-listGame = [game1, game2, game3]
-val = prologThing.getAverageComplexity(listGame)
+#game1 = "madeup6"
+#prologThing.getAllProperties(game1)
+#game2 = "madeup5"
+#game3 = "madeup6"
+#listGame = [game1, game2, game3]
+#val = prologThing.getAverageComplexity(listGame)
 
 
 # returns a list of all games in the knowledge-base
@@ -58,22 +58,23 @@ listNameGames = prologThing.getNamesGamesInList()
 listTypeGames = prologThing.getTypes()
 
 # finds all games with a certain complexity
-prologThing.searchGameByAverageComplexity(val, prolog)
+#prologThing.searchGameByAverageComplexity(val, prolog)
 
 #getting the answers from the Gui
 prologThing.setNumPlay(GUI.getNumPlayers())
 prologThing.setGame1(GUI.getGame1())
+prologThing.setGame2(GUI.getGame2())
+prologThing.setGame3(GUI.getGame3())
 prologThing.setBudget(GUI.getMaxPrice())
 prologThing.setType(GUI.getGameType())
 prologThing.setCoop(GUI.getCoop())
 prologThing.setCamp(GUI.getCampaign())
 prologThing.setMinAge("0")
 
-listX = []
-listX.append(GUI.getGame1())
+
 
 ## searching for other games with the complexity of game1:
-prologThing.searchGameByAverageComplexity(prologThing.getAverageComplexity(listX), prolog)
+prologThing.searchGameByAverageComplexity(prologThing.getAverageComplexity(GUI.getAllGames()), prolog)
 
 prologThing.stringQuery(prolog)
 prologThing.printSol()
