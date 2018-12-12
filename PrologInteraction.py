@@ -32,10 +32,14 @@ class PrologInteraction:
 		
 	def getAverageComplexity(self, listGame):
 		compAv = 0
+		comp = 0
+		print(listGame)
 		for y in listGame:
+			print(y)
 			x = self.prolog.query('''game({},_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
 			for soln in x:
 				comp = soln["Complexity"]
+				print(comp)
 			compAv = compAv + comp
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))

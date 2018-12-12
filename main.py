@@ -69,6 +69,12 @@ prologThing.setCoop(GUI.getCoop())
 prologThing.setCamp(GUI.getCampaign())
 prologThing.setMinAge("0")
 
+listX = []
+listX.append(GUI.getGame1())
+
+## searching for other games with the complexity of game1:
+prologThing.searchGameByAverageComplexity(prologThing.getAverageComplexity(listX), prolog)
+
 prologThing.stringQuery(prolog)
 prologThing.printSol()
 
