@@ -51,7 +51,7 @@ class Gui:
 		#question 2 previous games
 		Label(master, text="Name three games you like").pack(anchor=tk.W)
 		game1Entry = AutocompleteEntry(master)
-		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")
+		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
 		game1Entry.pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
 		
