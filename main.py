@@ -1,3 +1,4 @@
+
 from pyswip import Prolog
 
 import tkinter as tk
