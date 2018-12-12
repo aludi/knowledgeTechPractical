@@ -32,8 +32,8 @@ GUI = gui.Gui(root)
 # potential genres
 
 	
-def load_knowledge_base():		#implementing knowledge base in separate function
-	prolog.consult("startingKB.pl")
+#def load_knowledge_base():		#implementing knowledge base in separate function
+	#prolog.consult("startingKB.pl")
 	# game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	### to add: complexity, TYPE, budget, rec players, cooperative, vaste-groep (campaign games)), list-of-genres.
 
