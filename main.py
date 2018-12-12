@@ -39,11 +39,10 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 
 
 prolog = Prolog()
-#kb = load_knowledge_base()		#loading the knowledge base
-prologThing = PrologInteraction()
+prologThing = PrologInteraction()		# test, taking object from class PrologInteraction as: prologThing.
 
 
-#hard-coded test of prologinteraction class
+#hard-coded test of prologInteraction class
 game1 = "madeup6"
 prologThing.getAllProperties(game1)
 game2 = "madeup5"
@@ -51,9 +50,21 @@ game3 = "madeup6"
 listGame = [game1, game2, game3]
 val = prologThing.getAverageComplexity(listGame)
 print(val)
+
+
+
+
+# returns a list of all games in the knowledge-base
+listNameGames = prologThing.getNamesGamesInList()
+
+# returns a list of all types of games in the knowledge-base
+listTypeGames = prologThing.getTypes()
+GUI.setTypeList(listTypeGames)
+
+# finds all games with a certain complexity
 prologThing.searchGameByAverageComplexity(val, prolog)
 
-#getting the answers from the Gui
+# getting the answers from the Gui
 prologThing.setNumPlay(GUI.getNumPlayers())
 prologThing.setBudget(GUI.getMaxPrice())
 prologThing.setType(GUI.getGameType())
@@ -68,50 +79,7 @@ prologThing.printSol()
 
 #rule for min/max
 #prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")
-# rule for min age
+#rule for min age
 #prolog.assertz("minimumAge(M, N):- N >= M")
-
-
 #game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-
 #unsubtle way of selecting for 
-'''
-numberOfPlayers = input("with how many players do you want to play?\n")
-print("you want to play with ", numberOfPlayers, "players")
-
-budget = input("what is your budget?\n")
-print("your budget is ", budget, "euros")
-
-typeGame = input("what is your game-type?\n")
-print("your game-type is ", typeGame)
-
-coop = input("cooperative? true/false\n")
-print(coop)
-
-camp = input("campaign? true/false\n")
-print(camp)
-
-minAge = input("what is the minimum age of the players?\n")
-print("your min age is ", minAge)
-'''
-'''
-stringQuery =''''''
-A is {},
- M = {},
-  B = {},
-   T = {}, 
-   CO = {},
-    CA = {},
-    game(Name, MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
-     C < B,
-      numPlay(A, MinP, MaxP), minimumAge(M, Minage)''''''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
-
-y = prolog.query(stringQuery)
-
-x= 0
-for soln in y:
-	print("you can play:", (soln["Name"]))
-	x = 1
-if x == 0:
-	print("sorry, we couldn't find any games for you")	'''
-

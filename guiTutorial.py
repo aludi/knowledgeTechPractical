@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import *
 from functools import partial
+from PrologInteraction import *
 
 #bleh
 class Gui: 
 	
 	def __init__(self, master): 
-		
+		prologThing = PrologInteraction()
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		self.__forSelf = True
 		self.__numPlayers = 1
@@ -14,6 +15,7 @@ class Gui:
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
+		self.__ListType = prologThing.getTypes()
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
@@ -50,8 +52,9 @@ class Gui:
 		Label(master, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
 		gen.set("strategy")
-		Radiobutton(master, text="Strategy", padx = 20, variable=gen, value="strategy").pack(anchor=tk.W)
-		Radiobutton(master, text="Family", padx = 20, variable=gen, value="family").pack(anchor=tk.W)
+		for i in self.__ListType:
+			print(i)
+			Radiobutton(master, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_type(master,gen)).pack(anchor=tk.W)
 		
 		#question 5
@@ -127,6 +130,12 @@ class Gui:
 		
 	def getCampaign(self):
 		return self.__Campaign
+		
+	# setters	
+	def setTypeList(self, typeGamesList):
+		self.__ListType = typeGamesList
+		
+		
 		
 		#frame = Frame(master)
 		#frame.pack()
