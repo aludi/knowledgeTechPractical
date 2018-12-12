@@ -43,20 +43,15 @@ class PrologInteraction:
 		gamesList = []
 		x = self.prolog.query('''game(X,_, _, _, _, _, _,_, _,_, _)''')
 		for soln in x:
-			print(soln["X"])
 			gamesList.append(soln["X"])
-		print(gamesList)
 		return gamesList
 		
 	def getTypes(self):
 		typesList = []
 		x = self.prolog.query('''game(_,_, _, _, _, _, T,_, _,_, _)''')
 		for soln in x:
-			print(soln["T"])
 			if soln["T"] not in typesList:
 				typesList.append(soln["T"])
-		
-		print(typesList)
 		return typesList
 		
 

@@ -15,7 +15,8 @@ class Gui:
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
-		self.__ListType = prologThing.getTypes()
+		self.__ListType = prologThing.getTypes() 		#getting types-lists (family, strategy) from prologInteraction
+		self.__ListNames = prologThing.getNamesGamesInList() #getting all names of all games from prologInteraction
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
@@ -35,25 +36,24 @@ class Gui:
 		Radiobutton(master, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_person(master,var1)).pack(anchor=tk.W)	
 		
-		#question 2
+		#question 2	#  set "_"
 		Label(master, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
 		num = Entry(master)
 		num.pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_numPlayers(master,num)).pack(anchor=tk.W)
 		
-		#question 3
+		#question 3 # set "_" as default option?
 		Label(master, text="What is the maximum price you want to pay for the game? (in euros)").pack(anchor=tk.W)
 		maxP = Entry(master)
 		maxP.pack(anchor=tk.W)
-		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
+		#TODO if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
 		Button(master, text="Confirm Choice", command= lambda: self.save_budget(master,maxP)).pack(anchor=tk.W)
 			
 		#question 4
 		Label(master, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
-		for i in self.__ListType:
-			print(i)
+		gen.set("family")
+		for i in self.__ListType:		#loops through all game-types in database.
 			Radiobutton(master, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_type(master,gen)).pack(anchor=tk.W)
 		

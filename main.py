@@ -49,8 +49,6 @@ game2 = "madeup5"
 game3 = "madeup6"
 listGame = [game1, game2, game3]
 val = prologThing.getAverageComplexity(listGame)
-print(val)
-
 
 
 
