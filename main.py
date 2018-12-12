@@ -1,13 +1,16 @@
 from pyswip import Prolog
 
-#import Tkinter as tk
-#from Tkinter import *
-
-
 import tkinter as tk
-#from tkinter import *
-#import Gui
+from tkinter import *
+
 from PrologInteraction import *
+
+import guiTutorial as gui
+
+
+#initiate a root and an instance of the class Gui
+root = Tk()
+GUI = gui.Gui(root)
 
 
 ### LINK TO GITHUB REPO: https://github.com/aludi/knowledgeTechPractical
@@ -28,10 +31,6 @@ from PrologInteraction import *
 # how long should it take?
 # potential genres
 
-
-
-def question1():
-	print("I'm clicking stuff")
 	
 def load_knowledge_base():		#implementing knowledge base in separate function
 	prolog.consult("startingKB.pl")
@@ -41,7 +40,6 @@ def load_knowledge_base():		#implementing knowledge base in separate function
 
 prolog = Prolog()
 #kb = load_knowledge_base()		#loading the knowledge base
-#gui = Gui
 prologThing = PrologInteraction()
 
 
@@ -55,12 +53,13 @@ val = prologThing.getAverageComplexity(listGame)
 print(val)
 prologThing.searchGameByAverageComplexity(val, prolog)
 
-
-prologThing.setNumPlay(1)
-prologThing.setBudget(100)
-prologThing.setType("family")
-prologThing.setCoop("true")
-prologThing.setCamp("true")
+#getting the answers from the Gui
+prologThing.setNumPlay(GUI.getNumPlayers())
+prologThing.setGame1(GUI.getGame1())
+prologThing.setBudget(GUI.getMaxPrice())
+prologThing.setType(GUI.getGameType())
+prologThing.setCoop(GUI.getCoop())
+prologThing.setCamp(GUI.getCampaign())
 prologThing.setMinAge("0")
 
 prologThing.stringQuery(prolog)
@@ -80,19 +79,14 @@ prologThing.printSol()
 '''
 numberOfPlayers = input("with how many players do you want to play?\n")
 print("you want to play with ", numberOfPlayers, "players")
-
 budget = input("what is your budget?\n")
 print("your budget is ", budget, "euros")
-
 typeGame = input("what is your game-type?\n")
 print("your game-type is ", typeGame)
-
 coop = input("cooperative? true/false\n")
 print(coop)
-
 camp = input("campaign? true/false\n")
 print(camp)
-
 minAge = input("what is the minimum age of the players?\n")
 print("your min age is ", minAge)
 '''
@@ -107,13 +101,10 @@ A is {},
     game(Name, MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
      C < B,
       numPlay(A, MinP, MaxP), minimumAge(M, Minage)''''''.format(numberOfPlayers, minAge, budget, typeGame, coop, camp)
-
 y = prolog.query(stringQuery)
-
 x= 0
 for soln in y:
 	print("you can play:", (soln["Name"]))
 	x = 1
 if x == 0:
 	print("sorry, we couldn't find any games for you")	'''
-
