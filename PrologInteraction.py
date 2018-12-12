@@ -16,7 +16,7 @@ class PrologInteraction:
 		self.camp = 0
 		self.minAge = 0
 		self.y = 0
-		print(self.minAge)
+		
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
@@ -41,6 +41,21 @@ class PrologInteraction:
 		return(compAv/len(listGame))
 		
 
+	def getNamesGamesInList(self):
+		gamesList = []
+		x = self.prolog.query('''game(X,_, _, _, _, _, _,_, _,_, _)''')
+		for soln in x:
+			gamesList.append(soln["X"])
+		return gamesList
+		
+	def getTypes(self):
+		typesList = []
+		x = self.prolog.query('''game(_,_, _, _, _, _, T,_, _,_, _)''')
+		for soln in x:
+			if soln["T"] not in typesList:
+				typesList.append(soln["T"])
+		return typesList
+		
 	#some setters
 	
 	def setNumPlay(self, numPlay):

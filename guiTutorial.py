@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from functools import partial
+from PrologInteraction import *
 
 from tkinter_autocomplete import AutocompleteEntry
 
@@ -11,13 +12,17 @@ class Gui:
 	def __init__(self, master): 
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
+		prologThing = PrologInteraction()
+		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		self.__forSelf = True
-		self.__game1 = "scrabble"
 		self.__numPlayers = 1
 		self.__maxPrice = 10
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
+		self.__ListType = prologThing.getTypes() 		#getting types-lists (family, strategy) from prologInteraction
+		self.__ListNames = prologThing.getNamesGamesInList() #getting all names of all games from prologInteraction
+		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
@@ -46,7 +51,7 @@ class Gui:
 		#question 2 previous games
 		Label(master, text="Name three games you like").pack(anchor=tk.W)
 		game1Entry = AutocompleteEntry(master)
-		game1Entry.build(entries=games, no_results_message="<No results found for '{}' >")
+		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")
 		game1Entry.pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
 		
@@ -66,9 +71,9 @@ class Gui:
 		#question 4
 		Label(master, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
-		Radiobutton(master, text="Strategy", padx = 20, variable=gen, value="strategy").pack(anchor=tk.W)
-		Radiobutton(master, text="Family", padx = 20, variable=gen, value="family").pack(anchor=tk.W)
+		gen.set("family")
+		for i in self.__ListType:		#loops through all game-types in database.
+			Radiobutton(master, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_type(master,gen)).pack(anchor=tk.W)
 		
 		#question 5
