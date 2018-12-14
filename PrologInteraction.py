@@ -51,28 +51,42 @@ class PrologInteraction:
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
+	def getGenres
+		
 
-	def getNamesGamesInList(self):		# this function queries for the name of every game and puts it in a list
+	#getters for GUI initialization
+	def getNamesGamesForGUI(self):		# this function queries for the name of every game and puts it in a list
 		gamesList = []
 		x = self.prolog.query('''game(X,_,_, _, _, _, _, _,_, _,_, _)''')
 		for soln in x:
 			gamesList.append(soln["X"])
 		return gamesList
 		
-	def getTypes(self):					# this function queries for every unique type of game and puts it in the list
+	def getTypesForGUI(self):					# this function queries for every unique type of game and puts it in the list
 		typesList = []
 		x = self.prolog.query('''game(_,_,_,_, _, _, _, T,_, _,_, _)''')
 		for soln in x:
 			if isinstance(soln["T"],(list,)):
-				L1 = soln["T"]
-				for i in L1:
+				for i in soln["T"]:
 					sol = str(i)
 			if sol not in typesList:
 				typesList.append(sol)
 		print(typesList)
 		return typesList
 	
-	#def getGenres(self): TODO
+	def getGenresForGUI(self):
+		genresList = []
+		x = self.prolog.query('''game(_,_,_,_, _, _, _,_,_, _,_, G)''')
+		for soln in x:
+			if isinstance(soln["G"],(list,)):
+				for i in soln["G"]:
+					sol = str(i)
+			if sol not in genresList:
+				genresList.append(sol)
+		print(genresList)
+		return genresList
+		
+	
 	
 	#some setters
 	
