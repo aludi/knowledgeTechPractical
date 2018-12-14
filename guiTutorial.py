@@ -1,6 +1,10 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 from functools import partial
+from PrologInteraction import *
+
+from tkinter_autocomplete import AutocompleteEntry
 
 
 class Gui: 
@@ -8,12 +12,21 @@ class Gui:
 	def __init__(self, master): 
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
+		prologThing = PrologInteraction()
+		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		self.__forSelf = True
 		self.__numPlayers = 1
 		self.__maxPrice = 10
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
+		self.__ListType = prologThing.getTypes() 		#getting types-lists (family, strategy) from prologInteraction
+		self.__ListNames = prologThing.getNamesGamesInList() #getting all names of all games from prologInteraction
+		self.__game1 = "some"
+		self.__game2 = "some"
+		self.__game3 = "some"
+		
+		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
@@ -33,6 +46,29 @@ class Gui:
 		Radiobutton(master, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_person(master,var1)).pack(anchor=tk.W)	
 		
+		
+		#TEMPORARY
+		games = ("Small world", "Monopoly", "Colonisten van katan", "pandemic", "Agricola", "Wizard")
+		def choseEntry(entry):
+			print(entry)
+		
+		#question 2 previous games
+		Label(master, text="Name three games you like").pack(anchor=tk.W)
+		game1Entry = AutocompleteEntry(master)
+		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		game1Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
+		
+		game2Entry = AutocompleteEntry(master)
+		game2Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		game2Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game2(master,game2Entry)).pack(anchor=tk.W)
+		
+		game3Entry = AutocompleteEntry(master)
+		game3Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		game3Entry.pack(anchor=tk.W)
+		Button(master, text="Confirm Choice", command= lambda: self.save_game3(master,game3Entry)).pack(anchor=tk.W)
+		
 		#question 2
 		Label(master, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
 		num = Entry(master)
@@ -49,9 +85,9 @@ class Gui:
 		#question 4
 		Label(master, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
-		Radiobutton(master, text="Strategy", padx = 20, variable=gen, value="strategy").pack(anchor=tk.W)
-		Radiobutton(master, text="Family", padx = 20, variable=gen, value="family").pack(anchor=tk.W)
+		gen.set("family")
+		for i in self.__ListType:		#loops through all game-types in database.
+			Radiobutton(master, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(master, text="Confirm Choice", command= lambda: self.save_type(master,gen)).pack(anchor=tk.W)
 		
 		#question 5
@@ -75,9 +111,17 @@ class Gui:
 		
 		
 
-			
 	def save_person(self, master, var1):
 		self.__forSelf = var1.get()
+		master.update
+	def save_game1(self, master, game):
+		self.__game1 = game.text.get()
+		master.update
+	def save_game2(self, master, game):
+		self.__game2 = game.text.get()
+		master.update
+	def save_game3(self, master, game):
+		self.__game3 = game.text.get()
 		master.update
 		
 	def save_numPlayers(self, master, num):
@@ -112,6 +156,15 @@ class Gui:
 	# getters	
 	def getPerson(self):
 		return self.__forSelf	
+	
+	def getGame1(self):
+		return self.__game1
+	def getGame2(self):
+		return self.__game2
+	def getGame3(self):
+		return self.__game3
+	def getAllGames(self):
+		return [self.__game1, self.__game2, self.__game3]
 		
 	def getNumPlayers(self):
 		return self.__numPlayers
@@ -127,19 +180,3 @@ class Gui:
 		
 	def getCampaign(self):
 		return self.__Campaign
-		
-		#frame = Frame(master)
-		#frame.pack()
-		
-		#self.printButton = Button(frame, text= "Print Message", command=self.printMessage)
-		#self.printButton.pack(side=LEFT)
-		
-		#self.quitButton =  Button(frame, text= "Quit", command = frame.quit)
-		#self.quitButton.pack(side=LEFT)
-		
-	#def printMessage(self): 
-		#print("wow, this actually worked")
-		
-
-
-   

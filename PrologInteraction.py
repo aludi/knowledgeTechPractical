@@ -1,13 +1,17 @@
 from pyswip import Prolog
 
+
 class PrologInteraction:
 	
 	#initialization
-	
+
 	def __init__(self):
 		self.prolog = Prolog()
 		self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
 		prologRules = self.initPrologRules()
+		self.game1 = "some game"
+		self.game2 = "some game"
+		self.game3 = "some game"
 		self.numberOfPlayers = 0
 		self.budget = 0
 		self.typeGame = 0
@@ -15,9 +19,11 @@ class PrologInteraction:
 		self.camp = 0
 		self.minAge = 0
 		self.y = 0
-		print(self.minAge)
+		
 		
 	def initPrologRules(self):
+		#self.prolog.assertz("game(madeup5, 1, 2, 10, 12, 5.9, family, 10, true, true, strategy)")
+		#self.prolog.assertz("game(madeup6, 1, 2, 10, 3, 6.1, family, 10, true, false, adventure)")
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
 	
@@ -31,21 +37,53 @@ class PrologInteraction:
 		
 	def getAverageComplexity(self, listGame):
 		compAv = 0
+		comp = 0
+		print(listGame)
 		for y in listGame:
+			print(y)
 			x = self.prolog.query('''game({},_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
 			for soln in x:
 				comp = soln["Complexity"]
+				print(comp)
 			compAv = compAv + comp
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
 
+	def getNamesGamesInList(self):
+		gamesList = []
+		x = self.prolog.query('''game(X,_, _, _, _, _, _,_, _,_, _)''')
+		for soln in x:
+			gamesList.append(soln["X"])
+		return gamesList
+		
+	def getTypes(self):
+		typesList = []
+		x = self.prolog.query('''game(_,_, _, _, _, _, T,_, _,_, _)''')
+		for soln in x:
+			if soln["T"] not in typesList:
+				typesList.append(soln["T"])
+		return typesList
+		
 	#some setters
 	
 	def setNumPlay(self, numPlay):
 		print(numPlay)
 		self.numberOfPlayers = numPlay
 		print(self.numberOfPlayers)
+	
+	def setGame1(self, game):
+		print(game)
+		self.game1 = game
+		print(self.game1)
+	def setGame2(self, game):
+		print(game)
+		self.game2 = game
+		print(self.game2)
+	def setGame3(self, game):
+		print(game)
+		self.game3 = game
+		print(self.game3)
 	
 	def setBudget(self, budgetVal):
 		self.budget = budgetVal #to implement: range of budgets
@@ -64,6 +102,9 @@ class PrologInteraction:
 		
 		
 	# assorted other functions
+	
+	def makeListOfGames(self):
+		return [self.game1, self.game2, self.game3]
 		
 		
 	def searchGameByAverageComplexity(self, avComp, prolog):
