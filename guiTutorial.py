@@ -28,7 +28,6 @@ class Gui:
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		prologThing = PrologInteraction()
-		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		self.__forSelf = True
 		self.__numPlayers = 1
 		self.__maxPrice = 10
@@ -172,15 +171,19 @@ class Gui:
 	
 	
 	# getters	
+	
 	def getPerson(self):
 		return self.__forSelf	
 	
 	def getGame1(self):
 		return self.__game1
+		
 	def getGame2(self):
 		return self.__game2
+		
 	def getGame3(self):
 		return self.__game3
+		
 	def getAllGames(self):
 		return [self.__game1, self.__game2, self.__game3]
 		
