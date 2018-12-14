@@ -186,4 +186,3 @@ class Gui:
 		
 	def getCampaign(self):
 		return self.__Campaign
-		
