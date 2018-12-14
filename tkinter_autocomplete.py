@@ -70,7 +70,9 @@ class AutocompleteEntry(tk.Frame, object):
               entries,
               max_entries=5,
               case_sensitive=False,
-              no_results_message=NO_RESULTS_MESSAGE
+              no_results_message=NO_RESULTS_MESSAGE,
+              rowNum=0,
+              columnNum=1
             ):
         """Set up the autocompletion settings.
         Binds <KeyRelease>, <<ListboxSelect>>, <Down> and <Up> for
@@ -97,10 +99,12 @@ class AutocompleteEntry(tk.Frame, object):
 
         self.entry.bind("<KeyRelease>", self._update_autocomplete)
         self.entry.focus()
-        self.entry.grid(column=0, row=0)
+        #self.entry.grid(column=0, row=0)
+        self.entry.grid(column=columnNum, row=rowNum)
 
         self.listbox.bind("<<ListboxSelect>>", self._select_entry)
-        self.listbox.grid(column=0, row=1)
+        #self.listbox.grid(column=0, row=1)
+        self.listbox.grid(column=columnNum,row=rowNum+1)
         self.listbox.grid_forget()
         # Initially, the listbox widget doesn't show up.
 
