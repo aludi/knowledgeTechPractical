@@ -51,7 +51,7 @@ class PrologInteraction:
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
-	def getGenres
+	#def getGenres
 		
 
 	#getters for GUI initialization

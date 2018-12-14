@@ -72,18 +72,20 @@ class Gui:
 		Label(f2, text="Name three games you like").grid()
 		game1Entry = StringVar()
 		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 1, rowNum=2)	#changed to listNames
-		game1Entry = f2.text.get()
+		game1Entry = f2.text
 		
 		#game2Entry = AutocompleteEntry(master)
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=4)	#changed to listNames
-		game2Entry = f2.text.get()
+		#f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=4)	#changed to listNames
+		#game2Entry = StringVar()
+		#game2Entry = f2.text
 		#game2Entry.grid()
 		
 		#game3Entry = AutocompleteEntry(master)
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=6)	#changed to listNames
-		game3Entry = f2.text.get()
+		#f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=6)	#changed to listNames
+		#game3Entry = StringVar()
+		#game3Entry = f2.text.get()
 		#game3Entry.grid()
-		Button(f2, text="Next", command= lambda: self.save_games(master,game1Entry, game2Entry, game3Entry, f3)).grid()
+		Button(f2, text="Next", command= lambda: self.save_games(master,game1Entry, f3)).grid()
 		
 		#question 3
 		Label(f3, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
@@ -133,10 +135,12 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
-	def save_games(self, master, g1, g2, g3, frame):
-		self.__game1 = g1
-		self.__game2 = g2
-		self.__game3 = g3
+	def save_games(self, master, g1, frame):
+		self.__game1 = g1.get()
+		#self.__game2 = g2.get()
+		#self.__game3 = g3.get()
+		print("first saved game ")
+		print(self.__game1)
 		raise_frame(frame)
 		master.update
 		
