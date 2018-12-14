@@ -69,16 +69,18 @@ class Gui:
 		
 		#question 2 previous games
 		Label(f2, text="Name three games you like").grid()
-		#game1Entry = AutocompleteEntry(master)
-		game1Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
-		#game1Entry.grid()
+		game1Entry = StringVar()
+		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 1, rowNum=2)	#changed to listNames
+		game1Entry = f2.text.get()
 		
 		#game2Entry = AutocompleteEntry(master)
-		game2Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=4)	#changed to listNames
+		game2Entry = f2.text.get()
 		#game2Entry.grid()
 		
 		#game3Entry = AutocompleteEntry(master)
-		game3Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=6)	#changed to listNames
+		game3Entry = f2.text.get()
 		#game3Entry.grid()
 		Button(f2, text="Next", command= lambda: self.save_games(master,game1Entry, game2Entry, game3Entry, f3)).grid()
 		
@@ -131,9 +133,9 @@ class Gui:
 		master.update
 		
 	def save_games(self, master, g1, g2, g3, frame):
-		self.__game1 = g1.text.get()
-		self.__game2 = g2.text.get()
-		self.__game3 = g3.text.get()
+		self.__game1 = g1
+		self.__game2 = g2
+		self.__game3 = g3
 		raise_frame(frame)
 		master.update
 		
