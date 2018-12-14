@@ -51,8 +51,12 @@ class PrologInteraction:
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
-	def getGenres
-		
+	#def getGenres():
+	
+	def getComplexity(self):
+		x = self.prolog.query('''game(throughTheAgesANewStoryOfCivilization,_,_, _, _, _, C, _,_, _,_, _)''')
+		for soln in x:
+			print(soln["C"])
 
 	#getters for GUI initialization
 	def getNamesGamesForGUI(self):		# this function queries for the name of every game and puts it in a list
@@ -62,29 +66,28 @@ class PrologInteraction:
 			gamesList.append(soln["X"])
 		return gamesList
 		
-	def getTypesForGUI(self):					# this function queries for every unique type of game and puts it in the list
-		typesList = []
-		x = self.prolog.query('''game(_,_,_,_, _, _, _, T,_, _,_, _)''')
-		for soln in x:
-			if isinstance(soln["T"],(list,)):
-				for i in soln["T"]:
+	def getListsForGUI(self, typeOrGenre, resultQ):
+		listForGUI = []
+		for soln in resultQ:
+			if isinstance(soln[typeOrGenre],(list,)):
+				for i in soln[typeOrGenre]:
 					sol = str(i)
-			if sol not in typesList:
-				typesList.append(sol)
-		print(typesList)
+			if sol not in listForGUI:
+				listForGUI.append(sol)
+		print(listForGUI)
+		return listForGUI
+	
+	def getTypesForGUI(self):					# this function queries for every unique type of game and puts it in the list
+		x = self.prolog.query('''game(_,_,_,_, _, _, _, T,_, _,_, _)''')
+		typesList = self.getListsForGUI("T", x)
 		return typesList
 	
 	def getGenresForGUI(self):
-		genresList = []
 		x = self.prolog.query('''game(_,_,_,_, _, _, _,_,_, _,_, G)''')
-		for soln in x:
-			if isinstance(soln["G"],(list,)):
-				for i in soln["G"]:
-					sol = str(i)
-			if sol not in genresList:
-				genresList.append(sol)
-		print(genresList)
+		genresList = self.getListsForGUI("G", x)
 		return genresList
+		
+	
 		
 	
 	
@@ -178,17 +181,18 @@ class PrologInteraction:
 		
 	def stringQuery(self, prolog):
 		stringQuery ='''
-		A is {},
-		M = {},
-		B = {},
-		T = {}, 
+		NUMBEROFPLAYERS is {},
+		MINAGE = {},
+		BUDGET = {},
+		TYPE = {},
+		in_list_type(Name, TYPE),
 		CO = {},
 		CA = {},
-		game(Name, MinP, MaxP, RecP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
-		C < B,
-		numPlay(A, MinP, MaxP), 
-        minimumAge(M, Minage)'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
+		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
+		COST < BUDGET,
+        minimumAge(MINAGE, Minage)'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
+		print(stringQuery)
 		self.y = prolog.query(stringQuery)
 
 
