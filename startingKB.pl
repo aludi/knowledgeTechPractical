@@ -1,4 +1,4 @@
-
+#game(name, min players, max players, rec players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 
 game(madeup5, 1, 2, 10, 12, 5.9, family, 10, true, true, strategy).
 game(madeup6, 1, 2, 10, 3, 6.1, family, 10, true, false, adventure).
@@ -14,3 +14,10 @@ game(catan, 3, 4, 60, 10, 2.34, family, 40, false, false, trading).
 game(monopoly, 2, 8, 60, 8, 1.67, family, 30, false, false, trading).
 game(yourebluffing, 3, 5, 45, 10, 1.62, family, 10, false, false, animals).
 game(risk, 2, 6, 120, 10, 2.10, wargame, 30, false, false, territory).
+
+game(gloomhaven,1,4,3,90,14,3.77,[strategy,thematic],120,true,true,[adventure,fantasy]).
+game(pandemicLegacySeason1,2,4,4,60,12,2.83,[strategy,thematic],60,true,true,[medical,environmental]).
+game(throughTheAgesANewStoryOfCivilization,2,4,3,210,14,4.37,[strategy],70,false,false,[cardGame,civilization,economic]).
+game(terraformingMars,1,5,3,120,12,3.24,[strategy],60,false,false,[economic,environmental,scienceFiction,territoryBuilding]).
+game(twilightStruggle,2,2,2,150,14,3.56,[strategy,wargames],60,false,true,[wargame,political,modernWarfare]).
+game(starWarsRebellion,2,4,2,210,12,3.66,[strategy,thematic],90,false,false,[scienceFiction,wargame).
