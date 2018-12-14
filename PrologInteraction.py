@@ -128,7 +128,7 @@ class PrologInteraction:
 		A is {},
 		game(Name, _,_, _, _, _, C,_, _, _, _, _),
 		C =< A + 0.5,
-		C >= A - 0.5.'''.format(avComp)
+		C >= A - 0.5'''.format(avComp)
 		self.y = self.prolog.query(stringQuery)
 		x= 0
 		for soln in self.y:
