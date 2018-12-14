@@ -22,16 +22,15 @@ class PrologInteraction:
 		
 		
 	def initPrologRules(self):
-		#self.prolog.assertz("game(madeup5, 1, 2, 10, 12, 5.9, family, 10, true, true, strategy)")
-		#self.prolog.assertz("game(madeup6, 1, 2, 10, 3, 6.1, family, 10, true, false, adventure)")
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
+		self.prolog.assertz("in_list(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_), member(X, B)")
 	
 	# some getters
 	
 	def getAllProperties(self, nameOfGame):
 		print("am in here")
-		x = self.prolog.query('''game({},MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		x = self.prolog.query('''game({},MinP, MaxP, RecP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
 			print(soln["MinP"], soln["MaxP"], soln["Time"], soln["Minage"], soln["Complexity"], soln["T"], soln["Listgenre"])
 		
@@ -41,7 +40,7 @@ class PrologInteraction:
 		print(listGame)
 		for y in listGame:
 			print(y)
-			x = self.prolog.query('''game({},_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+			x = self.prolog.query('''game({},_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
 			for soln in x:
 				comp = soln["Complexity"]
 				print(comp)
@@ -50,19 +49,26 @@ class PrologInteraction:
 		return(compAv/len(listGame))
 		
 
-	def getNamesGamesInList(self):
+	def getNamesGamesInList(self):		# this function queries for the name of every game and puts it in a list
 		gamesList = []
-		x = self.prolog.query('''game(X,_, _, _, _, _, _,_, _,_, _)''')
+		x = self.prolog.query('''game(X,_,_, _, _, _, _, _,_, _,_, _)''')
 		for soln in x:
 			gamesList.append(soln["X"])
 		return gamesList
 		
-	def getTypes(self):
+	def getTypes(self):					# this function queries for every unique type of game and puts it in the list
 		typesList = []
-		x = self.prolog.query('''game(_,_, _, _, _, _, T,_, _,_, _)''')
+		x = self.prolog.query('''game(_,_,_,_, _, _, _, T,_, _,_, _)''')
 		for soln in x:
-			if soln["T"] not in typesList:
-				typesList.append(soln["T"])
+			if isinstance(soln["T"],(list,)):
+				L1 = soln["T"]
+				for i in L1:
+					sol = str(i)
+			if isinstance(soln["T"], (str,)):
+				sol = soln["T"]
+			if sol not in typesList:
+				typesList.append(sol)
+		print(typesList)
 		return typesList
 		
 	#some setters
@@ -103,15 +109,18 @@ class PrologInteraction:
 		
 	# assorted other functions
 	
+	
+
 	def makeListOfGames(self):
 		return [self.game1, self.game2, self.game3]
 		
-		
+	# queries
+	
 	def searchGameByAverageComplexity(self, avComp, prolog):
 		# TODO: finetune range complexity, for now it's ±5
 		stringQuery = '''
 		A is {},
-		game(Name, _, _, _, _, C,_, _, _, _, _),
+		game(Name, _,_, _, _, _, C,_, _, _, _, _),
 		C =< A + 0.5,
 		C >= A - 0.5.'''.format(avComp)
 		self.y = self.prolog.query(stringQuery)
@@ -121,6 +130,18 @@ class PrologInteraction:
 			x = 1
 		if x == 0:
 			print("sorry, we couldn't find any games for you")	
+			
+	def searchGameByType(self, prolog):
+		typeGame = self.typeGame
+		print(typeGame)
+		q = '''T = {}, in_list(A,T)'''.format(typeGame)
+		self.y = prolog.query(q)
+		for soln in self.y:
+			print("you can play:", (soln['A']))
+			x = 1
+		if x == 0:
+			print("sorry, we couldn't find any games for you")	
+		
 		
 	def stringQuery(self, prolog):
 		stringQuery ='''
@@ -130,7 +151,7 @@ class PrologInteraction:
 		T = {}, 
 		CO = {},
 		CA = {},
-		game(Name, MinP, MaxP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
+		game(Name, MinP, MaxP, RecP, Time, Minage, Complexity, T, C, CO, CA, Listgenre),
 		C < B,
 		numPlay(A, MinP, MaxP), 
         minimumAge(M, Minage)'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)

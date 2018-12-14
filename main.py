@@ -18,26 +18,23 @@ def guiAnswers(pI):
 	pI.setCamp(GUI.getCampaign())			# setting if game is campaign
 	pI.setMinAge("0")						# setting min age for playing
 
-
+#todo: select more than 1 type of game?
 
 #initiate a root and an instance of the class Gui
 root = Tk()
 GUI = gui.Gui(root)
 
+#initialize prolog and the prolog interaction class
 prolog = Prolog()
 pI = PrologInteraction()
-
-# returns a list of all games in the knowledge-base
-listNameGames = pI.getNamesGamesInList()
-
-# returns a list of all types of games in the knowledge-base
-listTypeGames = pI.getTypes()
 
 #getting the answers from the Gui
 guiAnswers(pI)
 
-## searching for other games with the complexity of game1:
+# searching for other games with the complexity of game1:
 pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), prolog)
+# searching for games in list of type
+pI.searchGameByType(prolog)
 
 pI.stringQuery(prolog)
 pI.printSol()
