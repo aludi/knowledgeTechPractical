@@ -30,10 +30,10 @@ class Gui:
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
-		#pic = PhotoImage(file = "scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
-		#w1 = Label(master, image = pic)
-		#w1.image = pic
-		#w1.pack(side = "right")
+		pic = PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
+		w1 = Label(master, image = pic)
+		w1.image = pic
+		w1.pack(side = "right")
 		Button(master, text="Exit", command= master.destroy).pack(side = "bottom")
 		w.pack()
 		

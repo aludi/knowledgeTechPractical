@@ -7,7 +7,7 @@ class PrologInteraction:
 
 	def __init__(self):
 		self.prolog = Prolog()
-		#self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
+		self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
 		prologRules = self.initPrologRules()
 		self.game1 = "some game"
 		self.game2 = "some game"
@@ -22,8 +22,8 @@ class PrologInteraction:
 		
 		
 	def initPrologRules(self):
-		self.prolog.assertz("game(madeup5, 1, 2, 10, 12, 5.9, family, 10, true, true, strategy)")
-		self.prolog.assertz("game(madeup6, 1, 2, 10, 3, 6.1, family, 10, true, false, adventure)")
+		#self.prolog.assertz("game(madeup5, 1, 2, 10, 12, 5.9, family, 10, true, true, strategy)")
+		#self.prolog.assertz("game(madeup6, 1, 2, 10, 3, 6.1, family, 10, true, false, adventure)")
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
 	
