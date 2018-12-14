@@ -11,6 +11,21 @@ class Gui:
 	
 	def __init__(self, master): 
 		
+		def raise_frame(frame):
+			frame.tkraise()
+			
+		f0 = Frame(master)
+		f1 = Frame(master)
+		f2 = AutocompleteEntry(master)
+		f3 = Frame(master)
+		f4 = Frame(master)
+		f5 = Frame(master)
+		f6 = Frame(master)
+		f7 = Frame(master)
+		
+		for frame in (f0, f1, f2, f3, f4, f5, f6, f7):
+		    frame.grid(row=0, column=0, sticky='news')
+		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		prologThing = PrologInteraction()
 		self.__forSelf = True
@@ -28,118 +43,118 @@ class Gui:
 		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
-		w = Label(master, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
+		w = Label(f0, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
 		pic = PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
-		w1 = Label(master, image = pic)
+		w1 = Label(f0, image = pic)
 		w1.image = pic
 		w1.pack(side = "right")
-		Button(master, text="Exit", command= master.destroy).pack(side = "bottom")
+		Button(f0, text="Exit", command= master.destroy).pack(side = "bottom")
+		Button(f0, text="Start", command= lambda: raise_frame(f1)).pack(side = "bottom")
 		w.pack()
 		
 		
 		#question 1 
-		Label(master, text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
+		Label(f1, text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
 		var1 = BooleanVar()
 		var1.set(True)
-		Radiobutton(master, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
-		Radiobutton(master, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_person(master,var1)).pack(anchor=tk.W)	
+		Radiobutton(f1, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
+		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
+		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f2)).pack(anchor=tk.W)	
 		
 		
 		#TEMPORARY
-		games = ("Small world", "Monopoly", "Colonisten van katan", "pandemic", "Agricola", "Wizard")
+		games = ("Small world", "Monopoly", "Colonisten van Catan", "pandemic", "Agricola", "Wizard")
 		def choseEntry(entry):
 			print(entry)
 		
 		#question 2 previous games
-		Label(master, text="Name three games you like").pack(anchor=tk.W)
-		game1Entry = AutocompleteEntry(master)
-		game1Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
-		game1Entry.pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_game1(master,game1Entry)).pack(anchor=tk.W)
+		Label(f2, text="Name three games you like").grid()
+		#game1Entry = AutocompleteEntry(master)
+		game1Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		#game1Entry.grid()
 		
-		game2Entry = AutocompleteEntry(master)
-		game2Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
-		game2Entry.pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_game2(master,game2Entry)).pack(anchor=tk.W)
+		#game2Entry = AutocompleteEntry(master)
+		game2Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		#game2Entry.grid()
 		
-		game3Entry = AutocompleteEntry(master)
-		game3Entry.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
-		game3Entry.pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_game3(master,game3Entry)).pack(anchor=tk.W)
-		
-		#question 2
-		Label(master, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
-		num = Entry(master)
-		num.pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_numPlayers(master,num)).pack(anchor=tk.W)
+		#game3Entry = AutocompleteEntry(master)
+		game3Entry = f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >")	#changed to listNames
+		#game3Entry.grid()
+		Button(f2, text="Next", command= lambda: self.save_games(master,game1Entry, game2Entry, game3Entry, f3)).grid()
 		
 		#question 3
-		Label(master, text="What is the maximum price you want to pay for the game? (in euros)").pack(anchor=tk.W)
-		maxP = Entry(master)
+		Label(f3, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
+		num = Entry(f3)
+		num.pack(anchor=tk.W)
+		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,f4)).pack(anchor=tk.W)
+		
+		#question 4
+		Label(f4, text="What is the maximum price you want to pay for the game? (in euros)").pack(anchor=tk.W)
+		maxP = Entry(f4)
 		maxP.pack(anchor=tk.W)
 		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
-		Button(master, text="Confirm Choice", command= lambda: self.save_budget(master,maxP)).pack(anchor=tk.W)
+		Button(f4, text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
 			
-		#question 4
-		Label(master, text="What type of game do you want to play?").pack(anchor=tk.W)
+		#question 5
+		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
 		gen.set("family")
 		for i in self.__ListType:		#loops through all game-types in database.
-			Radiobutton(master, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_type(master,gen)).pack(anchor=tk.W)
-		
-		#question 5
-		Label(master, text="Do you want a cooperative game?").pack(anchor=tk.W)
-		coop = StringVar()
-		coop.set("true")
-		Radiobutton(master, text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
-		Radiobutton(master, text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_coop(master,coop)).pack(anchor=tk.W)
+			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
+		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f6)).pack(anchor=tk.W)
 		
 		#question 6
-		Label(master, text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+		Label(f6, text="Do you want a cooperative game?").pack(anchor=tk.W)
+		coop = StringVar()
+		coop.set("true")
+		Radiobutton(f6, text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
+		Radiobutton(f6, text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
+		Button(f6, text="Confirm Choice", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
+		
+		#question 7
+		Label(f7, text="Do you want a game that has a campaign?").pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
-		Radiobutton(master, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
-		Radiobutton(master, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
-		Button(master, text="Confirm Choice", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
+		Radiobutton(f7, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
+		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
+		Button(f7, text="Confirm Choice", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		
+		raise_frame(f0)
 		
 		master.mainloop()
-		
+	
 		
 
-	def save_person(self, master, var1):
+	def save_person(self, master, var1,frame):
 		self.__forSelf = var1.get()
+		raise_frame(frame)
 		master.update
 		
-	def save_game1(self, master, game):
-		self.__game1 = game.text.get()
+	def save_games(self, master, g1, g2, g3, frame):
+		self.__game1 = g1.text.get()
+		self.__game2 = g2.text.get()
+		self.__game3 = g3.text.get()
+		raise_frame(frame)
 		master.update
 		
-	def save_game2(self, master, game):
-		self.__game2 = game.text.get()
-		master.update
-		
-	def save_game3(self, master, game):
-		self.__game3 = game.text.get()
-		master.update
-		
-	def save_numPlayers(self, master, num):
+	def save_numPlayers(self, master, num, frame):
 		self.__numPlayers = num.get()
+		raise_frame(frame)
 		master.update	
 		
-	def save_budget(self, master, maxP):
+	def save_budget(self, master, maxP, frame):
 		self.__maxPrice = maxP.get()
+		raise_frame(frame)
 		master.update
 		
-	def save_type(self, master, gen):
+	def save_type(self, master, gen, frame):
 		self.__gameType = gen.get()
+		raise_frame(frame)
 		master.update
 		
-	def save_coop(self, master, coop):
+	def save_coop(self, master, coop, frame):
 		self.__Coop = coop.get()
+		raise_frame(frame)
 		master.update
 		
 	def save_campaign(self, master, cam):
@@ -186,3 +201,6 @@ class Gui:
 		
 	def getCampaign(self):
 		return self.__Campaign
+		
+def raise_frame(frame):
+			frame.tkraise()
