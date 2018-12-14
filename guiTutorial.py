@@ -34,8 +34,9 @@ class Gui:
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
-		self.__ListType = prologThing.getTypes() 		#getting types-lists (family, strategy) from prologInteraction
-		self.__ListNames = prologThing.getNamesGamesInList() #getting all names of all games from prologInteraction
+		self.__ListType = prologThing.getTypesForGUI() 		#getting types-lists (family, strategy) from prologInteraction
+		self.__ListNames = prologThing.getNamesGamesForGUI() #getting all names of all games from prologInteraction
+		self.__ListGenres = prologThing.getGenresForGUI()
 		self.__game1 = "some"
 		self.__game2 = "some"
 		self.__game3 = "some"
