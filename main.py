@@ -35,6 +35,10 @@ guiAnswers(pI)
 pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), prolog)
 # searching for games in list of type
 pI.searchGameByType(prolog)
+# searching for games in list of genre
+#only for testing if genre selection works
+pI.setGenre("adventure")
+pI.searchGameByGenre(prolog)
 
 pI.stringQuery(prolog)
 pI.printSol()

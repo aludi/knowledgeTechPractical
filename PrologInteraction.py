@@ -18,13 +18,16 @@ class PrologInteraction:
 		self.coop = 0
 		self.camp = 0
 		self.minAge = 0
+		self.genre = 0
 		self.y = 0
 		
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
-		self.prolog.assertz("in_list(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_), member(X, B)")
+		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
+		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
+
 	
 	# some getters
 	
@@ -64,13 +67,13 @@ class PrologInteraction:
 				L1 = soln["T"]
 				for i in L1:
 					sol = str(i)
-			if isinstance(soln["T"], (str,)):
-				sol = soln["T"]
 			if sol not in typesList:
 				typesList.append(sol)
 		print(typesList)
 		return typesList
-		
+	
+	#def getGenres(self): TODO
+	
 	#some setters
 	
 	def setNumPlay(self, numPlay):
@@ -105,6 +108,9 @@ class PrologInteraction:
 		
 	def setMinAge(self, minAgeSet):
 		self.minAge = minAgeSet
+	
+	def setGenre(self, genreSet):
+		self.genre = genreSet
 		
 		
 	# assorted other functions
@@ -131,10 +137,23 @@ class PrologInteraction:
 		if x == 0:
 			print("sorry, we couldn't find any games for you")	
 			
-	def searchGameByType(self, prolog):
+	def searchGameByType(self, prolog):			# selects all games with a certain type
+		x = 0
 		typeGame = self.typeGame
 		print(typeGame)
-		q = '''T = {}, in_list(A,T)'''.format(typeGame)
+		q = '''T = {}, in_list_type(A,T)'''.format(typeGame)
+		self.y = prolog.query(q)
+		for soln in self.y:
+			print("you can play:", (soln['A']))
+			x = 1
+		if x == 0:
+			print("sorry, we couldn't find any games for you")	
+			
+	def searchGameByGenre(self, prolog):			# selects all games with a certain type
+		x = 0
+		genre = self.genre
+		print(genre)
+		q = '''T = {}, in_list_genre(A,T)'''.format(genre)
 		self.y = prolog.query(q)
 		for soln in self.y:
 			print("you can play:", (soln['A']))
