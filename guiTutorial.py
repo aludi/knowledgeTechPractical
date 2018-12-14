@@ -16,14 +16,16 @@ class Gui:
 			
 		f0 = Frame(master)
 		f1 = Frame(master)
-		f2 = AutocompleteEntry(master)
+		f2one = AutocompleteEntry(master)
+		f2two = AutocompleteEntry(master)
+		f2three = AutocompleteEntry(master)
 		f3 = Frame(master)
 		f4 = Frame(master)
 		f5 = Frame(master)
 		f6 = Frame(master)
 		f7 = Frame(master)
 		
-		for frame in (f0, f1, f2, f3, f4, f5, f6, f7):
+		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7):
 		    frame.grid(row=0, column=0, sticky='news')
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
@@ -60,7 +62,7 @@ class Gui:
 		var1.set(True)
 		Radiobutton(f1, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
 		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f2)).pack(anchor=tk.W)	
+		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f2one)).pack(anchor=tk.W)	
 		
 		
 		#TEMPORARY
@@ -68,22 +70,26 @@ class Gui:
 		def choseEntry(entry):
 			print(entry)
 		
-		#question 2 previous games
-		Label(f2, text="Name three games you like").grid()
+		#question 2.1 previous games
+		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 1, rowNum=2)	#changed to listNames
-		game1Entry = f2.text.get()
+		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
+		game1Entry = f2one.text
+		Button(f2one, text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
 		
-		#game2Entry = AutocompleteEntry(master)
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=4)	#changed to listNames
-		game2Entry = f2.text.get()
-		#game2Entry.grid()
+		#question 2.2
+		Label(f2two, text="Name three games you like-2").grid()
+		game2Entry = StringVar()
+		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
+		game2Entry = f2two.text
+		Button(f2two, text="Next", command= lambda: self.save_game2(master,game2Entry, f2three)).grid()
 		
-		#game3Entry = AutocompleteEntry(master)
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=1,rowNum=6)	#changed to listNames
-		game3Entry = f2.text.get()
-		#game3Entry.grid()
-		Button(f2, text="Next", command= lambda: self.save_games(master,game1Entry, game2Entry, game3Entry, f3)).grid()
+		#question 2.3
+		Label(f2three, text="Name three games you like-3").grid()
+		game3Entry = StringVar()
+		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=6)	#changed to listNames
+		game3Entry = f2three.text
+		Button(f2three, text="Next", command= lambda: self.save_game3(master,game3Entry, f3)).grid()
 		
 		#question 3
 		Label(f3, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
@@ -133,13 +139,27 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
-	def save_games(self, master, g1, g2, g3, frame):
-		self.__game1 = g1
-		self.__game2 = g2
-		self.__game3 = g3
+	def save_game1(self, master, g1, frame):
+		self.__game1 = g1.get()
+		print("first saved game ")
+		print(self.__game1)
 		raise_frame(frame)
 		master.update
 		
+	def save_game2(self, master, g2, frame):
+		self.__game2 = g2.get()
+		print("second saved game")
+		print(self.__game2)
+		raise_frame(frame)
+		master.update
+		
+	def save_game3(self, master, g3, frame):
+		self.__game3 = g3.get()
+		print("third saved game")
+		print(self.__game3)
+		raise_frame(frame)
+		master.update
+	
 	def save_numPlayers(self, master, num, frame):
 		self.__numPlayers = num.get()
 		raise_frame(frame)

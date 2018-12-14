@@ -51,12 +51,7 @@ class PrologInteraction:
 		print("the average complexity of the three games is... ", compAv/len(listGame))
 		return(compAv/len(listGame))
 		
-	#def getGenres():
-	
-	def getComplexity(self):
-		x = self.prolog.query('''game(throughTheAgesANewStoryOfCivilization,_,_, _, _, _, C, _,_, _,_, _)''')
-		for soln in x:
-			print(soln["C"])
+
 
 	#getters for GUI initialization
 	def getNamesGamesForGUI(self):		# this function queries for the name of every game and puts it in a list

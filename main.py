@@ -30,6 +30,8 @@ pI = PrologInteraction()
 
 #getting the answers from the Gui
 guiAnswers(pI)
+pI.getComplexity()
+
 
 # searching for other games with the complexity of game1:
 pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), prolog)
@@ -37,9 +39,9 @@ pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), pro
 pI.searchGameByType(prolog)
 # searching for games in list of genre
 #only for testing if genre selection works
-pI.setGame1("madeup16")				# setting game 1 for extracting features
-pI.setGame2("madeup5")				# setting game 2 for extracting features
-pI.setGame3("madeup7")				# setting game 3 for extracting features
+#pI.setGame1("madeup16")				# setting game 1 for extracting features
+#pI.setGame2("madeup5")				# setting game 2 for extracting features
+#pI.setGame3("madeup7")				# setting game 3 for extracting features
 
 
 
