@@ -9,7 +9,13 @@ from tkinter_autocomplete import AutocompleteEntry
 
 class Gui: 
 	
-	def __init__(self, master): 
+	def __init__(self, master, whichDef, finalList): 
+		if(whichDef == 0):
+			self.makeGui(master)
+		else:
+			self.printResults(master, finalList)
+		
+	def makeGui(self,master):
 		
 		def raise_frame(frame):
 			frame.tkraise()
@@ -24,6 +30,7 @@ class Gui:
 		f5 = Frame(master)
 		f6 = Frame(master)
 		f7 = Frame(master)
+		
 		
 		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7):
 		    frame.grid(row=0, column=0, sticky='news')
@@ -42,6 +49,7 @@ class Gui:
 		self.__game1 = "some"
 		self.__game2 = "some"
 		self.__game3 = "some"
+		self.__finalGames = "some"
 		
 		
 		
@@ -51,8 +59,8 @@ class Gui:
 		w1 = Label(f0, image = pic)
 		w1.image = pic
 		w1.pack(side = "right")
-		Button(f0, text="Exit", command= master.destroy).pack(side = "bottom")
-		Button(f0, text="Start", command= lambda: raise_frame(f1)).pack(side = "bottom")
+		Button(f0, text="Exit", command= master.destroy).pack(side = "left")
+		Button(f0, text="Start", command= lambda: raise_frame(f1)).pack(side = "left")
 		w.pack()
 		
 		
@@ -128,11 +136,20 @@ class Gui:
 		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
 		Button(f7, text="Confirm Choice", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		
+
 		raise_frame(f0)
 		
 		master.mainloop()
 	
-		
+			#final result
+	def printResults(self, master, finalGames):
+		print("am in printresults")
+		Label(master, text="Here are your final games").pack(anchor=tk.W)
+		for i in finalGames:
+			print(i)
+			Label(master, text=i, padx = 20).pack(anchor=tk.W)
+		Button(master, text="Exit", command= master.destroy).pack(side = "left")
+		master.mainloop()	
 
 	def save_person(self, master, var1,frame):
 		self.__forSelf = var1.get()
@@ -193,8 +210,11 @@ class Gui:
 	
 	
 	
+	def setFinalGames(self, finalGames):
+		self.__finalGames = finalGames
+		
 	# getters	
-	
+
 	def getPerson(self):
 		return self.__forSelf	
 	
