@@ -17,7 +17,7 @@ class PrologInteraction:
 		self.typeGame = 0
 		self.coop = 0
 		self.camp = 0
-		self.minAge = 0
+		self.minAge = 12
 		self.genre = 0
 		self.y = 0
 		

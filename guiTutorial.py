@@ -71,7 +71,7 @@ class Gui:
 		#question 2 previous games
 		Label(f2, text="Name three games you like").grid()
 		game1Entry = StringVar()
-		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 1, rowNum=2)	#changed to listNames
+		f2.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2.text
 		
 		#game2Entry = AutocompleteEntry(master)
