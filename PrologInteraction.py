@@ -20,6 +20,7 @@ class PrologInteraction:
 		self.minAge = 12
 		self.genre = 0
 		self.y = 0
+		self.complexity = 0
 		
 		
 	def initPrologRules(self):
@@ -30,6 +31,9 @@ class PrologInteraction:
 
 	
 	# some getters
+	def getSelfY(self):
+		#returns list of final games
+		return self.y
 	
 	def getAllProperties(self, nameOfGame):
 		print("am in here")
@@ -49,6 +53,7 @@ class PrologInteraction:
 				print(comp)
 			compAv = compAv + comp
 		print("the average complexity of the three games is... ", compAv/len(listGame))
+		self.complexity = compAv/len(listGame)
 		return(compAv/len(listGame))
 		
 
@@ -183,20 +188,30 @@ class PrologInteraction:
 		in_list_type(Name, TYPE),
 		CO = {},
 		CA = {},
+		AVERAGECOMPLEXITY = {},
 		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
 		COST < BUDGET,
-        minimumAge(MINAGE, Minage)'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
+        minimumAge(MINAGE, Minage),
+        Complexity =< AVERAGECOMPLEXITY + 0.5,
+		Complexity >= AVERAGECOMPLEXITY - 0.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp, self.complexity)
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
 		print(stringQuery)
 		self.y = prolog.query(stringQuery)
+		print(self.y)
 
 
-
+#: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven.
+# 
+#
 #game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	def printSol(self):
+		listFinal = []
 		x= 0
 		for soln in self.y:
 			print("you can play:", (soln["Name"]))
+			if soln["Name"] not in listFinal:
+				listFinal.append(soln["Name"])
 			x = 1
 		if x == 0:
 			print("sorry, we couldn't find any games for you")	
+		return listFinal
