@@ -3,11 +3,10 @@
 block_cipher = None
 
 
-a = Analysis(['main.py', 'guiTutorial.py', 'Prologinteraction.py', 
- 'tkinter_autocomplete.py'],
+a = Analysis(['main.py'],
              pathex=['/Users/ludivanleeuwen/Documents/GitHub/knowledgeTechPractical'],
              binaries=[],
-             datas=[('img/scaryOwl1.gif','img')],
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -20,14 +19,18 @@ pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
           a.scripts,
-          a.binaries,
-          a.zipfiles,
-          a.datas,
           [],
+          exclude_binaries=True,
           name='main',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          runtime_tmpdir=None,
           console=True )
+coll = COLLECT(exe,
+               a.binaries,
+               a.zipfiles,
+               a.datas,
+               strip=False,
+               upx=True,
+               name='main')

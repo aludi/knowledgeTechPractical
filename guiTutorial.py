@@ -126,7 +126,7 @@ class Gui:
 		coop.set("true")
 		Radiobutton(f6, text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
 		Radiobutton(f6, text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
-		Button(f6, text="Confirm Choice", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
+		Button(f6, text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
 		#question 7
 		Label(f7, text="Do you want a game that has a campaign?").pack(anchor=tk.W)
@@ -135,20 +135,21 @@ class Gui:
 		Radiobutton(f7, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
 		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
 		Button(f7, text="Confirm Choice", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
-		
-
 		raise_frame(f0)
 		
 		master.mainloop()
 	
 			#final result
 	def printResults(self, master, finalGames):
-		print("am in printresults")
-		Label(master, text="Here are your final games").pack(anchor=tk.W)
+		Label(master,font = "Times 20 bold", fg = "blue", text="Here are your final games").pack(anchor=tk.W, side = "top")
+		pic = PhotoImage(file = "img/scaryOwl1.gif")
+		master1 = Label(master, image = pic)
+		master1.image = pic
+		master1.pack(side = "left")
 		for i in finalGames:
 			print(i)
-			Label(master, text=i, padx = 20).pack(anchor=tk.W)
-		Button(master, text="Exit", command= master.destroy).pack(side = "left")
+			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W, side = "right")
+		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
 	def save_person(self, master, var1,frame):
@@ -179,11 +180,15 @@ class Gui:
 	
 	def save_numPlayers(self, master, num, frame):
 		self.__numPlayers = num.get()
+		if self.__numPlayers == '':
+			self.__numPlayers = 1		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
 		
 	def save_budget(self, master, maxP, frame):
 		self.__maxPrice = maxP.get()
+		if self.__maxPrice == '':
+			self.__maxPrice = 10000
 		raise_frame(frame)
 		master.update
 		
@@ -203,11 +208,13 @@ class Gui:
 		
 		
 	def save_minAge():
+		
 		minAge = minA.get()
+		if minAge == '':
+			minAge = "_"
 		
 	def callback(*args):
 		print("variable changed")
-	
 	
 	
 	def setFinalGames(self, finalGames):
