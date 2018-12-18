@@ -193,7 +193,7 @@ class PrologInteraction:
 		listFinal = []
 		x= 0
 		for soln in self.y:
-			print("you can play:", (soln["Name"]["Listgenre"]))
+			#print("you can play:", (soln["Name"]["Listgenre"]))
 			if soln["Name"] not in listFinal:
 				listFinal.append(soln["Name"])
 			x = 1
