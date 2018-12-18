@@ -23,15 +23,16 @@ class PrologInteraction:
 		self.y = "_"
 		self.complexity = "_"
 
-		self.time = "_"
+		self.minTime = "_"
+		self.maxTime = "_"
 		self.listType = []
 
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
-		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
-		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
+		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
+		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
 
 	
 	# some getters
@@ -41,9 +42,9 @@ class PrologInteraction:
 	
 	def getAllProperties(self, nameOfGame):
 		print("am in here")
-		x = self.prolog.query('''game({},MinP, MaxP, RecP, Time, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		x = self.prolog.query('''game({},MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
-			print(soln["MinP"], soln["MaxP"], soln["Time"], soln["Minage"], soln["Complexity"], soln["T"], soln["Listgenre"])
+			print(soln["MinP"], soln["MaxP"], soln["Mintime"], soln["Maxtime"], soln["Minage"], soln["Complexity"], soln["T"], soln["Listgenre"])
 		
 	def getAverageComplexity(self, listGame):
 		compAv = 0
@@ -53,8 +54,8 @@ class PrologInteraction:
 		else:
 			for y in listGame:
 				print("y IN AVERAGE COMPLEXITY", type(y))
-				x = self.prolog.query('''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
-				query = '''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y)
+				x = self.prolog.query('''game("{}",_,_, _, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+				query = '''game("{}",_,_, _, _, _, _, Complexity, _,_, _,_, _)'''.format(y)
 				print(query)
 				print("x IN AVERAGE COMPLEXITY", type(x))
 				for soln in x:
@@ -69,7 +70,7 @@ class PrologInteraction:
 	#getters for GUI initialization
 	def getNamesGamesForGUI(self):		# this function queries for the name of every game and puts it in a list
 		gamesList = []
-		x = self.prolog.query('''game(X,_,_, _, _, _, _, _,_, _,_, _)''')
+		x = self.prolog.query('''game(X,_,_, _, _, _, _, _, _,_, _,_, _)''')
 		for soln in x:
 			gamesList.append(soln["X"])
 		return gamesList
@@ -85,12 +86,12 @@ class PrologInteraction:
 		return listForGUI
 	
 	def getTypesForGUI(self):					# this function queries for every unique type of game and puts it in the list
-		x = self.prolog.query('''game(_,_,_,_, _, _, _, T,_, _,_, _)''')
+		x = self.prolog.query('''game(_,_,_,_, _, _, _, _, T,_, _,_, _)''')
 		typesList = self.getListsForGUI("T", x)
 		return typesList
 	
 	def getGenresForGUI(self):
-		x = self.prolog.query('''game(_,_,_,_, _, _, _,_,_, _,_, G)''')
+		x = self.prolog.query('''game(_,_,_,_, _, _, _, _,_,_, _,_, G)''')
 		genresList = self.getListsForGUI("G", x)
 		return genresList
 		
@@ -179,25 +180,26 @@ class PrologInteraction:
 		MINAGE = {},
 		BUDGET = {},
 		TYPE = {},
-		TIME = {},
+		MINTIME = {},
+		MAXTIME = {},
 		in_list_type(Name, TYPE),
 		CO = {},
 		CA = {},
 		AVERAGECOMPLEXITY = {},
-		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
+		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 		COST < BUDGET,
 		Time < TIME,
         minimumAge(MINAGE, Minage),
         Complexity =< AVERAGECOMPLEXITY + 1,
-		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
 		self.y = prolog.query(stringQuery)
 		print(self.numberOfPlayers, self.minAge, self.budget,self.typeGame, self.coop, self.camp,self.complexity )
 		
 
-#: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven.
+#: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven. TIME NOW HAS RANGE
 # 
 #
-#game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+#game(name, min players, max players, minTime, maxTime, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 	
 	
 	def printSol(self):		# prints and creates list
