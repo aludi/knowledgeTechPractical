@@ -19,6 +19,7 @@ game("viticulture essential edition",1,6,4,45,90,12,2.92,["Strategy"],50,false,f
 game("concordia",2,5,4,100,100,12,3.09,["Strategy"],50,false,false,["Ancient","Economic","Nautical"]).
 
 
+
 /*
 game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 */
