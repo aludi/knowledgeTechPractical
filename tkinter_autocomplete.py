@@ -122,8 +122,10 @@ class AutocompleteEntry(tk.Frame, object):
             self.listbox.grid_forget()
         else:
             for entry in self._entries:
-                if text in entry.strip():
-                    self.listbox.insert(tk.END, entry)
+                #print(type(text))
+                #print("entry type",type(entry.strip()))
+                if text in entry.strip().decode(): #.decode()
+                    self.listbox.insert(tk.END, entry.decode())
 
         listbox_size = self.listbox.size()
         if not listbox_size:

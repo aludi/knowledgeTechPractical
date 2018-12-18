@@ -85,6 +85,8 @@ class Gui:
 		#question 2.1 previous games
 		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
+
+
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2one.text
 		Button(f2one, text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
@@ -118,9 +120,9 @@ class Gui:
 		P3 = IntVar()
 		P4 = IntVar()
 		P5 = IntVar()
-		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4,fg = "black",  text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4,fg = "blue",  text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, fg = "yellow", text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)

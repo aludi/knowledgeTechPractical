@@ -12,6 +12,7 @@ class PrologInteraction:
 		self.game1 = "some game"
 		self.game2 = "some game"
 		self.game3 = "some game"
+
 		self.numberOfPlayers = "_"
 		self.budget = "_"
 		self.typeGame = "_"
@@ -21,8 +22,10 @@ class PrologInteraction:
 		self.genre = "_"
 		self.y = "_"
 		self.complexity = "_"
+
 		self.time = "_"
-		
+		self.listType = []
+
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
@@ -49,7 +52,11 @@ class PrologInteraction:
 			self.complexity = 2.5
 		else:
 			for y in listGame:
-				x = self.prolog.query('''game({},_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+				print("y IN AVERAGE COMPLEXITY", type(y))
+				x = self.prolog.query('''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+				query = '''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y)
+				print(query)
+				print("x IN AVERAGE COMPLEXITY", type(x))
 				for soln in x:
 					comp = soln["Complexity"]
 				compAv = compAv + comp
@@ -162,7 +169,11 @@ class PrologInteraction:
 			print("sorry, we couldn't find any games for you")	
 		
 		
-	def stringQuery(self, prolog):
+	def stringQuery(self, prolog):	# to add, checkbox types - multiple queries
+		
+		
+		# to implement: for object in self.listTypes:
+			# call stringQuery where self.type = object
 		stringQuery ='''
 		NUMBEROFPLAYERS is {},
 		MINAGE = {},
