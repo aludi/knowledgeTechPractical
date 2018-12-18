@@ -82,12 +82,6 @@ class Gui:
 		minA.pack(anchor=tk.W)
 		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
-		
-		#TEMPORARY
-		games = ("Small world", "Monopoly", "Kolonisten van Catan", "pandemic", "Agricola", "Wizard")
-		def choseEntry(entry):
-			print(entry)
-		
 		#question 2.1 previous games
 		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
@@ -138,14 +132,17 @@ class Gui:
 		#question 5
 		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
+		count = 0
 		for i in self.__ListType:		#loops through all game-types in database.
-			print("PAY ATENTION!!!!!!!!",i, type(i))
+			if count == 0:
+				gen.set(i)
+				count = 1
+
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		Label(f61, text="How long do you want to play?").pack(anchor=tk.W)
+		Label(f61, text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
@@ -252,7 +249,6 @@ class Gui:
 		self.__Coop = coop.get()
 		raise_frame(frame)
 		master.update
-		
 		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
