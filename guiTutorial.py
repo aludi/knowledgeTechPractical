@@ -22,6 +22,7 @@ class Gui:
 			
 		f0 = Frame(master)
 		f1 = Frame(master)
+		f1a = Frame(master)
 		f2one = AutocompleteEntry(master)
 		f2two = AutocompleteEntry(master)
 		f2three = AutocompleteEntry(master)
@@ -29,10 +30,11 @@ class Gui:
 		f4 = Frame(master)
 		f5 = Frame(master)
 		f6 = Frame(master)
+		f61 = Frame(master)
 		f7 = Frame(master)
 		
 		
-		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7):
+		for frame in (f0, f1, f1a, f2one, f2two, f2three, f3, f4, f5, f6,f61, f7):
 		    frame.grid(row=0, column=0, sticky='news')
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
@@ -40,6 +42,7 @@ class Gui:
 		self.__forSelf = True
 		self.__numPlayers = 1
 		self.__maxPrice = 10
+		self.__minAge = 0
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
@@ -70,7 +73,13 @@ class Gui:
 		var1.set(True)
 		Radiobutton(f1, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
 		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f2one)).pack(anchor=tk.W)	
+		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
+		
+		#question leeftijd
+		Label(f1a, text="How old is your youngest player?").pack(anchor=tk.W)
+		minA = Entry(f1a)
+		minA.pack(anchor=tk.W)
+		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
 		
 		#TEMPORARY
@@ -118,7 +127,13 @@ class Gui:
 		gen.set("family")
 		for i in self.__ListType:		#loops through all game-types in database.
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f6)).pack(anchor=tk.W)
+		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
+		
+		#question 5
+		Label(f61, text="How long do you want to play?").pack(anchor=tk.W)
+		time = Entry(f61)
+		time.pack(anchor=tk.W)
+		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
 		#question 6
 		Label(f6, text="Do you want a cooperative game?").pack(anchor=tk.W)
@@ -197,22 +212,31 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
+	
+	def save_time(self,master, time, frame):
+		self.__gameTime = time.get()
+		if self.__gameTime == '':
+			self.__gameTime = 10000
+		raise_frame(frame)
+		master.update
+		
 	def save_coop(self, master, coop, frame):
 		self.__Coop = coop.get()
 		raise_frame(frame)
 		master.update
 		
+		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
 		master.destroy()
 		master.update
-		
-		
-	def save_minAge():
-		
-		minAge = minA.get()
-		if minAge == '':
-			minAge = "_"
+
+	def save_minAge(self, master, minA, frame):
+		self.__minAge = minA.get()
+		if self.__minAge == '':
+			self.__minAge = 0
+		raise_frame(frame)
+		master.update
 		
 	def callback(*args):
 		print("variable changed")
@@ -224,7 +248,10 @@ class Gui:
 	# getters	
 
 	def getPerson(self):
-		return self.__forSelf	
+		return self.__forSelf
+		
+	def getMinAge(self):
+		return self.__minAge	
 	
 	def getGame1(self):
 		return self.__game1
@@ -246,6 +273,9 @@ class Gui:
 		
 	def getGameType(self):
 		return self.__gameType
+		
+	def getTime(self):
+		return self.__gameTime
 		
 	def getCoop(self):
 		return self.__Coop
