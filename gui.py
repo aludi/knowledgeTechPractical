@@ -82,12 +82,6 @@ class Gui:
 		minA.pack(anchor=tk.W)
 		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
-		
-		#TEMPORARY
-		games = ("Small world", "Monopoly", "Kolonisten van Catan", "pandemic", "Agricola", "Wizard")
-		def choseEntry(entry):
-			print(entry)
-		
 		#question 2.1 previous games
 		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
@@ -126,9 +120,9 @@ class Gui:
 		P3 = IntVar()
 		P4 = IntVar()
 		P5 = IntVar()
-		Checkbutton(f4,fg = "black",  text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4,fg = "blue",  text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, fg = "yellow", text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)
@@ -138,13 +132,17 @@ class Gui:
 		#question 5
 		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
+		count = 0
 		for i in self.__ListType:		#loops through all game-types in database.
+			if count == 0:
+				gen.set(i)
+				count = 1
+
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		Label(f61, text="How long do you want to play?").pack(anchor=tk.W)
+		Label(f61, text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
@@ -155,6 +153,7 @@ class Gui:
 		coop.set("true")
 		Radiobutton(f6, text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
 		Radiobutton(f6, text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
+		Radiobutton(f6, text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
 		Button(f6, text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
 		#question 7
@@ -163,6 +162,7 @@ class Gui:
 		cam.set("true")
 		Radiobutton(f7, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
 		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
+		Radiobutton(f7, text="Doesn't matter", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
 		Button(f7, text="End", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		raise_frame(f0)
 		
@@ -249,14 +249,15 @@ class Gui:
 		
 	def save_coop(self, master, coop, frame):
 		self.__Coop = coop.get()
-		self.__Coop = "_"
+		if self.__Coop == "either":
+			self.__Coop = "_"
 		raise_frame(frame)
 		master.update
 		
-		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
-		self.__Campaign = "_"
+		if self.__Campaign== "either":
+			self.__Campaign = "_"
 		master.destroy()
 		master.update
 
@@ -313,4 +314,4 @@ class Gui:
 		return self.__Campaign
 		
 def raise_frame(frame):
-			frame.tkraise()
+	frame.tkraise()
