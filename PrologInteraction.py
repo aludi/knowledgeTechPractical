@@ -23,6 +23,8 @@ class PrologInteraction:
 		self.y = "_"
 		self.complexity = "_"
 
+		self.time = "_"
+
 		
 		
 	def initPrologRules(self):
@@ -116,6 +118,9 @@ class PrologInteraction:
 	def setType(self, typeGameSel):
 		self.typeGame = typeGameSel
 		
+	def setTime(self, time):
+		self.time= time
+		
 	def setCoop(self, CoopTF):
 		self.coop = CoopTF
 	
@@ -128,6 +133,9 @@ class PrologInteraction:
 	def setGenre(self, genreSet):
 		self.genre = genreSet
 		
+	def setAvComplexity(self, avCom):
+		self.complexity = avCom
+		
 		
 	# assorted other functions
 	
@@ -138,16 +146,6 @@ class PrologInteraction:
 		
 	# queries
 	
-	def searchGameByAverageComplexity(self, avComp, prolog):
-		# TODO: finetune range complexity, for now it's ±5
-		stringQuery = '''
-		A is {},
-		game(Name, _,_, _, _, _, C,_, _, _, _, _),
-		C =< A + 0.5,
-		C >= A - 0.5'''.format(avComp)
-		self.y = self.prolog.query(stringQuery)
-	
-			
 	def searchGameByType(self, prolog):			# selects all games with a certain type
 		x = 0
 		typeGame = self.typeGame
@@ -177,16 +175,19 @@ class PrologInteraction:
 		MINAGE = {},
 		BUDGET = {},
 		TYPE = {},
+		TIME = {},
 		in_list_type(Name, TYPE),
 		CO = {},
 		CA = {},
 		AVERAGECOMPLEXITY = {},
 		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
 		COST < BUDGET,
+		Time < TIME,
         minimumAge(MINAGE, Minage),
-        Complexity =< AVERAGECOMPLEXITY + 0.5,
-		Complexity >= AVERAGECOMPLEXITY - 0.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp, self.complexity)
+        Complexity =< AVERAGECOMPLEXITY + 1,
+		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
 		self.y = prolog.query(stringQuery)
+		print(self.numberOfPlayers, self.minAge, self.budget,self.typeGame, self.coop, self.camp,self.complexity )
 		
 
 #: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven.
@@ -199,7 +200,7 @@ class PrologInteraction:
 		listFinal = []
 		x= 0
 		for soln in self.y:
-			print("you can play:", (soln["Name"]["Listgenre"]))
+			print(soln["Name"])
 			if soln["Name"] not in listFinal:
 				listFinal.append(soln["Name"])
 			x = 1

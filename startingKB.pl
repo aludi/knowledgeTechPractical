@@ -3,7 +3,6 @@ game(name, min players, max players, rec players, time, min age, complexity, typ
 */
 
 
-
 game("gloomhaven",1,4,3,90,14,3.77,[strategy,thematic],120,true,true,[adventure,fantasy]).
 game("pandemic legacy: season1",2,4,4,60,12,2.83,[strategy,thematic],60,true,true,[medical,environmental]).
 game("through the ages: a new story of civilization",2,4,3,210,14,4.37,[strategy],70,false,false,[cardGame,civilization,economic]).

@@ -22,6 +22,7 @@ class Gui:
 			
 		f0 = Frame(master)
 		f1 = Frame(master)
+		f1a = Frame(master)
 		f2one = AutocompleteEntry(master)
 		f2two = AutocompleteEntry(master)
 		f2three = AutocompleteEntry(master)
@@ -29,17 +30,20 @@ class Gui:
 		f4 = Frame(master)
 		f5 = Frame(master)
 		f6 = Frame(master)
+		f61 = Frame(master)
 		f7 = Frame(master)
 		
 		
-		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7):
+		for frame in (f0, f1, f1a, f2one, f2two, f2three, f3, f4, f5, f6,f61, f7):
 		    frame.grid(row=0, column=0, sticky='news')
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		prologThing = PrologInteraction()
 		self.__forSelf = True
 		self.__numPlayers = 1
-		self.__maxPrice = 10
+
+		self.__minPrice = 10000
+		self.__maxPrice = 0
 		self.__gameType = "strategy"
 		self.__Coop = "true"
 		self.__Campaign = "true"
@@ -70,11 +74,17 @@ class Gui:
 		var1.set(True)
 		Radiobutton(f1, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
 		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f2one)).pack(anchor=tk.W)	
+		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
+		
+		#question leeftijd
+		Label(f1a, text="How old is your youngest player?").pack(anchor=tk.W)
+		minA = Entry(f1a)
+		minA.pack(anchor=tk.W)
+		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
 		
 		#TEMPORARY
-		games = ("Small world", "Monopoly", "Colonisten van Catan", "pandemic", "Agricola", "Wizard")
+		games = ("Small world", "Monopoly", "Kolonisten van Catan", "pandemic", "Agricola", "Wizard")
 		def choseEntry(entry):
 			print(entry)
 		
@@ -108,19 +118,36 @@ class Gui:
 		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,f4)).pack(anchor=tk.W)
 		
 		#question 4
-		Label(f4, text="What is the maximum price you want to pay for the game? (in euros)").pack(anchor=tk.W)
-		maxP = Entry(f4)
-		maxP.pack(anchor=tk.W)
+		Label(f4, text="What is your price range?").pack(anchor=tk.W)
+		Label(f4, text="You can select multiple boxes").pack(anchor=tk.W)
+		P0 = IntVar()
+		P1 = IntVar()
+		P2 = IntVar()
+		P3 = IntVar()
+		P4 = IntVar()
+		P5 = IntVar()
+		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)
 		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
-		Button(f4, text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
+		Button(f4, text="Next", command= lambda: self.save_budget(master,P0,P1,P2,P3,P4,P5,f5)).pack(anchor=tk.W)
 			
 		#question 5
 		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("family")
+		gen.set("strategy")
 		for i in self.__ListType:		#loops through all game-types in database.
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f6)).pack(anchor=tk.W)
+		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
+		
+		#question 5
+		Label(f61, text="How long do you want to play?").pack(anchor=tk.W)
+		time = Entry(f61)
+		time.pack(anchor=tk.W)
+		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
 		#question 6
 		Label(f6, text="Do you want a cooperative game?").pack(anchor=tk.W)
@@ -187,10 +214,23 @@ class Gui:
 		raise_frame(frame)
 		master.update	
 		
-	def save_budget(self, master, maxP, frame):
-		self.__maxPrice = maxP.get()
-		if self.__maxPrice == '':
+	def save_budget(self, master, P0,P1,P2,P3,P4,P5, frame):
+		for x in (P0,P1,P2,P3,P4,P5):
+			print(x.get())
+			if x.get() != 0 and x.get()-10 < self.__minPrice:
+				self.__minPrice = x.get()-10
+			if x.get() > self.__maxPrice:
+				self.__maxPrice = x.get()
+			if x.get() == 61:
+				self.__maxPrice = 10000
+
+		if self.__minPrice == 10000 and self.__maxPrice == 0:
+			self.__minPrice = 0
 			self.__maxPrice = 10000
+		print("minprice")
+		print(self.__minPrice)
+		print("maxprice")
+		print(self.__maxPrice)
 		raise_frame(frame)
 		master.update
 		
@@ -199,22 +239,31 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
+	
+	def save_time(self,master, time, frame):
+		self.__gameTime = time.get()
+		if self.__gameTime == '':
+			self.__gameTime = 10000
+		raise_frame(frame)
+		master.update
+		
 	def save_coop(self, master, coop, frame):
 		self.__Coop = coop.get()
 		raise_frame(frame)
 		master.update
 		
+		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
 		master.destroy()
 		master.update
-		
-		
-	def save_minAge():
-		
-		minAge = minA.get()
-		if minAge == '':
-			minAge = "_"
+
+	def save_minAge(self, master, minA, frame):
+		self.__minAge = minA.get()
+		if self.__minAge == '':
+			self.__minAge = 0
+		raise_frame(frame)
+		master.update
 		
 	def callback(*args):
 		print("variable changed")
@@ -226,7 +275,10 @@ class Gui:
 	# getters	
 
 	def getPerson(self):
-		return self.__forSelf	
+		return self.__forSelf
+		
+	def getMinAge(self):
+		return self.__minAge	
 	
 	def getGame1(self):
 		return self.__game1
@@ -248,6 +300,9 @@ class Gui:
 		
 	def getGameType(self):
 		return self.__gameType
+		
+	def getTime(self):
+		return self.__gameTime
 		
 	def getCoop(self):
 		return self.__Coop

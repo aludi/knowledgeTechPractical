@@ -16,7 +16,9 @@ def guiAnswers(pI):
 	pI.setType(GUI.getGameType())			# setting type of game (family, strategy, etc.)
 	pI.setCoop(GUI.getCoop())				# setting if game is cooperative
 	pI.setCamp(GUI.getCampaign())			# setting if game is campaign
-	pI.setMinAge("0")						# setting min age for playing
+	pI.setMinAge(GUI.getMinAge())			# setting min age for playing
+	pI.setTime(GUI.getTime())
+	pI.setAvComplexity(pI.getAverageComplexity(GUI.getAllGames()))	#setting average complexity
 
 #TODO:
 # lower priority (first query): campaign, leeftijd, duration, budget (sliders?), 
@@ -49,8 +51,11 @@ guiAnswers(pI)
 
 
 # searching for other games with the complexity of game1:
+
 pI.getAverageComplexity(GUI.getAllGames())
+
 # searching for games in list of type
+pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
 
 pI.stringQuery(prolog)
 finalList = pI.printSol()
