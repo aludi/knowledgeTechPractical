@@ -134,7 +134,7 @@ class Gui:
 		cam.set("true")
 		Radiobutton(f7, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
 		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
-		Button(f7, text="Confirm Choice", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
+		Button(f7, text="End", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		raise_frame(f0)
 		
 		master.mainloop()
@@ -204,6 +204,7 @@ class Gui:
 		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
+		master.destroy()
 		master.update
 		
 		
