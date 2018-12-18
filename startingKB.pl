@@ -17,3 +17,8 @@ game("caverna: the cave farmers",1,7,4,30,210,12,3.78,["Strategy"],80,false,fals
 game("arkham horror: the card game",1,2,2,60,120,14,3.28,["Customizable","Thematic"],30,true,true,["Adventure","Card Game","Fantasy","Horror","Novel-Based"]).
 game("viticulture essential edition",1,6,4,45,90,12,2.92,["Strategy"],50,false,false,["Economic","Farming"]).
 game("concordia",2,5,4,100,100,12,3.09,["Strategy"],50,false,false,["Ancient","Economic","Nautical"]).
+
+
+/*
+game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
+*/
