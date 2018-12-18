@@ -82,12 +82,6 @@ class Gui:
 		minA.pack(anchor=tk.W)
 		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
-		
-		#TEMPORARY
-		games = ("Small world", "Monopoly", "Kolonisten van Catan", "pandemic", "Agricola", "Wizard")
-		def choseEntry(entry):
-			print(entry)
-		
 		#question 2.1 previous games
 		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
@@ -249,7 +243,6 @@ class Gui:
 		self.__Coop = coop.get()
 		raise_frame(frame)
 		master.update
-		
 		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
