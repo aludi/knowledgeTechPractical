@@ -120,9 +120,9 @@ class Gui:
 		P3 = IntVar()
 		P4 = IntVar()
 		P5 = IntVar()
-		Checkbutton(f4,fg = "black",  text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4,fg = "blue",  text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, fg = "yellow", text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
+		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
 		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)
@@ -132,13 +132,16 @@ class Gui:
 		#question 5
 		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
-		gen.set("strategy")
+		count = 0
 		for i in self.__ListType:		#loops through all game-types in database.
+			if count == 0:
+				gen.set(i)
+				count = 1
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		Label(f61, text="How long do you want to play?").pack(anchor=tk.W)
+		Label(f61, text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
