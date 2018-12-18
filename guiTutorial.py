@@ -140,6 +140,7 @@ class Gui:
 		gen = StringVar()
 		gen.set("strategy")
 		for i in self.__ListType:		#loops through all game-types in database.
+			print("PAY ATENTION!!!!!!!!",i, type(i))
 			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
 		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		

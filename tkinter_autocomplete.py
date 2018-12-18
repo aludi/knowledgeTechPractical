@@ -39,8 +39,8 @@ class AutocompleteEntry(tk.Frame, object):
              you need to change styling)
     """
     LISTBOX_HEIGHT = 5
-    LISTBOX_WIDTH = 25
-    ENTRY_WIDTH = 25
+    LISTBOX_WIDTH = 30
+    ENTRY_WIDTH = 30
 
     def __init__(self, master, *args, **kwargs):
         """Constructor.

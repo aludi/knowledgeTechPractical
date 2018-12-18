@@ -79,7 +79,7 @@ class PrologInteraction:
 		for soln in resultQ:
 			if isinstance(soln[typeOrGenre],(list,)):
 				for i in soln[typeOrGenre]:
-					sol = str(i)
+					sol = i.decode()
 			if sol not in listForGUI:
 				listForGUI.append(sol)
 		return listForGUI
