@@ -8,7 +8,7 @@ game("pandemic legacy: season1",2,4,4,60,12,2.83,["Strategy","Thematic"],60,true
 game("through the ages: a new story of civilization",2,4,3,210,14,4.37,["Strategy"],70,false,false,["Card Game","Civilization","Economic"]).
 game("terraforming mars",1,5,3,120,12,3.24,["Strategy"],60,false,false,["Economic","Environmental","Science Fiction","Territory Building"]).
 game("twilight struggle",2,2,2,150,14,3.56,["Strategy","Wargame"],60,false,true,["Political","Modern Warfare"]).
-game("star wars: rebellion",2,4,2,210,12,3.66,["Strategy","Thematic"],90,false,false,["ScienceFiction","Wargame"]).
+game("star wars: rebellion",2,4,2,210,12,3.66,["Strategy","Thematic"],90,false,false,["Science Fiction","Wargame"]).
 game("scythe",1,5,4,105,12,3.37,["Strategy"],70,false,false,["Economic", "Science Fiction", "Territory Building"]).
 game("gaia project",1,4,4,110,14,4.30,["Strategy"],80,false,false,["Civilization", "Economic", "ScienceFiction", "Territory Building"]).
 game("great western trail",2,4,3,120,12,3.69,["Strategy"],60,false,false,["Animals"]).

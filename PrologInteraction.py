@@ -175,7 +175,7 @@ class PrologInteraction:
 		# to implement: for object in self.listTypes:
 			# call stringQuery where self.type = object
 		stringQuery ='''
-		NUMBEROFPLAYERS is {},
+		NUMBEROFPLAYERS = {},
 		MINAGE = {},
 		BUDGET = {},
 		TYPE = {},

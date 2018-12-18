@@ -5,7 +5,7 @@ from tkinter import *
 
 from PrologInteraction import *
 
-import guiTutorial as gui
+import gui
 
 def guiAnswers(pI):
 	pI.setNumPlay(GUI.getNumPlayers())		# setting number of players in pI
