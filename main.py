@@ -31,7 +31,6 @@ def guiAnswers(pI):
 
 # 1) print list of final genres in GUI
 # 2) get high/low priority queries in order
-# 3) change gui to reflect questions
 # 4) pop-ups on GUI for explanation
 
 # QUESTIONS
@@ -53,7 +52,7 @@ guiAnswers(pI)
 # searching for other games with the complexity of game1:
 #pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), prolog)
 # searching for games in list of type
-pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
+#pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
 
 pI.stringQuery(prolog)
 finalList = pI.printSol()

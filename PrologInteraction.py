@@ -22,6 +22,7 @@ class PrologInteraction:
 		self.y = "_"
 		self.complexity = "_"
 		self.time = "_"
+		self.listType = []
 		
 		
 	def initPrologRules(self):
@@ -162,7 +163,11 @@ class PrologInteraction:
 			print("sorry, we couldn't find any games for you")	
 		
 		
-	def stringQuery(self, prolog):
+	def stringQuery(self, prolog):	# to add, checkbox types - multiple queries
+		
+		
+		# to implement: for object in self.listTypes:
+			# call stringQuery where self.type = object
 		stringQuery ='''
 		NUMBEROFPLAYERS is {},
 		MINAGE = {},
