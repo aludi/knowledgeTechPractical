@@ -12,7 +12,6 @@ class PrologInteraction:
 		self.game1 = "some game"
 		self.game2 = "some game"
 		self.game3 = "some game"
-
 		self.numberOfPlayers = "_"
 		self.budget = "_"
 		self.typeGame = "_"
@@ -24,13 +23,14 @@ class PrologInteraction:
 		self.complexity = "_"
 		self.minTime = 60
 		self.maxTime = 120
+		self.time = "_"
 		self.listType = []
 
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- M >= N")   # rule for min age
-		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_,_), member(X, B)") #search by type
+		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
 		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
 
 	
@@ -80,6 +80,7 @@ class PrologInteraction:
 			if isinstance(soln[typeOrGenre],(list,)):
 				for i in soln[typeOrGenre]:
 					sol = i.decode()
+					sol = '''"{}"'''.format(sol)
 			if sol not in listForGUI:
 				listForGUI.append(sol)
 		return listForGUI
@@ -173,24 +174,22 @@ class PrologInteraction:
 		# to implement: for object in self.listTypes:
 			# call stringQuery where self.type = object
 		stringQuery ='''
-		NUMBEROFPLAYERS = {},
+		NUMBEROFPLAYERS is {},
 		MINAGE = {},
 		BUDGET = {},
 		TYPE = {},
-		TIMEMIN = {},
-		TIMEMAX = {},
+		TIME = {},
 		in_list_type(Name, TYPE),
 		CO = {},
 		CA = {},
 		AVERAGECOMPLEXITY = {},
 		game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 		COST < BUDGET,
-		TIMEMIN >= Mintime,
-		TIMEMAX =< Maxtime,
+		numPlay(TIME, Mintime, Maxtime),
 		numPlay(NUMBEROFPLAYERS, MinP, MaxP),
         minimumAge(MINAGE, Minage),
         Complexity =< AVERAGECOMPLEXITY + 1,
-		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
+		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
 		self.y = prolog.query(stringQuery)
 		print(stringQuery)
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)

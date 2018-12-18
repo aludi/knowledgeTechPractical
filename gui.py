@@ -176,7 +176,6 @@ class Gui:
 		master1.image = pic
 		master1.pack(side = "left")
 		for i in finalGames:
-			print(i)
 			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W, side = "right")
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
@@ -243,7 +242,7 @@ class Gui:
 	def save_time(self,master, time, frame):
 		self.__gameTime = time.get()
 		if self.__gameTime == '':
-			self.__gameTime = 10000
+			self.__gameTime = 60
 		raise_frame(frame)
 		master.update
 		
@@ -251,6 +250,7 @@ class Gui:
 		self.__Coop = coop.get()
 		if self.__Coop == "either":
 			self.__Coop = "_"
+		print("coop", self.__Coop)
 		raise_frame(frame)
 		master.update
 		
@@ -258,6 +258,7 @@ class Gui:
 		self.__Campaign = cam.get()
 		if self.__Campaign== "either":
 			self.__Campaign = "_"
+		print("camp", self.__Campaign)
 		master.destroy()
 		master.update
 
