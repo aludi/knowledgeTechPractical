@@ -91,6 +91,8 @@ class Gui:
 		#question 2.1 previous games
 		Label(f2one, text="Name three games you like-1").grid()
 		game1Entry = StringVar()
+
+
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2one.text
 		Button(f2one, text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()

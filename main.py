@@ -50,7 +50,9 @@ guiAnswers(pI)
 
 
 # searching for other games with the complexity of game1:
-#pI.searchGameByAverageComplexity(pI.getAverageComplexity(GUI.getAllGames()), prolog)
+
+pI.getAverageComplexity(GUI.getAllGames())
+
 # searching for games in list of type
 #pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
 
