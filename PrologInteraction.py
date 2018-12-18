@@ -7,20 +7,22 @@ class PrologInteraction:
 
 	def __init__(self):
 		self.prolog = Prolog()
-		self.kb = self.prolog.consult("startingKB.pl")		#to change so you can select your own file?
+		self.kb = self.prolog.consult('startingKB.pl')		#to change so you can select your own file?
 		prologRules = self.initPrologRules()
 		self.game1 = "some game"
 		self.game2 = "some game"
 		self.game3 = "some game"
-		self.numberOfPlayers = 0
-		self.budget = 0
-		self.typeGame = 0
-		self.coop = 0
-		self.camp = 0
-		self.minAge = 12
-		self.genre = 0
-		self.y = 0
-		self.complexity = 0
+
+		self.numberOfPlayers = "_"
+		self.budget = "_"
+		self.typeGame = "_"
+		self.coop = "_"
+		self.camp = "_"
+		self.minAge = "_"
+		self.genre = "_"
+		self.y = "_"
+		self.complexity = "_"
+
 		
 		
 	def initPrologRules(self):
@@ -32,7 +34,7 @@ class PrologInteraction:
 	
 	# some getters
 	def getSelfY(self):
-		#returns list of final games
+		#returns list of final games in prolog wrapper
 		return self.y
 	
 	def getAllProperties(self, nameOfGame):
@@ -44,16 +46,20 @@ class PrologInteraction:
 	def getAverageComplexity(self, listGame):
 		compAv = 0
 		comp = 0
-		print(listGame)
-		for y in listGame:
-			print(y)
-			x = self.prolog.query('''game({},_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
-			for soln in x:
-				comp = soln["Complexity"]
-				print(comp)
-			compAv = compAv + comp
-		print("the average complexity of the three games is... ", compAv/len(listGame))
-		self.complexity = compAv/len(listGame)
+		if listGame[0] == '':
+			self.complexity = 2.5
+		else:
+			for y in listGame:
+				print("y IN AVERAGE COMPLEXITY", type(y))
+				x = self.prolog.query('''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
+				query = '''game("{}",_,_, _, _, _, Complexity, _,_, _,_, _)'''.format(y)
+				print(query)
+				print("x IN AVERAGE COMPLEXITY", type(x))
+				for soln in x:
+					comp = soln["Complexity"]
+				compAv = compAv + comp
+			self.complexity = compAv/len(listGame)
+		print("the average complexity of the three games is... ", self.complexity)
 		return(compAv/len(listGame))
 		
 
@@ -74,7 +80,6 @@ class PrologInteraction:
 					sol = str(i)
 			if sol not in listForGUI:
 				listForGUI.append(sol)
-		print(listForGUI)
 		return listForGUI
 	
 	def getTypesForGUI(self):					# this function queries for every unique type of game and puts it in the list
@@ -94,23 +99,17 @@ class PrologInteraction:
 	#some setters
 	
 	def setNumPlay(self, numPlay):
-		print(numPlay)
 		self.numberOfPlayers = numPlay
-		print(self.numberOfPlayers)
 	
 	def setGame1(self, game):
-		print(game)
 		self.game1 = game
-		print(self.game1)
+		
 	def setGame2(self, game):
-		print(game)
 		self.game2 = game
-		print(self.game2)
+		
 	def setGame3(self, game):
-		print(game)
 		self.game3 = game
-		print(self.game3)
-	
+		
 	def setBudget(self, budgetVal):
 		self.budget = budgetVal #to implement: range of budgets
 		
@@ -147,17 +146,11 @@ class PrologInteraction:
 		C =< A + 0.5,
 		C >= A - 0.5'''.format(avComp)
 		self.y = self.prolog.query(stringQuery)
-		x= 0
-		for soln in self.y:
-			print("you can play:", (soln["Name"], soln['C']))
-			x = 1
-		if x == 0:
-			print("sorry, we couldn't find any games for you")	
+	
 			
 	def searchGameByType(self, prolog):			# selects all games with a certain type
 		x = 0
 		typeGame = self.typeGame
-		print(typeGame)
 		q = '''T = {}, in_list_type(A,T)'''.format(typeGame)
 		self.y = prolog.query(q)
 		for soln in self.y:
@@ -169,7 +162,6 @@ class PrologInteraction:
 	def searchGameByGenre(self, prolog):			# selects all games with a certain type
 		x = 0
 		genre = self.genre
-		print(genre)
 		q = '''T = {}, in_list_genre(A,T)'''.format(genre)
 		self.y = prolog.query(q)
 		for soln in self.y:
@@ -194,24 +186,26 @@ class PrologInteraction:
         minimumAge(MINAGE, Minage),
         Complexity =< AVERAGECOMPLEXITY + 0.5,
 		Complexity >= AVERAGECOMPLEXITY - 0.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp, self.complexity)
-		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.coop, self.camp)
-		print(stringQuery)
 		self.y = prolog.query(stringQuery)
-		print(self.y)
-
+		
 
 #: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven.
 # 
 #
 #game(name, min players, max players, time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-	def printSol(self):
+	
+	
+	def printSol(self):		# prints and creates list
 		listFinal = []
 		x= 0
 		for soln in self.y:
-			print("you can play:", (soln["Name"]))
+			print("you can play:", (soln["Name"]["Listgenre"]))
 			if soln["Name"] not in listFinal:
 				listFinal.append(soln["Name"])
 			x = 1
 		if x == 0:
-			print("sorry, we couldn't find any games for you")	
+			t = "Sorry, we couldn't find any games for you"
+			print(t)
+			listFinal.append(str(t))
+		print(listFinal)
 		return listFinal
