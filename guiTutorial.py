@@ -249,19 +249,21 @@ class Gui:
 		
 	def save_coop(self, master, coop, frame):
 		self.__Coop = coop.get()
+		self.__Coop = "_"
 		raise_frame(frame)
 		master.update
 		
 		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
+		self.__Campaign = "_"
 		master.destroy()
 		master.update
 
 	def save_minAge(self, master, minA, frame):
 		self.__minAge = minA.get()
 		if self.__minAge == '':
-			self.__minAge = 0
+			self.__minAge = 100
 		raise_frame(frame)
 		master.update
 		

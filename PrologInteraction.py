@@ -22,14 +22,13 @@ class PrologInteraction:
 		self.genre = "_"
 		self.y = "_"
 		self.complexity = "_"
-
 		self.time = "_"
 		self.listType = []
 
 		
 	def initPrologRules(self):
 		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
-		self.prolog.assertz("minimumAge(M, N):- N >= M")   # rule for min age
+		self.prolog.assertz("minimumAge(M, N):- M >= N")   # rule for min age
 		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
 		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
 
@@ -49,7 +48,7 @@ class PrologInteraction:
 		compAv = 0
 		comp = 0
 		if listGame[0] == '':
-			self.complexity = 2.5
+			self.complexity = 3.5
 		else:
 			for y in listGame:
 				print("y IN AVERAGE COMPLEXITY", type(y))
@@ -184,13 +183,15 @@ class PrologInteraction:
 		CO = {},
 		CA = {},
 		AVERAGECOMPLEXITY = {},
-		game(Name, MinP, MaxP, NUMBEROFPLAYERS, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
-		COST < BUDGET,
-		Time < TIME,
+		game(Name, MinP, MaxP, _, Time, Minage, Complexity,_, COST, CO, CA, Listgenre),
+		COST =< BUDGET,
+		Time =< TIME,
+		numPlay(NUMBEROFPLAYERS, MinP, MaxP),
         minimumAge(MINAGE, Minage),
         Complexity =< AVERAGECOMPLEXITY + 1,
 		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
 		self.y = prolog.query(stringQuery)
+		print(stringQuery)
 		print(self.numberOfPlayers, self.minAge, self.budget,self.typeGame, self.coop, self.camp,self.complexity )
 		
 
