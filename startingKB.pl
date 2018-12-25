@@ -17,7 +17,11 @@ game("caverna: the cave farmers",1,7,4,30,210,12,3.78,["Strategy"],80,false,fals
 game("arkham horror: the card game",1,2,2,60,120,14,3.28,["Customizable","Thematic"],30,true,true,["Adventure","Card Game","Fantasy","Horror","Novel-Based"]).
 game("viticulture essential edition",1,6,4,45,90,12,2.92,["Strategy"],50,false,false,["Economic","Farming"]).
 game("concordia",2,5,4,100,100,12,3.09,["Strategy"],50,false,false,["Ancient","Economic","Nautical"]).
-
+game("spirit island",1,4,2,90,120,14,3.91,["Strategy","Thematic"],55,true,false,["Environmental","Fantasy","Mythology", "Territory Building"]).
+game("agricola",1,5,4,30,150,12,3.63,["Stragegy"],50,false,false,["Animals","Economic","Farming"]).
+game("mage knight board game",1,3,2,60,240,14,4.26,["Strategy","Thematic"],200,true,false,["Adventure","Exploration","Fantasy"]).
+game("brass: lancashire",2,4,4,60,120,14,3.87,["Strategy"],60,false,false,["Economic","Transportation"]).
+game("mansions of madness: secon edition",1,5,4,120,180,12,2.66,["Thematic"],90,true,false,["Adventure","Exploration","Fantasy","Horror"]).
 
 /*
 game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
