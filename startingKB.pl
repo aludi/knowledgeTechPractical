@@ -77,12 +77,42 @@ game("descent: journeys in the dark (second edition)",2,5,5,120,120,12,3.21,["Th
 game("stone age",2,4,4,60,90,10,2.49,["Family","Strategy"],50,false,false,["Dice","Prehistoric"]).
 game("forbidden stars",2,4,3,120,180,14,3.79,["Strategy"],120,false,false,["Bluffing","Science Fiction","Wargame"]).
 game("santorini",2,4,2,20,20,6,1.78,["Abstract","Family"],20,false,false,["Ancient","Mythology"]).
-game("alchemists"2,4,4,120,120,12,3.85,["Strategy"],50,false,false,["Deduction","Fantasy"]).
+game("alchemists",2,4,4,120,120,12,3.85,["Strategy"],50,false,false,["Deduction","Fantasy"]).
 game("lisboa",1,4,3,60,120,14,4.50,["Strategy"],80,false,false,["City building","Economic","Political"]).
 game("war of the ring (first edition)",2,4,2,120,120,14,3.84,["Thematic","Wargame"],75,false,false,["Adventure","Fantasy","Novel-based","Territory Building","Wargame"]).
 game("castles of mad ludwig",2,4,4,90,90,10,2.66,["Strategy"],40,false,false,["Post-Napoleonic","Puzzle"]).
 game("legendary encounters: an alien deck building game",1,5,3,30,60,14, 2.71,["Thematic"],50,true,false,["Card Game","Horror","Science Fiction"]).
 game("star realms",2,2,2,20,20,8,1.96,["Strategy"],15,false,false,["Card Game","Science Fiction"]).
+game("yokohama",2,4,3,90,90,12,3.32,["Strategy"],35,false,false,["Economic"]).
+game("the resistance: avalon",5,10,7,30,30,12,1.78,["Party"],15,false,false,["Bluffing","Card Game","Deduction","Fantasy","Medieval","Negotiation"]).
+game("a game of thrones: the board game (second edition)",3,6,6,120,240,14,3.68,["Strategy"],50,false,false,["Bluffing","Fantasy","Negotiation","Novel-based","Political","Wargame"]).
+game("istanbul",2,5,4,40,60,10,2.59,["Strategy"],35,false,false,["Economic"]).
+game("root",3,4,4,60,90,10,3.43,["Strategy","Wargame"],60,false,false,["Animals","Fanasy","Wargame"]).
+game("champions of midgard",2,4,4,60,90,10,2.54,["Strategy"],45,false,false,["Adventure","Dice","Fantasy","Medieval","Mythology"]).
+game("raiders of the north sea",2,4,3,60,120,12,2.57,["Strategy"],60,false,false,["Medieval","Nautical"]).
+game("ticket to ride: europe",2,5,4,30,60,8,1.96,["Family"],45,false,false,["Trains"]).
+game("ora et labora",1,4,3,60,180,13,3.91,["Strategy"],140,false,false,["City Building","Economic","Industry","Medieval","Religious","Territory Building").
+game("arcadia quest",2,4,4,60,60,10,2.51,["Thematic"],70,false,true,["Adventure","Fantasy"]).
+game("chaos in the old world",3,4,4,60,120,14,3.18,["Strategy","Thematic"],60,false,false,["Fantasy","Horror","Mythology","Wargame"]).
+game("grand austria hotel",2,3,2,60,120,12,3.23,["Strategy"],80,["Economic"]).
+game("railways of the world",3,6,5,120,120,10,3.03,["Strategy"],90,false,false,["Trains","Transportation","Video Game Theme"]).
+game("suburbia",1,4,3,90,90,10,2.77,["Strategy"],50,false,false,["City Building","Economic"]).
+game("commands & colors: ancients",2,2,2,60,60,12,2.70,["Wargame"],45,false,false,["Ancient","Wargame"]).
+game("nations",1,5,3,40,200,14,3.54,["Strategy"],45,false,false,["Card Game","Civilization","Economic"]).
+game("catan",3,4,4,60,120,8,2.34,["Family","Stategy"],45,false,false,["Negotiation"]).
+game("monopoly",3,6,4,60,180,8,1.67,["Family"],20,false,false,["Economic","Negotiation"]).
+game("stratego",2,2,2,45,45,8,1.86,["Abstract","Family"],25,false,false,["Bluffing","Deduction","Memory","Napoleonic","Wargame"]).
+game("risk",3,6,4,120,120,10,2.10,["Family","Wargame"],30,false,false,["Territory Building","Wargame"]).
+game("set",1,8,4,30,30,6,1.69,["Abstract","Family"],10,false,false,["Card Game","Puzzle"]).
+game("small world",2,5,4,40,80,8,2.37,["Family","Strategy"],40,false,false,["Fantasy","Territory Building"]).
+game("betrayal at house on the hill",3,6,5,60,60,12,2.37,["Thematic"],30,true,false,["Adventure","Exploration","Horror"]).
+game("triviant pursuit",2,6,4,90,90,12,1.66,["Family","Party"],30,false,false,["Trivia"]).
+game("the werewolves of miller's hollow",8,18,12,30,30,10,1.32,["Party"],10,false,false,["Bluffing","Deduction","Horror","Murder/Mystery"]).
+game("dixit: odyssey",4,12,6,30,30,8,1.22,["Party"],40,false,false,["Card Game","Humor"]).
+game("captain sonar",6,8,8,45,60,10,2.11,["Party","Thematic"],40,false,false,["Deduction","Nautical"]).
+game("secret hitler",6,10,8,45,45,14,1.71,["Party"],35,false,false,["Bluffing","Card Game","Humor","Political"]).
+game("carcassonne",2,5,2,30,45,8,1.93,["Family"],30,false,false,["City Building","Medieval","Territory Building"]).
+game("mysterium",3,7,5,42,42,8,1.92,["Family","Thematic"],45,true,false,["Deduction","Murder/Mystery"]).
 
 
 
