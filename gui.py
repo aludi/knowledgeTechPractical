@@ -116,13 +116,15 @@ class Gui:
 		#question 4
 		Label(f4, text="What is the maximum price you want to pay for the game?").pack(anchor=tk.W)
 		maxP = IntVar()
-		Radiobutton(f4, text="10 euro", variable=maxP, value = 10).pack(anchor=tk.W)
-		Radiobutton(f4, text="20 euro", variable=maxP, value = 20).pack(anchor=tk.W)
-		Radiobutton(f4, text="30 euro", variable=maxP, value = 30).pack(anchor=tk.W)
-		Radiobutton(f4, text="40 euro", variable=maxP, value = 40).pack(anchor=tk.W)
-		Radiobutton(f4, text="50 euro", variable=maxP, value = 50).pack(anchor=tk.W)
-		Radiobutton(f4, text="more than 50 euro", variable=maxP, value = 61).pack(anchor=tk.W)
-		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
+		Radiobutton(f4, text="10 dollar", variable=maxP, value = 10).pack(anchor=tk.W)
+		Radiobutton(f4, text="20 dollar", variable=maxP, value = 20).pack(anchor=tk.W)
+		Radiobutton(f4, text="30 dollar", variable=maxP, value = 30).pack(anchor=tk.W)
+		Radiobutton(f4, text="40 dollar", variable=maxP, value = 40).pack(anchor=tk.W)
+		Radiobutton(f4, text="50 dollar", variable=maxP, value = 50).pack(anchor=tk.W)
+		Radiobutton(f4, text="75 dollar", variable=maxP, value = 75).pack(anchor=tk.W)
+		Radiobutton(f4, text="100 dollar", variable=maxP, value = 100).pack(anchor=tk.W)
+		Radiobutton(f4, text="150 dollar", variable=maxP, value = 150).pack(anchor=tk.W)
+		Radiobutton(f4, text="more than 150 euro", variable=maxP, value = 61).pack(anchor=tk.W)
 		Button(f4, text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
 			
 		#question 5
@@ -141,6 +143,7 @@ class Gui:
 		Label(f61, text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
+		NA = IntVar()
 		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
 		#question 6
@@ -209,7 +212,7 @@ class Gui:
 	def save_numPlayers(self, master, num, NA, frame):
 		self.__numPlayers = num.get()
 		if self.__numPlayers == '' or NA.get() == 1:
-			self.__numPlayers = 3		#to change later, difference between "doesn't matter" and "nothing filled in"
+			self.__numPlayers = 4		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
 		

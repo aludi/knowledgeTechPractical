@@ -49,7 +49,7 @@ class PrologInteraction:
 		compAv = 0
 		comp = 0
 		if not listGame:
-			self.complexity = 3.5
+			self.complexity = 3
 		else:
 			for y in listGame:
 				print("y IN AVERAGE COMPLEXITY", type(y))
@@ -190,7 +190,7 @@ class PrologInteraction:
 			minMax(TIME, Mintime, Maxtime),
 			NUMBEROFPLAYERS = RecP,
 			minimumAge(MINAGE, Minage),
-			Complexity =< AVERAGECOMPLEXITY + 1,
+			Complexity =< AVERAGECOMPLEXITY + .5,
 			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
 			
 		if priorityLevel == "medium": 
