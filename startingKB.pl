@@ -84,6 +84,8 @@ game("castles of mad ludwig",2,4,4,90,90,10,2.66,["Strategy"],40,false,false,["P
 game("legendary encounters: an alien deck building game",1,5,3,30,60,14, 2.71,["Thematic"],50,true,false,["Card Game","Horror","Science Fiction"]).
 game("star realms",2,2,2,20,20,8,1.96,["Strategy"],15,false,false,["Card Game","Science Fiction"]).
 
+
 /*
+cooperative komt voor campaign
 game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 */
