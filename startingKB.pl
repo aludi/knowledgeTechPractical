@@ -73,7 +73,7 @@ game("dominion",2,4,3,30,30,10,2.37,["Strategy"],30,false,false,["Card Game","Me
 game("kemet"3,5,5,90,120,12,2.99,["Strategy"],60,false,false,["Ancient","Mythology"]).
 game("pandemic",1,4,4,45,45,10,2.42,["Family","Strategy"],35,true,false,["Medical"]).
 game("pandemic: iberia",1,5,4,45,45,10,2.64,["Strategy"],50,true,false,["Medical"]).
-game("descent: journeys in the dark (second edition)",2,5,5,120,12,3.21,["Thematic"],80,false,true,["Adventure","Exploration","Fantasy"]).
+game("descent: journeys in the dark (second edition)",2,5,5,120,120,12,3.21,["Thematic"],80,false,true,["Adventure","Exploration","Fantasy"]).
 game("stone age",2,4,4,60,90,10,2.49,["Family","Strategy"],50,false,false,["Dice","Prehistoric"]).
 game("forbidden stars",2,4,3,120,180,14,3.79,["Strategy"],120,false,false,["Bluffing","Science Fiction","Wargame"]).
 game("santorini",2,4,2,20,20,6,1.78,["Abstract","Family"],20,false,false,["Ancient","Mythology"]).
