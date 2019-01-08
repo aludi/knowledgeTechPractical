@@ -115,7 +115,6 @@ game("carcassonne",2,5,2,30,45,8,1.93,["Family"],30,false,false,["City Building"
 game("mysterium",3,7,5,42,42,8,1.92,["Family","Thematic"],45,true,false,["Deduction","Murder/Mystery"]).
 
 
-
 /*
 cooperative komt voor campaign
 game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
