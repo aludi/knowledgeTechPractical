@@ -49,7 +49,7 @@ pI = PrologInteraction()
 guiAnswers(pI)
 
 
-# searching for other games with the complexity of game1:
+# searching for other games with the complexity of all games:
 
 pI.getAverageComplexity(GUI.getAllGames())
 
