@@ -52,6 +52,7 @@ guiAnswers(pI)
 # searching for other games with the complexity of game1:
 playedGames = GUI.getAllGames()
 
+
 pI.getAverageComplexity(playedGames)
 
 # searching for games in list of type

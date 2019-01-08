@@ -109,7 +109,9 @@ class Gui:
 		Label(f3, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
 		num = Entry(f3)
 		num.pack(anchor=tk.W)
-		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,f4)).pack(anchor=tk.W)
+		NA = IntVar()
+		Checkbutton(f3, text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
+		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,NA,f4)).pack(anchor=tk.W)
 		
 		#question 4
 		Label(f4, text="What is your price range?").pack(anchor=tk.W)
@@ -205,17 +207,16 @@ class Gui:
 		print(self.__game3)
 		raise_frame(frame)
 		master.update
-	
-	def save_numPlayers(self, master, num, frame):
+	 
+	def save_numPlayers(self, master, num, NA, frame):
 		self.__numPlayers = num.get()
-		if self.__numPlayers == '':
-			self.__numPlayers = 1		#to change later, difference between "doesn't matter" and "nothing filled in"
+		if self.__numPlayers == '' or NA.get() == 1:
+			self.__numPlayers = 3		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
 		
 	def save_budget(self, master, P0,P1,P2,P3,P4,P5, frame):
 		for x in (P0,P1,P2,P3,P4,P5):
-			print(x.get())
 			if x.get() != 0 and x.get()-10 < self.__minPrice:
 				self.__minPrice = x.get()-10
 			if x.get() > self.__maxPrice:
@@ -226,10 +227,6 @@ class Gui:
 		if self.__minPrice == 10000 and self.__maxPrice == 0:
 			self.__minPrice = 0
 			self.__maxPrice = 10000
-		print("minprice")
-		print(self.__minPrice)
-		print("maxprice")
-		print(self.__maxPrice)
 		raise_frame(frame)
 		master.update
 		
