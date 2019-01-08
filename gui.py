@@ -76,7 +76,7 @@ class Gui:
 		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
 		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
 		
-		#question leeftijd
+		#question age
 		Label(f1a, text="How old is your youngest player?").pack(anchor=tk.W)
 		minA = Entry(f1a)
 		minA.pack(anchor=tk.W)
@@ -173,10 +173,13 @@ class Gui:
 		master1.pack(side = "left")
 		count = 0
 		for i in finalGames:
-			count = count+1
-			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
 			if count > 5: 
 				break
+			count = count+1
+			if i == "Best Matching Games" or i == "Expanding Search" or i == "Expanding Search Again":
+				Label(master, text=i,font = "Times 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			else:
+				Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 

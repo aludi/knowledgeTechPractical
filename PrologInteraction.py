@@ -247,19 +247,20 @@ class PrologInteraction:
 	
 	def selectPriority(self, games):		# prints and creates list
 		listFinal = []
+		listFinal.append("Best Matching Games")
 		playedGames = []
 		for i in games: 
 			playedGames.append(i.encode())
 			
 		listFinal = self.selectFinalGames(listFinal,playedGames)
 				
-		if len(listFinal) < 5: 
+		if len(listFinal) < 6: 
 			listFinal.append("Expanding Search")
 			self.stringQuery(Prolog, "medium")
 			listFinal = self.selectFinalGames(listFinal,playedGames)
 			
-		if len(listFinal) < 6: 
-			listFinal.append("Expanding Search")
+		if len(listFinal) < 7: 
+			listFinal.append("Expanding Search Again")
 			self.stringQuery(Prolog, "low")
 			listFinal = self.selectFinalGames(listFinal,playedGames)
 			
