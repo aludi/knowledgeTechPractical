@@ -28,7 +28,7 @@ class PrologInteraction:
 
 		
 	def initPrologRules(self):
-		self.prolog.assertz("numPlay(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
+		self.prolog.assertz("minMax(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
 		self.prolog.assertz("minimumAge(M, N):- M >= N")   # rule for min age
 		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
 		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
@@ -48,8 +48,8 @@ class PrologInteraction:
 	def getAverageComplexity(self, listGame):
 		compAv = 0
 		comp = 0
-		if listGame[0] == '':
-			self.complexity = 3.5
+		if not listGame:
+			self.complexity = 3
 		else:
 			for y in listGame:
 				print("y IN AVERAGE COMPLEXITY", type(y))
@@ -62,7 +62,7 @@ class PrologInteraction:
 				compAv = compAv + comp
 			self.complexity = compAv/len(listGame)
 		print("the average complexity of the three games is... ", self.complexity)
-		return(compAv/len(listGame))
+		return self.complexity
 		
 
 
@@ -170,48 +170,101 @@ class PrologInteraction:
 			print("sorry, we couldn't find any games for you")	
 		
 		
-	def stringQuery(self, prolog):	# to add, checkbox types - multiple queries
+	def stringQuery(self, prolog, priorityLevel):	# to add, checkbox types - multiple queries
 		# to implement: for object in self.listTypes:
 			# call stringQuery where self.type = object
-		stringQuery ='''
-		NUMBEROFPLAYERS = {},
-		MINAGE = {},
-		BUDGET = {},
-		TYPE = {},
-		TIME = {},
-		in_list_type(Name, TYPE),
-		CO = {},
-		CA = {},
-		AVERAGECOMPLEXITY = {},
-		game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
-		COST < BUDGET,
-		numPlay(TIME, Mintime, Maxtime),
-		numPlay(NUMBEROFPLAYERS, MinP, MaxP),
-        minimumAge(MINAGE, Minage),
-        Complexity =< AVERAGECOMPLEXITY + 1,
-		Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			#priorityLevel indicates how precisely we want to meet the users requirements 
+		if priorityLevel == "high":
+			stringQuery ='''
+			NUMBEROFPLAYERS = {},
+			MINAGE = {},
+			BUDGET = {},
+			TYPE = {},
+			TIME = {},
+			in_list_type(Name, TYPE),
+			CO = {},
+			CA = {},
+			AVERAGECOMPLEXITY = {},
+			game(Name, MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
+			COST < BUDGET,
+			minMax(TIME, Mintime, Maxtime),
+			NUMBEROFPLAYERS = RecP,
+			minimumAge(MINAGE, Minage),
+			Complexity =< AVERAGECOMPLEXITY + 0.5,
+			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			
+		if priorityLevel == "medium": 
+			stringQuery ='''
+			NUMBEROFPLAYERS = {},
+			MINAGE = {},
+			BUDGET = {},
+			TYPE = {},
+			TIME = {},
+			in_list_type(Name, TYPE),
+			CO = {},
+			CA = {},
+			AVERAGECOMPLEXITY = {},
+			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
+			COST < BUDGET,
+			minMax(TIME, Mintime - 20, Maxtime + 20),
+			minMax(NUMBEROFPLAYERS, MinP, MaxP),
+			minimumAge(MINAGE, Minage),
+			Complexity =< AVERAGECOMPLEXITY + 1,
+			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			
+		if priorityLevel == "low":
+			stringQuery ='''
+			NUMBEROFPLAYERS = {},
+			MINAGE = {},
+			BUDGET = {},
+			TYPE = {},
+			TIME = {},
+			CO = {},
+			CA = {},
+			AVERAGECOMPLEXITY = {},
+			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
+			COST < BUDGET,
+			minMax(TIME, Mintime - 30, Maxtime + 30),
+			minMax(NUMBEROFPLAYERS, MinP -1, MaxP+ 1),
+			minimumAge(MINAGE, Minage),
+			Complexity =< AVERAGECOMPLEXITY + 1,
+			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			
 		self.y = prolog.query(stringQuery)
 		print(stringQuery)
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
 		
-
-#: time, time is smaller or equal to = tijd aangegeven + 50% van tijd aangegeven. TIME NOW HAS RANGE
-# 
+ 
 #
 #game(name, min players, max players, minTime, maxTime, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
-	
-	
-	def printSol(self):		# prints and creates list
-		listFinal = []
-		x= 0
+
+	def selectFinalGames(self, listFinal, playedGames):
 		for soln in self.y:
-			print(soln["Name"])
-			if soln["Name"] not in listFinal:
+			if soln["Name"] not in listFinal and soln["Name"] not in playedGames:
 				listFinal.append(soln["Name"])
-			x = 1
-		if x == 0:
+		return listFinal
+	
+	
+	def selectPriority(self, games):		# prints and creates list
+		listFinal = []
+		listFinal.append("Best Matching Games")
+		playedGames = []
+		for i in games: 
+			playedGames.append(i.encode())
+			
+		listFinal = self.selectFinalGames(listFinal,playedGames)
+				
+		if len(listFinal) < 6: 
+			listFinal.append("Expanding Search")
+			self.stringQuery(Prolog, "medium")
+			listFinal = self.selectFinalGames(listFinal,playedGames)
+			
+		if len(listFinal) < 7: 
+			listFinal.append("Expanding Search Again")
+			self.stringQuery(Prolog, "low")
+			listFinal = self.selectFinalGames(listFinal,playedGames)
+			
+		if listFinal == []:
 			t = "Sorry, we couldn't find any games for you"
-			print(t)
 			listFinal.append(str(t))
-		print(listFinal)
 		return listFinal

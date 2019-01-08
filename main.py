@@ -49,15 +49,17 @@ pI = PrologInteraction()
 guiAnswers(pI)
 
 
-# searching for other games with the complexity of all games:
+# searching for other games with the complexity of game1:
+playedGames = GUI.getAllGames()
 
-pI.getAverageComplexity(GUI.getAllGames())
+
+pI.getAverageComplexity(playedGames)
 
 # searching for games in list of type
 #pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
 
-pI.stringQuery(prolog)
-finalList = pI.printSol()
+pI.stringQuery(prolog, "high")
+finalList = pI.selectPriority(playedGames)
 print(pI.getSelfY())
 
 root = Tk()
