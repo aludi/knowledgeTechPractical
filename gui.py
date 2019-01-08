@@ -56,6 +56,7 @@ class Gui:
 		self.__game2 = "some"
 		self.__game3 = "some"
 		self.__finalGames = "some"
+		self.__genreList = PrologInteraction()
 			
 		
 		
@@ -187,6 +188,10 @@ class Gui:
 				Label(master, text=i,font = "Times 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			else:
 				Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
+				Label(master, text = "This game is about...",font = "Times 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				genres = PrologInteraction().getGenreList(i.decode())
+				for j in genres:
+					Label(master, text=j,font = "Times 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
