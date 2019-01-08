@@ -114,22 +114,16 @@ class Gui:
 		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,NA,f4)).pack(anchor=tk.W)
 		
 		#question 4
-		Label(f4, text="What is your price range?").pack(anchor=tk.W)
-		Label(f4, text="You can select multiple boxes").pack(anchor=tk.W)
-		P0 = IntVar()
-		P1 = IntVar()
-		P2 = IntVar()
-		P3 = IntVar()
-		P4 = IntVar()
-		P5 = IntVar()
-		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)
+		Label(f4, text="What is the maximum price you want to pay for the game?").pack(anchor=tk.W)
+		maxP = IntVar()
+		Radiobutton(f4, text="10 euro", variable=maxP, value = 10).pack(anchor=tk.W)
+		Radiobutton(f4, text="20 euro", variable=maxP, value = 20).pack(anchor=tk.W)
+		Radiobutton(f4, text="30 euro", variable=maxP, value = 30).pack(anchor=tk.W)
+		Radiobutton(f4, text="40 euro", variable=maxP, value = 40).pack(anchor=tk.W)
+		Radiobutton(f4, text="50 euro", variable=maxP, value = 50).pack(anchor=tk.W)
+		Radiobutton(f4, text="more than 50 euro", variable=maxP, value = 61).pack(anchor=tk.W)
 		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
-		Button(f4, text="Next", command= lambda: self.save_budget(master,P0,P1,P2,P3,P4,P5,f5)).pack(anchor=tk.W)
+		Button(f4, text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
 			
 		#question 5
 		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
@@ -177,8 +171,12 @@ class Gui:
 		master1 = Label(master, image = pic)
 		master1.image = pic
 		master1.pack(side = "left")
+		count = 0
 		for i in finalGames:
-			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W, side = "right")
+			count = count+1
+			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
+			if count > 5: 
+				break
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
@@ -215,18 +213,8 @@ class Gui:
 		raise_frame(frame)
 		master.update	
 		
-	def save_budget(self, master, P0,P1,P2,P3,P4,P5, frame):
-		for x in (P0,P1,P2,P3,P4,P5):
-			if x.get() != 0 and x.get()-10 < self.__minPrice:
-				self.__minPrice = x.get()-10
-			if x.get() > self.__maxPrice:
-				self.__maxPrice = x.get()
-			if x.get() == 61:
-				self.__maxPrice = 10000
-
-		if self.__minPrice == 10000 and self.__maxPrice == 0:
-			self.__minPrice = 0
-			self.__maxPrice = 10000
+	def save_budget(self, master, maxP, frame):
+		self.__maxPrice = maxP.get()
 		raise_frame(frame)
 		master.update
 		
@@ -291,7 +279,14 @@ class Gui:
 		return self.__game3
 		
 	def getAllGames(self):
-		return [self.__game1, self.__game2, self.__game3]
+		games = []
+		if self.__game1 != '': 
+			games.append(self.__game1)
+		if self.__game2 != '': 
+			games.append(self.__game2)
+		if self.__game3 != '': 
+			games.append(self.__game3)
+		return games
 		
 	def getNumPlayers(self):
 		return self.__numPlayers
