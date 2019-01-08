@@ -190,7 +190,7 @@ class PrologInteraction:
 			minMax(TIME, Mintime, Maxtime),
 			NUMBEROFPLAYERS = RecP,
 			minimumAge(MINAGE, Minage),
-			Complexity =< AVERAGECOMPLEXITY + .5,
+			Complexity =< AVERAGECOMPLEXITY + 0.5,
 			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
 			
 		if priorityLevel == "medium": 

@@ -77,7 +77,7 @@ game("descent: journeys in the dark (second edition)",2,5,5,120,120,12,3.21,["Th
 game("stone age",2,4,4,60,90,10,2.49,["Family","Strategy"],50,false,false,["Dice","Prehistoric"]).
 game("forbidden stars",2,4,3,120,180,14,3.79,["Strategy"],120,false,false,["Bluffing","Science Fiction","Wargame"]).
 game("santorini",2,4,2,20,20,6,1.78,["Abstract","Family"],20,false,false,["Ancient","Mythology"]).
-game("alchemists"2,4,4,120,120,12,3.85,["Strategy"],50,false,false,["Deduction","Fantasy"]).
+game("alchemists",2,4,4,120,120,12,3.85,["Strategy"],50,false,false,["Deduction","Fantasy"]).
 game("lisboa",1,4,3,60,120,14,4.50,["Strategy"],80,false,false,["City building","Economic","Political"]).
 game("war of the ring (first edition)",2,4,2,120,120,14,3.84,["Thematic","Wargame"],75,false,false,["Adventure","Fantasy","Novel-based","Territory Building","Wargame"]).
 game("castles of mad ludwig",2,4,4,90,90,10,2.66,["Strategy"],40,false,false,["Post-Napoleonic","Puzzle"]).
