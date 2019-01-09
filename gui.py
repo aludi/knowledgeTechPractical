@@ -92,7 +92,10 @@ class Gui:
 		Label(f1a, font = "TkDefaultFont 16", text="How old is your youngest player?").pack(anchor=tk.W)
 		minA = Entry(f1a)
 		minA.pack(anchor=tk.W)
-		Button(f1a, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
+		NA = IntVar()
+		Checkbutton(f1a, font = "TkDefaultFont 16", text="Doesn't matter", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
+		Button(f1a, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_minAge(master,minA,NA,f2one)).pack(anchor=tk.W)
+	
 		
 		#question 2.1 previous games
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
@@ -105,8 +108,6 @@ class Gui:
 		else:
 			Label(f2one, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-1").grid()
 		game1Entry = StringVar()
-
-
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2one.text
 		Button(f2one, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
@@ -162,10 +163,8 @@ class Gui:
 			if count == 0:
 				gen.set(i)
 				count = 1
-
 			Radiobutton(f5, font = "TkDefaultFont 16", text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-			
-		Radiobutton(f5, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=gen, value="_").pack(anchor=tk.W)
+		Radiobutton(f5, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=gen, value="_").pack(anchor=tk.W)
 		Button(f5, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
@@ -191,7 +190,7 @@ class Gui:
 		coop.set("true")
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
 		Radiobutton(f6, font = "TkDefaultFont 16", text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
-		Radiobutton(f6, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
+		Radiobutton(f6, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
 		Button(f6, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
 		def campaign():
@@ -206,7 +205,7 @@ class Gui:
 		cam.set("true")
 		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
 		Radiobutton(f7, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
-		Radiobutton(f7, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
+		Radiobutton(f7, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
 		Button(f7, font = "TkDefaultFont 16", text="End", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		raise_frame(f0)
 		
@@ -301,9 +300,9 @@ class Gui:
 		master.destroy()
 		master.update
 
-	def save_minAge(self, master, minA, frame):
+	def save_minAge(self, master, minA, NA, frame):
 		self.__minAge = minA.get()
-		if self.__minAge == '':
+		if self.__minAge == '' or NA.get() == 1 :
 			self.__minAge = 100
 		raise_frame(frame)
 		master.update
