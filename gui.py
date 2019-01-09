@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from functools import partial
 from PrologInteraction import *
 
@@ -61,17 +62,21 @@ class Gui:
 		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
-		w = Label(f0, font = "Times 16 bold", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
+		w = Label(f0, font = "TkDefaultFont 16", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
 		pic = PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
 		w1 = Label(f0, image = pic)
 		w1.image = pic
 		w1.pack(side = "right")
-		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(side = "left")
-		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(side = "left")
-		w.pack()
+		w.pack(fill=X,padx=0)
+		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
+		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(fill=X,padx=250,side="bottom")
 		
 		
 		#question 1 
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w1 = Label(f1, image = pic)
+		w1.image = pic
+		w1.pack(side = "right")
 		Label(f1, font = "TkDefaultFont 16", text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
 		var1 = BooleanVar()
 		var1.set(True)
@@ -80,13 +85,21 @@ class Gui:
 		Button(f1, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
 		
 		#question age
-		
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w1 = Label(f1a, image = pic)
+		w1.image = pic
+		w1.pack(side = "right")
 		Label(f1a, font = "TkDefaultFont 16", text="How old is your youngest player?").pack(anchor=tk.W)
 		minA = Entry(f1a)
 		minA.pack(anchor=tk.W)
 		Button(f1a, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
 		#question 2.1 previous games
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w1 = Label(f2one, image = pic)
+		w1.image = pic
+		w1.grid(row=0, column=2, columnspan=2, rowspan=2,
+               sticky=W+E+N+S, padx=5, pady=5)
 		if(self.__forSelf == True):
 			Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
 		else:
@@ -166,11 +179,14 @@ class Gui:
 		Checkbutton(f61, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
 		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,NA, f6)).pack(anchor=tk.W)
 		
+		def cooperative():
+			messagebox.showinfo("Cooperative play","Co-operative play encourages or requires players to work together to beat the game. There is little or no competition between players. Either the players win the game by reaching a pre-determined objective, or all players lose the game, often by not reaching the objective before a cerain event happens.")
+		
 		#question 6
 		if(self.__forSelf == True):
-			Label(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?").pack(anchor=tk.W)
+			Button(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).pack(anchor=tk.W)
 		if(self.__forSelf == False):
-			Label(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?").pack(anchor=tk.W)
+			Button(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?", command = cooperative).pack(anchor=tk.W)
 		coop = StringVar()
 		coop.set("true")
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
@@ -178,11 +194,14 @@ class Gui:
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
 		Button(f6, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
+		def campaign():
+			messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
+		
 		#question 7
 		if(self.__forSelf == True):
-			Label(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+			Button(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
 		else:
-			Label(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?").pack(anchor=tk.W)
+			Button(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
 		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
@@ -195,7 +214,7 @@ class Gui:
 	
 			#final result
 	def printResults(self, master, finalGames):
-		pic = PhotoImage(file = "img/scaryOwl1.gif")
+		pic = PhotoImage(file = "img/scaryOwlBig.gif")
 		master1 = Label(master, image = pic)
 		master1.image = pic
 		master1.pack(side = "left")
