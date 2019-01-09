@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from functools import partial
 from PrologInteraction import *
 
@@ -177,11 +178,14 @@ class Gui:
 		NA = IntVar()
 		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
+		def cooperative():
+			messagebox.showinfo("Cooperative play","Co-operative play encourages or requires players to work together to beat the game. There is little or no competition between players. Either the players win the game by reaching a pre-determined objective, or all players lose the game, often by not reaching the objective before a cerain event happens.")
+		
 		#question 6
 		if(self.__forSelf == True):
-			Label(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?").pack(anchor=tk.W)
+			Button(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).pack(anchor=tk.W)
 		if(self.__forSelf == False):
-			Label(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?").pack(anchor=tk.W)
+			Button(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?", command = cooperative).pack(anchor=tk.W)
 		coop = StringVar()
 		coop.set("true")
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
@@ -189,11 +193,14 @@ class Gui:
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
 		Button(f6, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
+		def campaign():
+			messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
+		
 		#question 7
 		if(self.__forSelf == True):
-			Label(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+			Button(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
 		else:
-			Label(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?").pack(anchor=tk.W)
+			Button(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
 		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
