@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from functools import partial
 from PrologInteraction import *
+from functools import partial
 
 from tkinter_autocomplete import AutocompleteEntry
 
@@ -69,7 +70,7 @@ class Gui:
 		w1.pack(side = "right")
 		w.pack(fill=X,padx=0)
 		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
-		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(fill=X,padx=250,side="bottom")
+		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1a)).pack(fill=X,padx=250,side="bottom")
 		
 		
 		#question 1 
@@ -103,31 +104,21 @@ class Gui:
 		w1.image = pic
 		w1.grid(row=0, column=2, columnspan=2, rowspan=2,
                sticky=W+E+N+S, padx=5, pady=5)
-		if(self.__forSelf == True):
-			Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
-		else:
-			Label(f2one, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-1").grid()
+		Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
 		game1Entry = StringVar()
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2one.text
 		Button(f2one, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
 		
 		#question 2.2
-		print(self.__forSelf)
-		if(self.__forSelf == True):
-			Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid()
-		else:
-			Label(f2two, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-2").grid()
+		Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid()
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game2Entry = f2two.text
 		Button(f2two, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game2(master,game2Entry, f2three)).grid()
 		
 		#question 2.3
-		if(self.__forSelf == True):
-			Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid()
-		else:
-			Label(f2three, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-3").grid()
+		Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid()
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=6)	#changed to listNames
 		game3Entry = f2three.text
@@ -168,10 +159,7 @@ class Gui:
 		Button(f5, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		if(self.__forSelf == True):
-			Label(f61, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
-		else:
-			Label(f61, font = "TkDefaultFont 16", text="How long do you think they want their average game to be? (in minutes)").pack(anchor=tk.W)
+		Label(f61, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		NA = IntVar()
@@ -182,10 +170,8 @@ class Gui:
 			messagebox.showinfo("Cooperative play","Co-operative play encourages or requires players to work together to beat the game. There is little or no competition between players. Either the players win the game by reaching a pre-determined objective, or all players lose the game, often by not reaching the objective before a cerain event happens.")
 		
 		#question 6
-		if(self.__forSelf == True):
-			Button(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).pack(anchor=tk.W)
-		if(self.__forSelf == False):
-			Button(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?", command = cooperative).pack(anchor=tk.W)
+		
+		Button(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).pack(anchor=tk.W)
 		coop = StringVar()
 		coop.set("true")
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
@@ -197,10 +183,8 @@ class Gui:
 			messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
 		
 		#question 7
-		if(self.__forSelf == True):
-			Button(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
-		else:
-			Button(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
+		
+		Button(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
 		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
@@ -210,6 +194,42 @@ class Gui:
 		raise_frame(f0)
 		
 		master.mainloop()
+		
+	def displayGameInfo(self,game):
+		popup = Tk()
+		popup.wm_title(game.decode())
+		Label(popup, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+		genres = PrologInteraction().getGenreList(game.decode())
+		#players = PrologInteraction().getNumPlayers(game.decode())
+		for j in genres:
+			Label(popup, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
+		#Label(popup, text = "Play this game with \t %d to %d players", font = "TkDefaultFont 10 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+		
+		Button(popup,text="Okay",command=popup.destroy).pack()
+		popup.mainloop()
+	
+	def displayChanges(self, change):
+		if change == 'Best Matching Games':
+			popup = Tk()
+			popup.wm_title("explanation")
+			Label(popup, text = "These are the games that match all of your specifications",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			Button(popup,text="Okay",command=popup.destroy).pack()
+			popup.mainloop()
+		if change == "Expanding Search...":
+			popup = Tk()
+			popup.wm_title("explanation")
+			explanation = "These games match fewer of your specifications: the number of players is in range instead of recommended, time range is wider by 20 minutes on both sides, complexity range is also increased!"
+			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			Button(popup,text="Okay",command=popup.destroy).pack()
+			popup.mainloop()
+		if change == "Expanding Search Again...":
+			popup = Tk()
+			popup.wm_title("explanation")
+			explanation = "These games have even wider search criteria: type preference is removed, budget is expanded with 10 euros, player range has increased, and time range has increased with 30 minutes on both sides"
+			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			Button(popup,text="Okay",command=popup.destroy).pack()
+			popup.mainloop()
+		
 	
 			#final result
 	def printResults(self, master, finalGames):
@@ -219,17 +239,14 @@ class Gui:
 		master1.pack(side = "left")
 		count = 0
 		for i in finalGames:
-			if count > 5: 
+			if count >= 5: 
 				break
-			if i == "Best Matching Games" or i == "Expanding Search" or i == "Expanding Search Again":
-				count = count+1
-				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			if i == "Best Matching Games" or i == "Expanding Search..." or i == "Expanding Search Again...":
+				#Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				Button(master, text = i, font = "TkDefaultFont 20 bold", fg = "black", padx = 20, command = partial(self.displayChanges,i)).pack(anchor = tk.W)
 			else:
-				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
-				Label(master, text = "This game is about...",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
-				genres = PrologInteraction().getGenreList(i.decode())
-				for j in genres:
-					Label(master, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
+				count = count+1
+				Button(master, text=i,font = "TkDefaultFont 20", fg = "red", padx = 20, command= partial(self.displayGameInfo,i)).pack(anchor=tk.W)			
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 

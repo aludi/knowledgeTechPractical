@@ -285,12 +285,12 @@ class PrologInteraction:
 		listFinal = self.selectFinalGames(listFinal,playedGames)
 				
 		if len(listFinal) < 6: 
-			listFinal.append("Expanding Search")
+			listFinal.append("Expanding Search...")
 			self.stringQuery(Prolog, "medium")
 			listFinal = self.selectFinalGames(listFinal,playedGames)
 			
 		if len(listFinal) < 7: 
-			listFinal.append("Expanding Search Again")
+			listFinal.append("Expanding Search Again...")
 			self.stringQuery(Prolog, "low")
 			listFinal = self.selectFinalGames(listFinal,playedGames)
 			
