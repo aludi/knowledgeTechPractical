@@ -56,6 +56,14 @@ class PrologInteraction:
 			genresList = soln["Listgenre"]
 		return genresList
 		
+	def getNumPlayers(self,nameOfGame):
+		playerList = []
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		playerList.append(x["MinP"])
+		playerList.append(x["MaxP"])
+		playerList.append(x["RecP"])
+		return playerList
+		
 	def getAverageComplexity(self, listGame):
 		compAv = 0
 		comp = 0

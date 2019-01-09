@@ -4,6 +4,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from functools import partial
 from PrologInteraction import *
+from functools import partial
 
 from tkinter_autocomplete import AutocompleteEntry
 
@@ -210,6 +211,20 @@ class Gui:
 		raise_frame(f0)
 		
 		master.mainloop()
+		
+	def displayGameInfo(self,game):
+		popup = Tk()
+		popup.wm_title(game.decode())
+		Label(popup, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+		genres = PrologInteraction().getGenreList(game.decode())
+		#players = PrologInteraction().getNumPlayers(game.decode())
+		for j in genres:
+			Label(popup, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
+		#Label(popup, text = "Play this game with \t %d to %d players", font = "TkDefaultFont 10 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+		
+		Button(popup,text="Okay",command=popup.destroy).pack()
+		popup.mainloop()
+		
 	
 			#final result
 	def printResults(self, master, finalGames):
@@ -219,14 +234,14 @@ class Gui:
 		master1.pack(side = "left")
 		count = 0
 		for i in finalGames:
-			if count > 5: 
+			if count >= 5: 
 				break
 			if i == "Best Matching Games" or i == "Expanding Search" or i == "Expanding Search Again":
-				count = count+1
 				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			else:
-				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
-				Label(master, text = "This game is about...",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				count = count+1
+				Button(master, text=i,font = "TkDefaultFont 20 bold", fg = "red", padx = 20, command= partial(self.displayGameInfo,i)).pack(anchor=tk.W)
+				Label(master, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 				genres = PrologInteraction().getGenreList(i.decode())
 				for j in genres:
 					Label(master, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
