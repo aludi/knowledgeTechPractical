@@ -91,7 +91,7 @@ game("root",3,4,4,60,90,10,3.43,["Strategy","Wargame"],60,false,false,["Animals"
 game("champions of midgard",2,4,4,60,90,10,2.54,["Strategy"],45,false,false,["Adventure","Dice","Fantasy","Medieval","Mythology"]).
 game("raiders of the north sea",2,4,3,60,120,12,2.57,["Strategy"],60,false,false,["Medieval","Nautical"]).
 game("ticket to ride: europe",2,5,4,30,60,8,1.96,["Family"],45,false,false,["Trains"]).
-game("ora et labora",1,4,3,60,180,13,3.91,["Strategy"],140,false,false,["City Building","Economic","Industry","Medieval","Religious","Territory Building").
+game("ora et labora",1,4,3,60,180,13,3.91,["Strategy"],140,false,false,["City Building","Economic","Industry","Medieval","Religious","Territory Building"]).
 game("arcadia quest",2,4,4,60,60,10,2.51,["Thematic"],70,false,true,["Adventure","Fantasy"]).
 game("chaos in the old world",3,4,4,60,120,14,3.18,["Strategy","Thematic"],60,false,false,["Fantasy","Horror","Mythology","Wargame"]).
 game("grand austria hotel",2,3,2,60,120,12,3.23,["Strategy"],80, false, false, ["Economic"]).

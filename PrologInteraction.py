@@ -232,7 +232,7 @@ class PrologInteraction:
 			CA = {},
 			AVERAGECOMPLEXITY = {},
 			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
-			COST < BUDGET,
+			COST < BUDGET + 10,
 			minMax(TIME, Mintime - 30, Maxtime + 30),
 			minMax(NUMBEROFPLAYERS, MinP -1, MaxP+ 1),
 			minimumAge(MINAGE, Minage),
