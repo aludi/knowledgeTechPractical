@@ -41,6 +41,7 @@ def guiAnswers(pI):
 
 #initiate a root and an instance of the class Gui
 root = Tk()
+root.wm_title("Board game recommendation")
 GUI = gui.Gui(root, 0, [])
 
 #initialize prolog and the prolog interaction class
@@ -65,6 +66,7 @@ finalList = pI.selectPriority(playedGames)
 print(pI.getSelfY())
 
 root = Tk()
+root.wm_title("Board game recommendation")
 GUI = gui.Gui(root, 1, finalList)
 #GUI.printResults(pI.getSelfY())
 #GUI.setFinalGames(pI.getSelfY())

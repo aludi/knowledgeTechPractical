@@ -99,7 +99,7 @@ game("railways of the world",3,6,5,120,120,10,3.03,["Strategy"],90,false,false,[
 game("suburbia",1,4,3,90,90,10,2.77,["Strategy"],50,false,false,["City Building","Economic"]).
 game("commands & colors: ancients",2,2,2,60,60,12,2.70,["Wargame"],45,false,false,["Ancient","Wargame"]).
 game("nations",1,5,3,40,200,14,3.54,["Strategy"],45,false,false,["Card Game","Civilization","Economic"]).
-game("catan",3,4,4,60,120,8,2.34,["Family","Stategy"],45,false,false,["Negotiation"]).
+game("catan",3,4,4,60,120,8,2.34,["Family","Strategy"],45,false,false,["Negotiation"]).
 game("monopoly",3,6,4,60,180,8,1.67,["Family"],20,false,false,["Economic","Negotiation"]).
 game("stratego",2,2,2,45,45,8,1.86,["Abstract","Family"],25,false,false,["Bluffing","Deduction","Memory","Napoleonic","Wargame"]).
 game("risk",3,6,4,120,120,10,2.10,["Family","Wargame"],30,false,false,["Territory Building","Wargame"]).
