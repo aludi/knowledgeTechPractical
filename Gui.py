@@ -36,15 +36,17 @@ class Gui:
 		
 		for frame in (f0, f1, f1a, f2one, f2two, f2three, f3, f4, f5, f6,f61, f7):
 		    frame.grid(row=0, column=0, sticky='news')
+		    
 		
 		#dubble underscore encapsulates the variable, it can't be directly accessed from main.py
 		prologThing = PrologInteraction()
 		self.__forSelf = True
 		self.__numPlayers = 1
-
 		self.__minPrice = 10000
 		self.__maxPrice = 0
 		self.__gameType = "strategy"
+		self.__gameTime = 60
+		self.__minAge = 100
 		self.__Coop = "true"
 		self.__Campaign = "true"
 		self.__ListType = prologThing.getTypesForGUI() 		#getting types-lists (family, strategy) from prologInteraction
@@ -54,7 +56,8 @@ class Gui:
 		self.__game2 = "some"
 		self.__game3 = "some"
 		self.__finalGames = "some"
-		
+		self.__genreList = PrologInteraction()
+			
 		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
@@ -63,76 +66,83 @@ class Gui:
 		w1 = Label(f0, image = pic)
 		w1.image = pic
 		w1.pack(side = "right")
-		Button(f0, text="Exit", command= master.destroy).pack(side = "left")
-		Button(f0, text="Start", command= lambda: raise_frame(f1)).pack(side = "left")
+		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(side = "left")
+		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(side = "left")
 		w.pack()
 		
 		
 		#question 1 
-		Label(f1, text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
+		Label(f1, font = "TkDefaultFont 16", text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
 		var1 = BooleanVar()
 		var1.set(True)
-		Radiobutton(f1, text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
-		Radiobutton(f1, text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		Button(f1, text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
+		Radiobutton(f1, font = "TkDefaultFont 16", text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
+		Radiobutton(f1, font = "TkDefaultFont 16", text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
+		Button(f1, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
 		
-		#question leeftijd
-		Label(f1a, text="How old is your youngest player?").pack(anchor=tk.W)
+		#question age
+		
+		Label(f1a, font = "TkDefaultFont 16", text="How old is your youngest player?").pack(anchor=tk.W)
 		minA = Entry(f1a)
 		minA.pack(anchor=tk.W)
-		Button(f1a, text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
+		Button(f1a, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
 		#question 2.1 previous games
-		Label(f2one, text="Name three games you like-1").grid()
+		if(self.__forSelf == True):
+			Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
+		else:
+			Label(f2one, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-1").grid()
 		game1Entry = StringVar()
 
 
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=2)	#changed to listNames
 		game1Entry = f2one.text
-		Button(f2one, text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
+		Button(f2one, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
 		
 		#question 2.2
-		Label(f2two, text="Name three games you like-2").grid()
+		print(self.__forSelf)
+		if(self.__forSelf == True):
+			Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid()
+		else:
+			Label(f2two, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-2").grid()
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game2Entry = f2two.text
-		Button(f2two, text="Next", command= lambda: self.save_game2(master,game2Entry, f2three)).grid()
+		Button(f2two, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game2(master,game2Entry, f2three)).grid()
 		
 		#question 2.3
-		Label(f2three, text="Name three games you like-3").grid()
+		if(self.__forSelf == True):
+			Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid()
+		else:
+			Label(f2three, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-3").grid()
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=6)	#changed to listNames
 		game3Entry = f2three.text
-		Button(f2three, text="Next", command= lambda: self.save_game3(master,game3Entry, f3)).grid()
+		Button(f2three, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game3(master,game3Entry, f3)).grid()
 		
 		#question 3
-		Label(f3, text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
+		Label(f3, font = "TkDefaultFont 16", text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
 		num = Entry(f3)
 		num.pack(anchor=tk.W)
 		NA = IntVar()
-		Checkbutton(f3, text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
-		Button(f3, text="Next", command= lambda: self.save_numPlayers(master,num,NA,f4)).pack(anchor=tk.W)
+		Checkbutton(f3, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
+		Button(f3, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_numPlayers(master,num,NA,f4)).pack(anchor=tk.W)
 		
 		#question 4
-		Label(f4, text="What is your price range?").pack(anchor=tk.W)
-		Label(f4, text="You can select multiple boxes").pack(anchor=tk.W)
-		P0 = IntVar()
-		P1 = IntVar()
-		P2 = IntVar()
-		P3 = IntVar()
-		P4 = IntVar()
-		P5 = IntVar()
-		Checkbutton(f4, text="0-10 euro", variable=P0, onvalue = 10, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="10-20 euro", variable=P1, onvalue = 20, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="20-30 euro", variable=P2, onvalue = 30, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="30-40 euro", variable=P3, onvalue = 40, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="40-50 euro", variable=P4, onvalue = 50, offvalue = 0).pack(anchor=tk.W)
-		Checkbutton(f4, text="more than 50 euro", variable=P5, onvalue = 61, offvalue = 0).pack(anchor=tk.W)
-		#if an impossible answer is given (max < min or price < 0), make a pop-up instead of going to next question
-		Button(f4, text="Next", command= lambda: self.save_budget(master,P0,P1,P2,P3,P4,P5,f5)).pack(anchor=tk.W)
+		Label(f4, font = "TkDefaultFont 16", text="What is the maximum price you want to pay for the game?").pack(anchor=tk.W)
+		maxP = IntVar()
+		Radiobutton(f4, font = "TkDefaultFont 16", text="10 dollar", variable=maxP, value = 10).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="20 dollar", variable=maxP, value = 20).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="30 dollar", variable=maxP, value = 30).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="40 dollar", variable=maxP, value = 40).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="50 dollar", variable=maxP, value = 50).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="75 dollar", variable=maxP, value = 75).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="100 dollar", variable=maxP, value = 100).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="150 dollar", variable=maxP, value = 150).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="more than 150 euro", variable=maxP, value = 61).pack(anchor=tk.W)
+		Button(f4, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
 			
 		#question 5
-		Label(f5, text="What type of game do you want to play?").pack(anchor=tk.W)
+		Label(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?").pack(anchor=tk.W)
 		gen = StringVar()
 		count = 0
 		for i in self.__ListType:		#loops through all game-types in database.
@@ -140,32 +150,44 @@ class Gui:
 				gen.set(i)
 				count = 1
 
-			Radiobutton(f5, text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-		Button(f5, text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
+			Radiobutton(f5, font = "TkDefaultFont 16", text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
+			
+		Radiobutton(f5, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=gen, value="_").pack(anchor=tk.W)
+		Button(f5, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		Label(f61, text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f61, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
+		else:
+			Label(f61, font = "TkDefaultFont 16", text="How long do you think they want their average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
-		Button(f61, text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
+		NA = IntVar()
+		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
 		#question 6
-		Label(f6, text="Do you want a cooperative game?").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?").pack(anchor=tk.W)
+		if(self.__forSelf == False):
+			Label(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?").pack(anchor=tk.W)
 		coop = StringVar()
 		coop.set("true")
-		Radiobutton(f6, text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
-		Radiobutton(f6, text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
-		Radiobutton(f6, text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
-		Button(f6, text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
+		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
+		Radiobutton(f6, font = "TkDefaultFont 16", text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
+		Radiobutton(f6, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
+		Button(f6, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
 		#question 7
-		Label(f7, text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+		else:
+			Label(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?").pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
-		Radiobutton(f7, text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
-		Radiobutton(f7, text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
-		Radiobutton(f7, text="Doesn't matter", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
-		Button(f7, text="End", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
+		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
+		Radiobutton(f7, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
+		Radiobutton(f7, font = "TkDefaultFont 16", text="Doesn't matter", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
+		Button(f7, font = "TkDefaultFont 16", text="End", command= lambda: self.save_campaign(master,cam)).pack(anchor=tk.W) 
 		raise_frame(f0)
 		
 		master.mainloop()
@@ -177,13 +199,25 @@ class Gui:
 		master1 = Label(master, image = pic)
 		master1.image = pic
 		master1.pack(side = "left")
+		count = 0
 		for i in finalGames:
-			Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W, side = "right")
+			if count > 5: 
+				break
+			if i == "Best Matching Games" or i == "Expanding Search" or i == "Expanding Search Again":
+				count = count+1
+				Label(master, text=i,font = "Times 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			else:
+				Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
+				Label(master, text = "This game is about...",font = "Times 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				genres = PrologInteraction().getGenreList(i.decode())
+				for j in genres:
+					Label(master, text=j,font = "Times 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
 	def save_person(self, master, var1,frame):
 		self.__forSelf = var1.get()
+		print(self.__forSelf)
 		raise_frame(frame)
 		master.update
 		
@@ -211,22 +245,12 @@ class Gui:
 	def save_numPlayers(self, master, num, NA, frame):
 		self.__numPlayers = num.get()
 		if self.__numPlayers == '' or NA.get() == 1:
-			self.__numPlayers = 3		#to change later, difference between "doesn't matter" and "nothing filled in"
+			self.__numPlayers = 4		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
 		
-	def save_budget(self, master, P0,P1,P2,P3,P4,P5, frame):
-		for x in (P0,P1,P2,P3,P4,P5):
-			if x.get() != 0 and x.get()-10 < self.__minPrice:
-				self.__minPrice = x.get()-10
-			if x.get() > self.__maxPrice:
-				self.__maxPrice = x.get()
-			if x.get() == 61:
-				self.__maxPrice = 10000
-
-		if self.__minPrice == 10000 and self.__maxPrice == 0:
-			self.__minPrice = 0
-			self.__maxPrice = 10000
+	def save_budget(self, master, maxP, frame):
+		self.__maxPrice = maxP.get()
 		raise_frame(frame)
 		master.update
 		
@@ -235,7 +259,6 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
-	
 	def save_time(self,master, time, frame):
 		self.__gameTime = time.get()
 		if self.__gameTime == '':
@@ -291,7 +314,14 @@ class Gui:
 		return self.__game3
 		
 	def getAllGames(self):
-		return [self.__game1, self.__game2, self.__game3]
+		games = []
+		if self.__game1 != '': 
+			games.append(self.__game1)
+		if self.__game2 != '': 
+			games.append(self.__game2)
+		if self.__game3 != '': 
+			games.append(self.__game3)
+		return games
 		
 	def getNumPlayers(self):
 		return self.__numPlayers

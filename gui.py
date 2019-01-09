@@ -56,6 +56,7 @@ class Gui:
 		self.__game2 = "some"
 		self.__game3 = "some"
 		self.__finalGames = "some"
+		self.__genreList = PrologInteraction()
 			
 		
 		
@@ -79,13 +80,17 @@ class Gui:
 		Button(f1, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
 		
 		#question age
+		
 		Label(f1a, font = "TkDefaultFont 16", text="How old is your youngest player?").pack(anchor=tk.W)
 		minA = Entry(f1a)
 		minA.pack(anchor=tk.W)
 		Button(f1a, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_minAge(master,minA,f2one)).pack(anchor=tk.W)	
 		
 		#question 2.1 previous games
-		Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
+		if(self.__forSelf == True):
+			Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid()
+		else:
+			Label(f2one, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-1").grid()
 		game1Entry = StringVar()
 
 
@@ -94,14 +99,21 @@ class Gui:
 		Button(f2one, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game1(master,game1Entry, f2two)).grid()
 		
 		#question 2.2
-		Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid()
+		print(self.__forSelf)
+		if(self.__forSelf == True):
+			Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid()
+		else:
+			Label(f2two, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-2").grid()
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game2Entry = f2two.text
 		Button(f2two, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_game2(master,game2Entry, f2three)).grid()
 		
 		#question 2.3
-		Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid()
+		if(self.__forSelf == True):
+			Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid()
+		else:
+			Label(f2three, font = "TkDefaultFont 16", text="Name three games that are liked by the person who you're buying for-3").grid()
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=6)	#changed to listNames
 		game3Entry = f2three.text
@@ -144,14 +156,20 @@ class Gui:
 		Button(f5, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_type(master,gen,f61)).pack(anchor=tk.W)
 		
 		#question 5
-		Label(f61, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f61, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
+		else:
+			Label(f61, font = "TkDefaultFont 16", text="How long do you think they want their average game to be? (in minutes)").pack(anchor=tk.W)
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		NA = IntVar()
 		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
 		
 		#question 6
-		Label(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f6, font = "TkDefaultFont 16", text="Do you want a cooperative game?").pack(anchor=tk.W)
+		if(self.__forSelf == False):
+			Label(f6, font = "TkDefaultFont 16", text="Do you think they want a cooperative game?").pack(anchor=tk.W)
 		coop = StringVar()
 		coop.set("true")
 		Radiobutton(f6, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
@@ -160,7 +178,10 @@ class Gui:
 		Button(f6, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_coop(master,coop, f7)).pack(anchor=tk.W)
 		
 		#question 7
-		Label(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+		if(self.__forSelf == True):
+			Label(f7, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?").pack(anchor=tk.W)
+		else:
+			Label(f7, font = "TkDefaultFont 16", text="Do you think they want a game that has a campaign?").pack(anchor=tk.W)
 		cam = StringVar()
 		cam.set("true")
 		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
@@ -187,11 +208,16 @@ class Gui:
 				Label(master, text=i,font = "Times 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			else:
 				Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
+				Label(master, text = "This game is about...",font = "Times 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				genres = PrologInteraction().getGenreList(i.decode())
+				for j in genres:
+					Label(master, text=j,font = "Times 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
 	def save_person(self, master, var1,frame):
 		self.__forSelf = var1.get()
+		print(self.__forSelf)
 		raise_frame(frame)
 		master.update
 		
