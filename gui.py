@@ -163,7 +163,8 @@ class Gui:
 		time = Entry(f61)
 		time.pack(anchor=tk.W)
 		NA = IntVar()
-		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,f6)).pack(anchor=tk.W)
+		Checkbutton(f61, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
+		Button(f61, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_time(master,time,NA, f6)).pack(anchor=tk.W)
 		
 		#question 6
 		if(self.__forSelf == True):
@@ -204,13 +205,13 @@ class Gui:
 				break
 			if i == "Best Matching Games" or i == "Expanding Search" or i == "Expanding Search Again":
 				count = count+1
-				Label(master, text=i,font = "Times 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			else:
-				Label(master, text=i,font = "Times 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
-				Label(master, text = "This game is about...",font = "Times 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+				Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "red", padx = 20).pack(anchor=tk.W)
+				Label(master, text = "This game is about...",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 				genres = PrologInteraction().getGenreList(i.decode())
 				for j in genres:
-					Label(master, text=j,font = "Times 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
+					Label(master, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
 
@@ -244,7 +245,7 @@ class Gui:
 	def save_numPlayers(self, master, num, NA, frame):
 		self.__numPlayers = num.get()
 		if self.__numPlayers == '' or NA.get() == 1:
-			self.__numPlayers = 4		#to change later, difference between "doesn't matter" and "nothing filled in"
+			self.__numPlayers = 0		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
 		
@@ -258,10 +259,10 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
-	def save_time(self,master, time, frame):
+	def save_time(self,master, time, NA, frame):
 		self.__gameTime = time.get()
-		if self.__gameTime == '':
-			self.__gameTime = 60
+		if NA.get() == 1:
+			self.__gameTime = 0
 		raise_frame(frame)
 		master.update
 		

@@ -19,6 +19,8 @@ def guiAnswers(pI):
 	pI.setMinAge(GUI.getMinAge())			# setting min age for playing
 	pI.setTime(GUI.getTime())
 	pI.setAvComplexity(pI.getAverageComplexity(GUI.getAllGames()))	#setting average complexity
+	pI.setTimeMatters(GUI.getTime())
+	pI.setNumPlayersMatter(GUI.getNumPlayers())
 
 #TODO:
 # lower priority (first query): campaign, leeftijd, duration, budget (sliders?), 

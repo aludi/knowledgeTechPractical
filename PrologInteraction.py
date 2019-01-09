@@ -25,10 +25,13 @@ class PrologInteraction:
 		self.maxTime = 120
 		self.time = "_"
 		self.listType = []
+		self.numPlayersMatter = "1"
+		self.numTimeMatters = "1"
 
 		
 	def initPrologRules(self):
 		self.prolog.assertz("minMax(A,MIN, MAX):- A >= MIN, A =< MAX")  #rule for min/max (budget and players)
+		self.prolog.assertz("minMaxConditional(A,MIN, MAX, CON):-(CON > 0-> minMax(A, MIN, MAX);minMax((MIN+MAX)/2, MIN, MAX))")
 		self.prolog.assertz("minimumAge(M, N):- M >= N")   # rule for min age
 		self.prolog.assertz("in_list_type(N,X) :- game(N,_,_,_,_,_,_,_,B,_,_,_,_), member(X, B)") #search by type
 		self.prolog.assertz("in_list_genre(N,X) :- game(N,_,_,_,_,_,_,_,_,_,_,_,B), member(X, B)") #search by genre
@@ -47,7 +50,6 @@ class PrologInteraction:
 			
 			
 	def getGenreList(self, nameOfGame):
-		print("am in here")
 		genresList = "no genres found"
 		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
@@ -145,6 +147,12 @@ class PrologInteraction:
 		
 	def setAvComplexity(self, avCom):
 		self.complexity = avCom
+	
+	def setTimeMatters(self,timeMatters):
+		self.numTimeMatters = timeMatters
+	
+	def setNumPlayersMatter(self, numPlayMatter):
+		self.numPlayersMatter = numPlayMatter
 		
 		
 	# assorted other functions
@@ -193,14 +201,15 @@ class PrologInteraction:
 			in_list_type(Name, TYPE),
 			CO = {},
 			CA = {},
+			TIMEMATTERS = {},
 			AVERAGECOMPLEXITY = {},
 			game(Name, MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 			COST < BUDGET,
-			minMax(TIME, Mintime, Maxtime),
+			minMaxConditional(TIME,Mintime, Maxtime, TIMEMATTERS),
 			NUMBEROFPLAYERS = RecP,
 			minimumAge(MINAGE, Minage),
 			Complexity =< AVERAGECOMPLEXITY + 0.5,
-			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp,self.numTimeMatters, self.complexity )
 			
 		if priorityLevel == "medium": 
 			stringQuery ='''
@@ -212,14 +221,16 @@ class PrologInteraction:
 			in_list_type(Name, TYPE),
 			CO = {},
 			CA = {},
+			TIMEMATTERS = {},
+			NUMPLAYERSMATTER = {},
 			AVERAGECOMPLEXITY = {},
 			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 			COST < BUDGET,
-			minMax(TIME, Mintime - 20, Maxtime + 20),
-			minMax(NUMBEROFPLAYERS, MinP, MaxP),
+			minMaxConditional(TIME,Mintime-20, Maxtime+20, TIMEMATTERS),
+			minMaxConditional(NUMBEROFPLAYERS,MinP, MaxP, NUMPLAYERSMATTER),
 			minimumAge(MINAGE, Minage),
 			Complexity =< AVERAGECOMPLEXITY + 1,
-			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters,self.numPlayersMatter, self.complexity )
 			
 		if priorityLevel == "low":
 			stringQuery ='''
@@ -230,14 +241,16 @@ class PrologInteraction:
 			TIME = {},
 			CO = {},
 			CA = {},
+			TIMEMATTERS = {},
+			NUMPLAYERSMATTER = {},
 			AVERAGECOMPLEXITY = {},
 			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 			COST < BUDGET + 10,
-			minMax(TIME, Mintime - 30, Maxtime + 30),
-			minMax(NUMBEROFPLAYERS, MinP -1, MaxP+ 1),
+			minMaxConditional(TIME,Mintime-30, Maxtime+30, TIMEMATTERS),
+			minMaxConditional(NUMBEROFPLAYERS,MinP-1, MaxP+1, NUMPLAYERSMATTER),
 			minimumAge(MINAGE, Minage),
 			Complexity =< AVERAGECOMPLEXITY + 1,
-			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.complexity)
+			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters, self.numPlayersMatter, self.complexity)
 			
 		self.y = prolog.query(stringQuery)
 		print(stringQuery)
