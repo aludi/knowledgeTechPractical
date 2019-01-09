@@ -113,6 +113,11 @@ game("captain sonar",6,8,8,45,60,10,2.11,["Party","Thematic"],40,false,false,["D
 game("secret hitler",6,10,8,45,45,14,1.71,["Party"],35,false,false,["Bluffing","Card Game","Humor","Political"]).
 game("carcassonne",2,5,2,30,45,8,1.93,["Family"],30,false,false,["City Building","Medieval","Territory Building"]).
 game("mysterium",3,7,5,42,42,8,1.92,["Family","Thematic"],45,true,false,["Deduction","Murder/Mystery"]).
+game("halli galli", 3, 6, 4, 10, 10, 6, 1.01, ["Party"], 13, false, false, ["Action", "Cards"]).
+game("jumbo jet", 2, 6, 4, 240, 240, 9, 1.67, ["Thematic"], 15, false, false, ["Aviation", "Economic", "Travel"]).
+game("mister X", 2, 6, 4, 60, 60, 10, 2.07, ["Family"], 30, false, false, ["Bluffing", "Deduction"]).
+
+
 
 
 /*
