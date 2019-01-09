@@ -59,7 +59,7 @@ game("anachrony",1,4,3,30,120,14,3.95,["Strategy"],65,false,false,["Economic","S
 game("clank!: a deck-building adventure",2,4,3,30,60,8,2.21,["Family","Strategy"],40,false,false,["Adventure","Fantasy"]).
 game("t.i.m.e stories",3,4,4,90,90,14,2.64,["Thematic"],50,true,false,["Adventure","Mature","Puzzle","Science Fiction"]).
 game("mombasa",2,4,4,75,150,12,3.90,["Strategy"],50,false,false,["Economic"]).
-game("roll for the galaxy",2,5,3,45,12,2.76,["Strategy"],30,false,false,["Civilization","Dice","Economic","Science Fiction", "Space Exploration"]).
+game("roll for the galaxy",2,5,3,45,45,12,2.76,["Strategy"],30,false,false,["Civilization","Dice","Economic","Science Fiction", "Space Exploration"]).
 game("battlestar galactica: the board game",4,6,5,120,300,14,3.23,["Thematic"],150,true,false,["Bluffing","Deduction","Political","Science Fiction","Space Exploration"]).
 game("the gallerist",1,4,4,60,150,14,4.28,["Strategy"],100,false,false,["Economic"]).
 game("sherlock holmes consulting detective: the thames murders & other cases",1,5,2,60,120,12,2.72,["Thematic"],50,true,false,["Deduction","Murder/Mystery","Novel-based"]).
@@ -94,7 +94,7 @@ game("ticket to ride: europe",2,5,4,30,60,8,1.96,["Family"],45,false,false,["Tra
 game("ora et labora",1,4,3,60,180,13,3.91,["Strategy"],140,false,false,["City Building","Economic","Industry","Medieval","Religious","Territory Building").
 game("arcadia quest",2,4,4,60,60,10,2.51,["Thematic"],70,false,true,["Adventure","Fantasy"]).
 game("chaos in the old world",3,4,4,60,120,14,3.18,["Strategy","Thematic"],60,false,false,["Fantasy","Horror","Mythology","Wargame"]).
-game("grand austria hotel",2,3,2,60,120,12,3.23,["Strategy"],80,["Economic"]).
+game("grand austria hotel",2,3,2,60,120,12,3.23,["Strategy"],80, false, false, ["Economic"]).
 game("railways of the world",3,6,5,120,120,10,3.03,["Strategy"],90,false,false,["Trains","Transportation","Video Game Theme"]).
 game("suburbia",1,4,3,90,90,10,2.77,["Strategy"],50,false,false,["City Building","Economic"]).
 game("commands & colors: ancients",2,2,2,60,60,12,2.70,["Wargame"],45,false,false,["Ancient","Wargame"]).

@@ -52,7 +52,6 @@ class PrologInteraction:
 		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
 			genresList = soln["Listgenre"]
-		print(genresList)
 		return genresList
 		
 	def getAverageComplexity(self, listGame):

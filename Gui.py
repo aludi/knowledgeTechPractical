@@ -194,7 +194,6 @@ class Gui:
 	
 			#final result
 	def printResults(self, master, finalGames):
-		Label(master,font = "Times 20 bold", fg = "blue", text="Here are your final games").pack(anchor=tk.W, side = "top")
 		pic = PhotoImage(file = "img/scaryOwl1.gif")
 		master1 = Label(master, image = pic)
 		master1.image = pic
