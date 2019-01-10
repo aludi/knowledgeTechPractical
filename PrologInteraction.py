@@ -133,6 +133,8 @@ class PrologInteraction:
 		self.game3 = game
 		
 	def setBudget(self, budgetVal):
+		if budgetVal == 0:
+			budgetVal = 1000
 		self.budget = budgetVal #to implement: range of budgets
 		
 	def setType(self, typeGameSel):
