@@ -297,7 +297,7 @@ class Gui:
 		
 	def save_time(self,master, time, NA, frame):
 		self.__gameTime = time.get()
-		if NA.get() == 1:
+		if self.__gameTime == '' or NA.get() == 1:
 			self.__gameTime = 0
 		raise_frame(frame)
 		master.update
