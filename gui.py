@@ -143,7 +143,7 @@ class Gui:
 		Radiobutton(f4, font = "TkDefaultFont 16", text="75 dollar", variable=maxP, value = 75).pack(anchor=tk.W)
 		Radiobutton(f4, font = "TkDefaultFont 16", text="100 dollar", variable=maxP, value = 100).pack(anchor=tk.W)
 		Radiobutton(f4, font = "TkDefaultFont 16", text="150 dollar", variable=maxP, value = 150).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="more than 150 euro", variable=maxP, value = 61).pack(anchor=tk.W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="more than 150 euro", variable=maxP, value = 1000).pack(anchor=tk.W)
 		Button(f4, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_budget(master,maxP,f5)).pack(anchor=tk.W)
 			
 		#question 5

@@ -210,14 +210,15 @@ class PrologInteraction:
 			CO = {},
 			CA = {},
 			TIMEMATTERS = {},
+			NUMPLAYERSMATTER = {},
 			AVERAGECOMPLEXITY = {},
 			game(Name, MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
 			COST < BUDGET,
 			minMaxConditional(TIME,Mintime, Maxtime, TIMEMATTERS),
-			NUMBEROFPLAYERS = RecP,
+			minMaxConditional(NUMBEROFPLAYERS,RecP, RecP, NUMPLAYERSMATTER),
 			minimumAge(MINAGE, Minage),
 			Complexity =< AVERAGECOMPLEXITY + 0.5,
-			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp,self.numTimeMatters, self.complexity )
+			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp,self.numTimeMatters, self.numPlayersMatter, self.complexity )
 			
 		if priorityLevel == "medium": 
 			stringQuery ='''
