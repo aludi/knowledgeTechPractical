@@ -44,29 +44,30 @@ root = Tk()
 root.wm_title("Board game recommendation")
 GUI = gui.Gui(root, 0, [])
 
-#initialize prolog and the prolog interaction class
-prolog = Prolog()
-pI = PrologInteraction()
+if GUI.getFinished():		
+	#initialize prolog and the prolog interaction class
+	prolog = Prolog()
+	pI = PrologInteraction()
 
-#getting the answers from the Gui
-guiAnswers(pI)
-
-
-# searching for other games with the complexity of game1:
-playedGames = GUI.getAllGames()
+	#getting the answers from the Gui
+	guiAnswers(pI)
 
 
-pI.getAverageComplexity(playedGames)
+	# searching for other games with the complexity of game1:
+	playedGames = GUI.getAllGames()
 
-# searching for games in list of type
-#pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
 
-pI.stringQuery(prolog, "high")
-finalList = pI.selectPriority(playedGames)
-print(pI.getSelfY())
+	pI.getAverageComplexity(playedGames)
 
-root = Tk()
-root.wm_title("Board game recommendation")
-GUI = gui.Gui(root, 1, finalList)
-#GUI.printResults(pI.getSelfY())
-#GUI.setFinalGames(pI.getSelfY())
+	# searching for games in list of type
+	#pI.getAverageComplexity(GUI.getAllGames()) # initialize average complexity
+
+	pI.stringQuery(prolog, "high")
+	finalList = pI.selectPriority(playedGames)
+	print(pI.getSelfY())
+
+	root = Tk()
+	root.wm_title("Board game recommendation")
+	GUI = gui.Gui(root, 1, finalList)
+	#GUI.printResults(pI.getSelfY())
+	#GUI.setFinalGames(pI.getSelfY())

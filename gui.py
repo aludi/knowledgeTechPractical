@@ -59,11 +59,12 @@ class Gui:
 		self.__game3 = "some"
 		self.__finalGames = "some"
 		self.__genreList = PrologInteraction()
+		self.__finished = False
 			
 		
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
-		w = Label(f0, font = "TkDefaultFont 16", fg = "black", text = "Hello\n I will help you with selecting a boardgame!")
+		w = Label(f0, font = "TkDefaultFont 16", fg = "black", text = "Hello,\n I will help you with selecting a board game!")
 		pic = PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
 		w1 = Label(f0, image = pic)
 		w1.image = pic
@@ -311,6 +312,7 @@ class Gui:
 		
 	def save_campaign(self, master, cam):
 		self.__Campaign = cam.get()
+		self.__finished = True
 		if self.__Campaign== "either":
 			self.__Campaign = "_"
 		print("camp", self.__Campaign)
@@ -323,9 +325,6 @@ class Gui:
 			self.__minAge = 100
 		raise_frame(frame)
 		master.update
-		
-	def callback(*args):
-		print("variable changed")
 	
 	
 	def setFinalGames(self, finalGames):
@@ -375,6 +374,9 @@ class Gui:
 		
 	def getCampaign(self):
 		return self.__Campaign
+	
+	def getFinished(self):
+		return self.__finished
 		
 def raise_frame(frame):
 	frame.tkraise()
