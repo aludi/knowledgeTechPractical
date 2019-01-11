@@ -56,6 +56,12 @@ class PrologInteraction:
 			genresList = soln["Listgenre"]
 		return genresList
 		
+	def getTypeList(self, nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x:
+			typeList = soln["T"]
+		return typeList
+		
 	def getNumPlayers(self,nameOfGame):
 		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x: 
@@ -69,6 +75,14 @@ class PrologInteraction:
 		for soln in x:
 			age = soln["Minage"]
 		return age
+		
+	def getCoopCampaign(self,nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x:
+			coop = soln["CO"]
+			camp = soln["CA"]
+		return [coop,camp]
+
 	
 	def getPlayTime(self,nameOfGame):
 		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))

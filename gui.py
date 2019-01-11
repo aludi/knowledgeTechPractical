@@ -78,49 +78,57 @@ class Gui:
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f1, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f1, font = "TkDefaultFont 16", text="Question 1.", padx = 200, pady = 30).pack(anchor=tk.W)
-		Label(f1, font = "TkDefaultFont 16", text="How old is your youngest player?", padx = 200).pack(anchor=tk.W)
+		w1.grid(row=3,column=3,rowspan=10,sticky=E)
+		Label(f1, font = "TkDefaultFont 16", text="Question 1.").grid(row=0,column=0,sticky=W)
+		Label(f1, font = "TkDefaultFont 16", text="How old is your youngest player?").grid(row=1,column=0,sticky=W)
 		minA = Entry(f1)
-		minA.pack(anchor=tk.W, padx = 200)
+		minA.grid(row=2,column=0,sticky=W)
 		NA = IntVar()
-		Checkbutton(f1, font = "TkDefaultFont 16", text="Doesn't matter", padx = 200, variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
-		Button(f1, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_minAge(master,minA,NA,f2one)).pack(fill=X,padx=250,side="bottom")
+		Checkbutton(f1, font = "TkDefaultFont 16", text="Doesn't matter", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0,sticky=W)
+		Button(f1, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_minAge(master,minA,NA,f2one)).grid(row=14,column=2,sticky=S)
 		
 		#question 2.1 previous games
-		#pic = PhotoImage(file = "img/scaryOwl1.gif") 
-		#w1 = Label(f2one, image = pic)
-		#w1.image = pic
-		#w1.grid(row = 10, column = 100, sticky = S)
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w2 = Label(f2one, image = pic)
+		w2.image = pic
+		w2.grid(row = 4, column = 2,rowspan=10, sticky = E)
 		Label(f2one, font = "TkDefaultFont 16", text="Question 2a.").grid(row=0, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid(row=1, column=0, sticky=W)
-		Label(f2one, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0, sticky=W)
+		Label(f2one, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game1Entry = StringVar()
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=4)	#changed to listNames
 		game1Entry = f2one.text
-		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=19, column=50, sticky=S)
-		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=20, column=50,sticky=S)
+		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=14, column=1, sticky=S+W)
+		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=15, column=1,sticky=S+W)
 		
 		#question 2.2
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w2 = Label(f2two, image = pic)
+		w2.image = pic
+		w2.grid(row = 4, column = 3,rowspan=10, sticky = E)
 		Label(f2two, font = "TkDefaultFont 16", text="Question 2b.").grid(row=0, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid(row=1, column=0, sticky=W)
-		Label(f2two, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0, sticky=W)
+		Label(f2two, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game2Entry = f2two.text
-		Button(f2two, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game2(master,game2Entry, f2three)).grid(row=19, sticky=W+S)
-		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=20, sticky=W+S)
+		Button(f2two, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game2(master,game2Entry, f2three)).grid(row=14, column=2,sticky=S)
+		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=15, column=2, sticky=S)
 		
 		
 		#question 2.3
+		pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		w2 = Label(f2three, image = pic)
+		w2.image = pic
+		w2.grid(row = 4, column = 3,rowspan=10, sticky = E)
 		Label(f2three, font = "TkDefaultFont 16", text="Question 2c.").grid(row=0, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid(row=1, column=0, sticky=W)
-		Label(f2three, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0)
+		Label(f2three, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2,sticky=W)
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game3Entry = f2three.text
-		Button(f2three, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game3(master,game3Entry, f3)).grid(row=19, sticky=W+S)
-		Button(f2three, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2two)).grid(row=20, sticky=W+S)
+		Button(f2three, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game3(master,game3Entry, f3)).grid(row=14, column=2, sticky=S)
+		Button(f2three, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2two)).grid(row=25, column=2, sticky=S)
 		
 		#question 3
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
@@ -256,7 +264,6 @@ class Gui:
 		popup.wm_title(game.decode())
 		Label(popup, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20,pady=2).grid(columnspan=4)
 		genres = PrologInteraction().getGenreList(game.decode())
-		#players = PrologInteraction().getNumPlayers(game.decode())
 		r = 1
 		for j in genres:
 			Label(popup, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 40).grid(row=r,sticky=W)
@@ -276,8 +283,29 @@ class Gui:
 		Label(popup, text = "Age:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+3, sticky=W) 
 		Label(popup, text = "%s+"%age, font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+3, column=1,sticky=W)
 		
+		coopCamp = PrologInteraction().getCoopCampaign(game.decode())
+		if coopCamp[0] == True:
+			coop = "Yes"
+		else: 
+			coop = "No"
+		if coopCamp[1] == True:
+			camp = "Yes"
+		else:
+			camp = "No"
+		Label(popup, text = "Cooperative:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+4, sticky=W) 
+		Label(popup, text = "%s"%coop, font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+4, column=1,sticky=W)
+		Label(popup, text = "Campaign game:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+5, sticky=W) 
+		Label(popup, text = "%s"%camp, font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+5, column=1,sticky=W)
 		
-		Button(popup,text="Okay",command=popup.destroy).grid(column=3)
+		types = PrologInteraction().getTypeList(game.decode())
+		Label(popup, text = "Type of game:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+6, sticky=W)
+		c=1
+		for k in types:
+			Label(popup, text=k,font = "TkDefaultFont 10 italic", fg = "blue").grid(row=r+6,column=c,sticky=W)
+			c = c+1
+		
+		
+		Button(popup,text="Okay",command=popup.destroy,pady=20).grid(column=1,sticky=W)
 		popup.mainloop()
 	
 	def displayChanges(self, change):
@@ -290,15 +318,19 @@ class Gui:
 		if change == "Expanding Search...":
 			popup = Tk()
 			popup.wm_title("explanation")
-			explanation = "These games match fewer of your specifications: \nThe number of players is in range instead of recommended, \ntime range is wider by 20 minutes on both sides, \ncomplexity range is also increased!"
-			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			explanation = ["The number of players is in range instead of recommended","Time range is wider by 20 minutes on both sides","Complexity range is increased"]
+			Label(popup, text = "These games match fewer of your specifications:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			for i in range(3): 
+				Label(popup, text = explanation[i],font = "TkDefaultFont 10", fg = "black", padx = 20).pack(anchor=tk.W)
 			Button(popup,text="Okay",command=popup.destroy).pack()
 			popup.mainloop()
 		if change == "Expanding Search Again...":
 			popup = Tk()
 			popup.wm_title("explanation")
-			explanation = "These games have even wider search criteria: \nType preference is removed, \nbudget is expanded with 10 euros, \nplayer range has increased, \nand time range has increased with 30 minutes on both sides"
-			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			explanation = ["Type preference is removed", "Budget is expanded with 10 euros", "Player range has increased", "Time range has increased with 30 minutes on both sides"]
+			Label(popup, text = "These games have even wider search criteria:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			for i in range(4): 
+				Label(popup, text = explanation[i],font = "TkDefaultFont 10", fg = "black", padx = 20).pack(anchor=tk.W)
 			Button(popup,text="Okay",command=popup.destroy).pack()
 			popup.mainloop()
 		
