@@ -19,6 +19,7 @@ class Gui:
 		
 	def makeGui(self,master):
 		
+		
 		def raise_frame(frame):
 			frame.tkraise()
 			
@@ -72,20 +73,7 @@ class Gui:
 		w1.pack(fill=X,padx=0)
 		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
 		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1a)).pack(fill=X,padx=250,side="bottom")
-		
-	    
-		#question 1 
-		#pic = PhotoImage(file = "img/scaryOwl1.gif") 
-		#w1 = Label(f1, image = pic)
-		#w1.image = pic
-		#w1.pack(side = "right")
-		#Label(f1, font = "TkDefaultFont 16", text="Is the game for yourself or for someone else?").pack(anchor=tk.W)
-		#var1 = BooleanVar()
-		#var1.set(True)
-		#Radiobutton(f1, font = "TkDefaultFont 16", text="For me", padx = 20, variable=var1, value=True).pack(anchor=tk.W)
-		#Radiobutton(f1, font = "TkDefaultFont 16", text="For someone else", padx = 20, variable=var1, value=False).pack(anchor=tk.W)
-		#Button(f1, font = "TkDefaultFont 16", text="Next", command= lambda: self.save_person(master,var1,f1a)).pack(anchor=tk.W)	
-		
+			
 		
 		#question 1
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
@@ -252,12 +240,10 @@ class Gui:
 				Button(master, text=i,font = "TkDefaultFont 20", fg = "red", padx = 20, command= partial(self.displayGameInfo,i)).pack(anchor=tk.W)			
 		Button(master, text="Exit", command= master.destroy).pack(side = "right")
 		master.mainloop()	
+		
+	def errorMessage(self):
+		messagebox.showinfo("Error","Input should be a digit")
 
-	def save_person(self, master, var1,frame):
-		self.__forSelf = var1.get()
-		print(self.__forSelf)
-		raise_frame(frame)
-		master.update
 		
 	def save_game1(self, master, g1, frame):
 		self.__game1 = g1.get()
@@ -281,6 +267,9 @@ class Gui:
 		master.update
 	 
 	def save_numPlayers(self, master, num, NA, frame):
+		if not (num.get().isdigit() or num.get() ==''):
+			self.errorMessage()
+			return
 		self.__numPlayers = num.get()
 		if self.__numPlayers == '' or NA.get() == 1:
 			self.__numPlayers = 0		#to change later, difference between "doesn't matter" and "nothing filled in"
@@ -298,6 +287,9 @@ class Gui:
 		master.update
 		
 	def save_time(self,master, time, NA, frame):
+		if not (time.get().isdigit() or time.get() ==''):
+			self.errorMessage()
+			return
 		self.__gameTime = time.get()
 		if self.__gameTime == '' or NA.get() == 1:
 			self.__gameTime = 0
@@ -322,6 +314,9 @@ class Gui:
 		master.update
 
 	def save_minAge(self, master, minA, NA, frame):
+		if not (minA.get().isdigit() or minA.get() ==''):
+			self.errorMessage()
+			return
 		self.__minAge = minA.get()
 		if self.__minAge == '' or NA.get() == 1 :
 			self.__minAge = 100
