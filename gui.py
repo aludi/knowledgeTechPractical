@@ -71,12 +71,8 @@ class Gui:
 		w1.image = pic
 		w1.pack(fill=X,padx=0)
 		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
-<<<<<<< HEAD
 		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(fill=X,padx=250,side="bottom")
-	    
-=======
-		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1a)).pack(fill=X,padx=250,side="bottom")
->>>>>>> 6ec3a9b4d4e6b9f04ce5c1269726324c755e72ee
+
 
 		#question 1
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
