@@ -158,13 +158,31 @@ class Gui:
 		Button(f4, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f3)).pack(fill=X,padx=250,side="bottom")
 		Button(f4, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_budget(master,maxP,f5)).pack(fill=X,padx=250,side="bottom")
 			
+			
+		def typesExplained():
+			popup = Tk()
+			popup.wm_title("Types explained")
+			Label(popup, text = "Thematic:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 0,sticky=W)
+			Label(popup, text = "Emphasis on narative", font = "TkDefaultFont 10", fg = "black").grid(row=0,column=1,sticky=W)
+			Label(popup, text = "Strategy:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 1,sticky=W)
+			Label(popup, text = "More complex games", font = "TkDefaultFont 10", fg = "black").grid(row=1,column=1,sticky=W)
+			Label(popup, text = "Wargame:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 2,sticky=W)
+			Label(popup, text = "Conflict simulation", font = "TkDefaultFont 10", fg = "black").grid(row=2,column=1,sticky=W)
+			Label(popup, text = "Family:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 3,sticky=W)
+			Label(popup, text = "Fun for kids and adults", font = "TkDefaultFont 10", fg = "black").grid(row=3,column=1,sticky=W)
+			Label(popup, text = "Customizable:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 4,sticky=W)
+			Label(popup, text = "Has collectibles (such as cards)", font = "TkDefaultFont 10", fg = "black").grid(row=4,column=1,sticky=W)
+			Label(popup, text = "Party:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 5,sticky=W)
+			Label(popup, text = "Few rules, lots of laughs", font = "TkDefaultFont 10", fg = "black").grid(row=5,column=1,sticky=W)
+			
+		
 		#question 5
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f5, image = pic)
 		w1.image = pic
 		w1.pack(side = "right")
 		Label(f5, font = "TkDefaultFont 16", text="Question 5.").pack(anchor=tk.W)
-		Label(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?").pack(anchor=tk.W)
+		Button(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?", command= typesExplained).pack(anchor=tk.W)
 		gen = StringVar()
 		count = 0
 		for i in self.__ListType:		#loops through all game-types in database.
@@ -236,14 +254,30 @@ class Gui:
 	def displayGameInfo(self,game):
 		popup = Tk()
 		popup.wm_title(game.decode())
-		Label(popup, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+		Label(popup, text = "This game falls under the following categories:",font = "TkDefaultFont 11 bold", fg = "black", padx = 20,pady=2).grid(columnspan=4)
 		genres = PrologInteraction().getGenreList(game.decode())
 		#players = PrologInteraction().getNumPlayers(game.decode())
+		r = 1
 		for j in genres:
-			Label(popup, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 20).pack(anchor=tk.W)
-		#Label(popup, text = "Play this game with \t %d to %d players", font = "TkDefaultFont 10 bold", fg = "black", padx = 20).pack(anchor=tk.W)
+			Label(popup, text=j,font = "TkDefaultFont 10 italic", fg = "blue", padx = 40).grid(row=r,sticky=W)
+			r = r+1
 		
-		Button(popup,text="Okay",command=popup.destroy).pack()
+		numPlayers = PrologInteraction().getNumPlayers(game.decode())	
+		Label(popup, text = "Number of players:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = r+1, column=0,sticky=W)
+		Label(popup, text = "%s-%s"%(numPlayers[0],numPlayers[1]), font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+1, column=1,sticky=W)
+		Label(popup, text = "Best:", font = "TkDefaultFont 11 bold", fg = "black").grid(row = r+1, column=2,sticky=W)
+		Label(popup, text = "%s"%numPlayers[2], font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+1, column=3,sticky=W)
+		
+		playTime = PrologInteraction().getPlayTime(game.decode())
+		Label(popup, text = "Playtime:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+2, sticky=W) 
+		Label(popup, text = "%s-%s min"%(playTime[0],playTime[1]), font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+2, column=1,sticky=W)
+		
+		age = PrologInteraction().getAge(game.decode())
+		Label(popup, text = "Age:", font = "TkDefaultFont 11 bold", fg = "black",padx=20,pady=2).grid(row=r+3, sticky=W) 
+		Label(popup, text = "%s+"%age, font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+3, column=1,sticky=W)
+		
+		
+		Button(popup,text="Okay",command=popup.destroy).grid(column=3)
 		popup.mainloop()
 	
 	def displayChanges(self, change):
@@ -256,14 +290,14 @@ class Gui:
 		if change == "Expanding Search...":
 			popup = Tk()
 			popup.wm_title("explanation")
-			explanation = "These games match fewer of your specifications: the number of players is in range instead of recommended, time range is wider by 20 minutes on both sides, complexity range is also increased!"
+			explanation = "These games match fewer of your specifications: \nThe number of players is in range instead of recommended, \ntime range is wider by 20 minutes on both sides, \ncomplexity range is also increased!"
 			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			Button(popup,text="Okay",command=popup.destroy).pack()
 			popup.mainloop()
 		if change == "Expanding Search Again...":
 			popup = Tk()
 			popup.wm_title("explanation")
-			explanation = "These games have even wider search criteria: type preference is removed, budget is expanded with 10 euros, player range has increased, and time range has increased with 30 minutes on both sides"
+			explanation = "These games have even wider search criteria: \nType preference is removed, \nbudget is expanded with 10 euros, \nplayer range has increased, \nand time range has increased with 30 minutes on both sides"
 			Label(popup, text = explanation,font = "TkDefaultFont 11 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 			Button(popup,text="Okay",command=popup.destroy).pack()
 			popup.mainloop()
