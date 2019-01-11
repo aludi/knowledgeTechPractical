@@ -65,106 +65,106 @@ class Gui:
 		
 		#TkInter for interface : link for tutorial :  https://www.python-course.eu/tkinter_labels.php
 		w = Label(f0, font = "TkDefaultFont 16", fg = "black", text = "Hello,\n I will help you with selecting a board game!")
-		w.pack(fill=X,padx=0)
+		w.pack(padx=0)
 		pic = PhotoImage(file = "img/scaryOwl1.gif") #must always be a gif, thinter doesn't like other formats.
 		w1 = Label(f0, image = pic)
 		w1.image = pic
-		w1.pack(fill=X,padx=0)
-		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
-		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(fill=X,padx=250,side="bottom")
+		w1.pack(padx=0)
+		Button(f0, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(side="bottom")
+		Button(f0, font = "TkDefaultFont 16", text="Start", command= lambda: raise_frame(f1)).pack(side="bottom")
 
 
 		#question 1
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f1, image = pic)
 		w1.image = pic
-		w1.grid(row=3,column=3,rowspan=10,sticky=E)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
 		Label(f1, font = "TkDefaultFont 16", text="Question 1.").grid(row=0,column=0,sticky=W)
 		Label(f1, font = "TkDefaultFont 16", text="How old is your youngest player?").grid(row=1,column=0,sticky=W)
 		minA = Entry(f1)
 		minA.grid(row=2,column=0,sticky=W)
 		NA = IntVar()
 		Checkbutton(f1, font = "TkDefaultFont 16", text="Doesn't matter", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0,sticky=W)
-		Button(f1, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_minAge(master,minA,NA,f2one)).grid(row=14,column=2,sticky=S)
+		Button(f1, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_minAge(master,minA,NA,f2one)).grid(row=24,column=1,sticky=S)
 		
 		#question 2.1 previous games
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2one, image = pic)
 		w2.image = pic
-		w2.grid(row = 4, column = 2,rowspan=10, sticky = E)
+		w2.grid(row = 4, column = 1,rowspan=20, sticky = W)
 		Label(f2one, font = "TkDefaultFont 16", text="Question 2a.").grid(row=0, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid(row=1, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game1Entry = StringVar()
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=4)	#changed to listNames
 		game1Entry = f2one.text
-		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=14, column=1, sticky=S+W)
-		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=15, column=1,sticky=S+W)
+		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=24, column=1, sticky=S)
+		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=24, column=0,sticky=S)
 		
 		#question 2.2
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2two, image = pic)
 		w2.image = pic
-		w2.grid(row = 4, column = 3,rowspan=10, sticky = E)
+		w2.grid(row = 4, column = 1,rowspan=20, sticky = W)
 		Label(f2two, font = "TkDefaultFont 16", text="Question 2b.").grid(row=0, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid(row=1, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game2Entry = f2two.text
-		Button(f2two, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game2(master,game2Entry, f2three)).grid(row=14, column=2,sticky=S)
-		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=15, column=2, sticky=S)
+		Button(f2two, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game2(master,game2Entry, f2three)).grid(row=24, column=1,sticky=S)
+		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=24, column=0, sticky=S)
 		
 		
 		#question 2.3
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2three, image = pic)
 		w2.image = pic
-		w2.grid(row = 4, column = 3,rowspan=10, sticky = E)
+		w2.grid(row = 4, column = 1,rowspan=20, sticky = E)
 		Label(f2three, font = "TkDefaultFont 16", text="Question 2c.").grid(row=0, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid(row=1, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2,sticky=W)
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
 		game3Entry = f2three.text
-		Button(f2three, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game3(master,game3Entry, f3)).grid(row=14, column=2, sticky=S)
-		Button(f2three, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2two)).grid(row=25, column=2, sticky=S)
+		Button(f2three, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game3(master,game3Entry, f3)).grid(row=24, column=1, sticky=S+W)
+		Button(f2three, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2two)).grid(row=24, column=0, sticky=S)
 		
 		#question 3
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
-		w1 = Label(f3, image = pic)
-		w1.image = pic
-		w1.pack(side = "right")
-		Label(f3, font = "TkDefaultFont 16", text="Question 3.").pack(anchor=tk.W)
-		Label(f3, font = "TkDefaultFont 16", text="What is the preferred number of players?").pack(anchor=tk.W) #make sure input is valid!
+		w3 = Label(f3, image = pic)
+		w3.image = pic
+		w3.grid(row=3,column=1,rowspan=20,sticky=E)
+		Label(f3, font = "TkDefaultFont 16", text="Question 3.").grid(row=0,column=0)
+		Label(f3, font = "TkDefaultFont 16", text="What is the preferred number of players?").grid(row=1,column=0,columnspan=2,sticky=W)
 		num = Entry(f3)
-		num.pack(anchor=tk.W)
+		num.grid(row=2,column=0)
 		NA = IntVar()
-		Checkbutton(f3, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
-		Button(f3, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2three)).pack(fill=X,padx=250,side="bottom")
-		Button(f3, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_numPlayers(master,num,NA,f4)).pack(fill=X,padx=250,side="bottom")
+		Checkbutton(f3, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0)
+		Button(f3, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_numPlayers(master,num,NA,f4)).grid(row=23,column=1,sticky=S)
+		Button(f3, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2three)).grid(row=23,column=0,sticky=S)
 		
 		
 		#question 4
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f4, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f4, font = "TkDefaultFont 16", text="Question 4.").pack(anchor=tk.W)
-		Label(f4, font = "TkDefaultFont 16", text="What is the maximum price you want to pay for the game?").pack(anchor=tk.W)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		Label(f4, font = "TkDefaultFont 16", text="Question 4.").grid(row=0,column=0,sticky=W)
+		Label(f4, font = "TkDefaultFont 16", text="What is the maximum price you want to pay for the game?").grid(row=1,column=0,columnspan=2,sticky=W)
 		maxP = IntVar()
 		maxP.set("10")
-		Radiobutton(f4, font = "TkDefaultFont 16", text="10 dollar", variable=maxP, value = 10).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="20 dollar", variable=maxP, value = 20).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="30 dollar", variable=maxP, value = 30).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="40 dollar", variable=maxP, value = 40).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="50 dollar", variable=maxP, value = 50).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="75 dollar", variable=maxP, value = 75).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="100 dollar", variable=maxP, value = 100).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="150 dollar", variable=maxP, value = 150).pack(anchor=tk.W)
-		Radiobutton(f4, font = "TkDefaultFont 16", text="more than 150 dollar", variable=maxP, value = 1000).pack(anchor=tk.W)
-		Button(f4, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f3)).pack(fill=X,padx=250,side="bottom")
-		Button(f4, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_budget(master,maxP,f5)).pack(fill=X,padx=250,side="bottom")
+		Radiobutton(f4, font = "TkDefaultFont 16", text="10 dollar", variable=maxP, value = 10).grid(row=2,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="20 dollar", variable=maxP, value = 20).grid(row=3,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="30 dollar", variable=maxP, value = 30).grid(row=4,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="40 dollar", variable=maxP, value = 40).grid(row=5,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="50 dollar", variable=maxP, value = 50).grid(row=6,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="75 dollar", variable=maxP, value = 75).grid(row=7,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="100 dollar", variable=maxP, value = 100).grid(row=8,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="150 dollar", variable=maxP, value = 150).grid(row=9,column=0,sticky=W)
+		Radiobutton(f4, font = "TkDefaultFont 16", text="more than 150 dollar", variable=maxP, value = 1000).grid(row=10,column=0,sticky=W)
+		Button(f4, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f3)).grid(row=24,column=0,sticky=S)
+		Button(f4, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_budget(master,maxP,f5)).grid(row=24,column=1,sticky=S)
 			
 			
 		def typesExplained():
@@ -188,33 +188,35 @@ class Gui:
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f5, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f5, font = "TkDefaultFont 16", text="Question 5.").pack(anchor=tk.W)
-		Button(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?", command= typesExplained).pack(anchor=tk.W)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		Label(f5, font = "TkDefaultFont 16", text="Question 5.").grid(row=0,column=0,sticky=W)
+		Button(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?", command= typesExplained).grid(row=1,column=0,columnspan=2,sticky=W)
 		gen = StringVar()
 		count = 0
+		r=2
 		for i in self.__ListType:		#loops through all game-types in database.
 			if count == 0:
 				gen.set(i)
 				count = 1
-			Radiobutton(f5, font = "TkDefaultFont 16", text=i, padx = 20, variable=gen, value=i).pack(anchor=tk.W)
-		Radiobutton(f5, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=gen, value="_").pack(anchor=tk.W)
-		Button(f5, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f4)).pack(fill=X,padx=250,side="bottom")
-		Button(f5, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_type(master,gen,f6)).pack(fill=X,padx=250,side="bottom")
+			Radiobutton(f5, font = "TkDefaultFont 16", text=i, padx = 20, variable=gen, value=i).grid(row=r,column=0,sticky=W)
+			r=r+1
+		Radiobutton(f5, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=gen, value="_").grid(row=r,column=0,sticky=W)
+		Button(f5, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f4)).grid(row=24,column=0,sticky=S)
+		Button(f5, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_type(master,gen,f6)).grid(row=24,column=1,sticky=S)
 		
 		#question 6
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f6, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f6, font = "TkDefaultFont 16", text="Question 6.").pack(anchor=tk.W)
-		Label(f6, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").pack(anchor=tk.W)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		Label(f6, font = "TkDefaultFont 16", text="Question 6.").grid(row=0,column=0,sticky=W)
+		Label(f6, font = "TkDefaultFont 16", text="How long do you want your average game to be? (in minutes)").grid(row=1,column=0,columnspan=2,sticky=W)
 		time = Entry(f6)
-		time.pack(anchor=tk.W)
+		time.grid(row=2,column=0,sticky=W)
 		NA = IntVar()
-		Checkbutton(f6, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).pack(anchor=tk.W)
-		Button(f6, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f5)).pack(fill=X,padx=250,side="bottom")
-		Button(f6, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_time(master,time,NA, f7)).pack(fill=X,padx=250,side="bottom")
+		Checkbutton(f6, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0,sticky=W)
+		Button(f6, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f5)).grid(row=24,column=0,sticky=S)
+		Button(f6, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_time(master,time,NA, f7)).grid(row=24,column=1,sticky=S)
 		
 		
 		def cooperative():
@@ -224,17 +226,17 @@ class Gui:
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f7, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f7, font = "TkDefaultFont 16", text="Question 7.").pack(anchor=tk.W)
-		Button(f7, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).pack(anchor=tk.W)
-		Label(f7, font = "TkDefaultFont 10", text="(click on the question if you don't know what a cooperative game is)").pack(anchor=tk.W)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		Label(f7, font = "TkDefaultFont 16", text="Question 7.").grid(row=0,column=0,sticky=W)
+		Button(f7, font = "TkDefaultFont 16", text="Do you want a cooperative game?", command = cooperative).grid(row=1,column=0,columnspan=2,sticky=W)
+		Label(f7, font = "TkDefaultFont 10", text="(click on the question if you don't know what a cooperative game is)").grid(row=2,column=0,columnspan=2,sticky=W)
 		coop = StringVar()
 		coop.set("true")
-		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").pack(anchor=tk.W)
-		Radiobutton(f7, font = "TkDefaultFont 16", text="No", padx = 20, variable=coop, value="false").pack(anchor=tk.W)
-		Radiobutton(f7, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=coop, value="either").pack(anchor=tk.W)
-		Button(f7, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f6)).pack(fill=X,padx=250,side="bottom")
-		Button(f7, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_coop(master,coop, f8)).pack(fill=X,padx=250,side="bottom")
+		Radiobutton(f7, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=coop, value="true").grid(row=3,column=0,sticky=W)
+		Radiobutton(f7, font = "TkDefaultFont 16", text="No", padx = 20, variable=coop, value="false").grid(row=4,column=0,sticky=W)
+		Radiobutton(f7, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=coop, value="either").grid(row=5,column=0,sticky=W)
+		Button(f7, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f6)).grid(row=24,column=0,sticky=S)
+		Button(f7, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_coop(master,coop, f8)).grid(row=24,column=1,sticky=S)
 		
 		def campaign():
 			messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
@@ -243,17 +245,17 @@ class Gui:
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w1 = Label(f8, image = pic)
 		w1.image = pic
-		w1.pack(side = "right")
-		Label(f8, font = "TkDefaultFont 16", text="Question 8.").pack(anchor=tk.W)
-		Button(f8, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).pack(anchor=tk.W)
-		Label(f8, font = "TkDefaultFont 10", text="(click on the question if you don't know what a campaign game is)").pack(anchor=tk.W)
+		w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		Label(f8, font = "TkDefaultFont 16", text="Question 8.").grid(row=0,column=0,sticky=W)
+		Button(f8, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).grid(row=1,column=0,columnspan=2,sticky=W)
+		Label(f8, font = "TkDefaultFont 10", text="(click on the question if you don't know what a campaign game is)").grid(row=2,column=0,columnspan=2,sticky=W)
 		cam = StringVar()
 		cam.set("true")
-		Radiobutton(f8, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").pack(anchor=tk.W)
-		Radiobutton(f8, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").pack(anchor=tk.W)
-		Radiobutton(f8, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=cam, value="either").pack(anchor=tk.W)
-		Button(f8, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f7)).pack(fill=X,padx=250,side="bottom")
-		Button(f8, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_campaign(master,cam)).pack(fill=X,padx=250,side="bottom")
+		Radiobutton(f8, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").grid(row=3,column=0,sticky=W)
+		Radiobutton(f8, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").grid(row=4,column=0,sticky=W)
+		Radiobutton(f8, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=cam, value="either").grid(row=5,column=0,sticky=W)
+		Button(f8, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f7)).grid(row=24,column=0,sticky=S)
+		Button(f8, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_campaign(master,cam)).grid(row=24,column=1,sticky=S)
 		
 		
 		raise_frame(f0)
@@ -284,11 +286,11 @@ class Gui:
 		Label(popup, text = "%s+"%age, font = "TkDefaultFont 10 italic", fg = "blue").grid(row = r+3, column=1,sticky=W)
 		
 		coopCamp = PrologInteraction().getCoopCampaign(game.decode())
-		if coopCamp[0] == True:
+		if coopCamp[0] == "true":
 			coop = "Yes"
 		else: 
 			coop = "No"
-		if coopCamp[1] == True:
+		if coopCamp[1] == "true":
 			camp = "Yes"
 		else:
 			camp = "No"
