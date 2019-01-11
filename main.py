@@ -52,10 +52,8 @@ if GUI.getFinished():
 	#getting the answers from the Gui
 	guiAnswers(pI)
 
-
 	# searching for other games with the complexity of game1:
 	playedGames = GUI.getAllGames()
-
 
 	pI.getAverageComplexity(playedGames)
 
