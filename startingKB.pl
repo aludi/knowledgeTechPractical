@@ -118,8 +118,6 @@ game("jumbo jet", 2, 6, 4, 240, 240, 9, 1.67, ["Thematic"], 15, false, false, ["
 game("mister X", 2, 6, 4, 60, 60, 10, 2.07, ["Family"], 30, false, false, ["Bluffing", "Deduction"]).
 
 
-
-
 /*
 cooperative komt voor campaign
 game(name, min players, max players, rec players, min time, max time, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)

@@ -1,4 +1,4 @@
-from pyswip import Prolog
+from pyswip import Prolog, Query,Functor, Variable
 
 
 class PrologInteraction:
@@ -202,7 +202,7 @@ class PrologInteraction:
 			# call stringQuery where self.type = object
 			#priorityLevel indicates how precisely we want to meet the users requirements 
 		if priorityLevel == "high":
-			stringQuery ='''
+			stringQuery = '''
 			NUMBEROFPLAYERS = {},
 			MINAGE = {},
 			BUDGET = {},
@@ -220,8 +220,11 @@ class PrologInteraction:
 			minMaxConditional(NUMBEROFPLAYERS,RecP, RecP, NUMPLAYERSMATTER),
 			minimumAge(MINAGE, Minage),
 			Complexity =< AVERAGECOMPLEXITY + 0.5,
-			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp,self.numTimeMatters, self.numPlayersMatter, self.complexity )
+			Complexity >= AVERAGECOMPLEXITY - 1'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp,self.numTimeMatters, self.numPlayersMatter, self.complexity)
 			
+			
+			
+		
 		if priorityLevel == "medium": 
 			stringQuery ='''
 			NUMBEROFPLAYERS = {},
@@ -235,13 +238,13 @@ class PrologInteraction:
 			TIMEMATTERS = {},
 			NUMPLAYERSMATTER = {},
 			AVERAGECOMPLEXITY = {},
-			game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre),
+			findnsols(5,Name,game(Name, MinP, MaxP, _, Mintime, Maxtime, Minage, Complexity,_, COST, CO, CA, Listgenre), gamesList),
 			COST < BUDGET,
 			minMaxConditional(TIME,Mintime-20, Maxtime+20, TIMEMATTERS),
 			minMaxConditional(NUMBEROFPLAYERS,MinP, MaxP, NUMPLAYERSMATTER),
 			minimumAge(MINAGE, Minage),
-			Complexity =< AVERAGECOMPLEXITY + 1,
-			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters,self.numPlayersMatter, self.complexity )
+			Complexity =< AVERAGECOMPLEXITY + 2,
+			Complexity >= AVERAGECOMPLEXITY - 2'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters,self.numPlayersMatter, self.complexity )
 			
 		if priorityLevel == "low":
 			stringQuery ='''
@@ -264,17 +267,24 @@ class PrologInteraction:
 			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters, self.numPlayersMatter, self.complexity)
 			
 		self.y = prolog.query(stringQuery)
-		print(stringQuery)
-		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
+		#print(stringQuery)
+		#print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
 		
  
 #
 #game(name, min players, max players, minTime, maxTime, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 
 	def selectFinalGames(self, listFinal, playedGames):
+		count = 0
 		for soln in self.y:
 			if soln["Name"] not in listFinal and soln["Name"] not in playedGames:
 				listFinal.append(soln["Name"])
+			if count < 1:
+				listFinal  = soln['Name']
+				count = count + 1
+			else:
+				break
+			#print(listFinal)
 		return listFinal
 	
 	

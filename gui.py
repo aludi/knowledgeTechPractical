@@ -275,7 +275,7 @@ class Gui:
 	 
 	def save_numPlayers(self, master, num, NA, frame):
 		self.__numPlayers = num.get()
-		if self.__numPlayers == '' or NA.get() == 1:
+		if self.__numPlayers == '' or NA.get() == 1 or not(self.__numPlayers.isdigit()):
 			self.__numPlayers = 0		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
@@ -292,7 +292,7 @@ class Gui:
 		
 	def save_time(self,master, time, NA, frame):
 		self.__gameTime = time.get()
-		if self.__gameTime == '' or NA.get() == 1:
+		if self.__gameTime == '' or NA.get() == 1 or not(self.__gameTime.isdigit()):
 			self.__gameTime = 0
 		raise_frame(frame)
 		master.update
@@ -316,7 +316,7 @@ class Gui:
 
 	def save_minAge(self, master, minA, NA, frame):
 		self.__minAge = minA.get()
-		if self.__minAge == '' or NA.get() == 1 :
+		if self.__minAge == '' or NA.get() == 1 or not(self.__minAge.isdigit()):
 			self.__minAge = 100
 		raise_frame(frame)
 		master.update
