@@ -39,8 +39,8 @@ class AutocompleteEntry(tk.Frame, object):
              you need to change styling)
     """
     LISTBOX_HEIGHT = 5
-    LISTBOX_WIDTH = 30
-    ENTRY_WIDTH = 30
+    LISTBOX_WIDTH = 40
+    ENTRY_WIDTH = 40
 
     def __init__(self, master, *args, **kwargs):
         """Constructor.
@@ -68,7 +68,7 @@ class AutocompleteEntry(tk.Frame, object):
     def build(
               self,
               entries,
-              max_entries=5,
+              max_entries=10,
               case_sensitive=False,
               no_results_message=NO_RESULTS_MESSAGE,
               rowNum=0,
@@ -111,7 +111,7 @@ class AutocompleteEntry(tk.Frame, object):
         self.listbox.bind("<<ListboxSelect>>", self._select_entry)
         #self.listbox.grid(column=0, row=1)
         self.listbox.grid(column=columnNum,row=rowNum+1)
-        self.listbox.grid_forget()
+        #self.listbox.grid_forget()
         # Initially, the listbox widget doesn't show up.
 
     def _update_autocomplete(self, event):
@@ -124,14 +124,13 @@ class AutocompleteEntry(tk.Frame, object):
         text = self.text.get()
         if not self._case_sensitive:
             text = text.lower()
-        if not text:
-            self.listbox.grid_forget()
-        else:
-            for entry in self._entries:
-                #print(type(text))
-                #print("entry type",type(entry.strip()))
-                if text in entry.strip().decode(): #.decode()
-                    self.listbox.insert(tk.END, entry.decode())
+            
+        #I deleted something here so we have the white balk always visible, see git for original
+        for entry in self._entries:
+            #print(type(text))
+            #print("entry type",type(entry.strip()))
+            if text in entry.strip().decode(): #.decode()
+                self.listbox.insert(tk.END, entry.decode())
 
         listbox_size = self.listbox.size()
         if not listbox_size:

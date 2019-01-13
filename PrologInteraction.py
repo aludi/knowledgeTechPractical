@@ -56,13 +56,40 @@ class PrologInteraction:
 			genresList = soln["Listgenre"]
 		return genresList
 		
-	def getNumPlayers(self,nameOfGame):
-		playerList = []
+	def getTypeList(self, nameOfGame):
 		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
-		playerList.append(x["MinP"])
-		playerList.append(x["MaxP"])
-		playerList.append(x["RecP"])
-		return playerList
+		for soln in x:
+			typeList = soln["T"]
+		return typeList
+		
+	def getNumPlayers(self,nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x: 
+			minP = soln["MinP"]
+			maxP = soln["MaxP"]
+			recP = soln["RecP"]
+		return [minP,maxP,recP]
+		
+	def getAge(self,nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x:
+			age = soln["Minage"]
+		return age
+		
+	def getCoopCampaign(self,nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x:
+			coop = soln["CO"]
+			camp = soln["CA"]
+		return [coop,camp]
+
+	
+	def getPlayTime(self,nameOfGame):
+		x = self.prolog.query('''game("{}",MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
+		for soln in x: 
+			minTime = soln["Mintime"]
+			maxTime = soln["Maxtime"]
+		return [minTime,maxTime]
 		
 	def getAverageComplexity(self, listGame):
 		compAv = 0
