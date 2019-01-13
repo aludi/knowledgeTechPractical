@@ -22,21 +22,7 @@ def guiAnswers(pI):
 	pI.setTimeMatters(GUI.getTime())
 	pI.setNumPlayersMatter(GUI.getNumPlayers())
 
-#TODO:
-# lower priority (first query): campaign, leeftijd, duration, budget (sliders?), 
-# complexity (base < 2.5 or basis of three games), recc. players, type (max 3), cooperate.
 
-## higher priority (second query): campaign, leeftijd, duration, budget
-# complexity (larger range), numPlayers range, cooperate.
-
-# TODO TO IMPLEMENT
-
-# 1) print list of final genres in GUI
-# 2) get high/low priority queries in order
-# 4) pop-ups on GUI for explanation
-
-# QUESTIONS
-# links/images in final GUI frame?
 
 
 #initiate a root and an instance of the class Gui
@@ -67,5 +53,4 @@ if GUI.getFinished():
 	root = Tk()
 	root.wm_title("Board game recommendation")
 	GUI = gui.Gui(root, 1, finalList)
-	#GUI.printResults(pI.getSelfY())
-	#GUI.setFinalGames(pI.getSelfY())
+

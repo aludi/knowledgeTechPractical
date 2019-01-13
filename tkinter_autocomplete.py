@@ -100,11 +100,6 @@ class AutocompleteEntry(tk.Frame, object):
         self.entry.bind("<KeyRelease>", self._update_autocomplete)
         self.entry.focus()
         #self.entry.grid(column=0, row=0)
-       
-        print("row = ")
-        print(rowNum)
-        print("column = ") 
-        print(columnNum)
         
         self.entry.grid(column=columnNum, row=rowNum)
 

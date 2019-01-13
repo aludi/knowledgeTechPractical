@@ -87,13 +87,13 @@ class Gui:
 		Checkbutton(f1, font = "TkDefaultFont 16", text="Doesn't matter", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0,sticky=W)
 		Button(f1, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_minAge(master,minA,NA,f2one)).grid(row=24,column=1,sticky=S)
 		
-		#question 2.1 previous games
+		#question 2a previous games
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2one, image = pic)
 		w2.image = pic
 		w2.grid(row = 4, column = 1,rowspan=20, sticky = W)
 		Label(f2one, font = "TkDefaultFont 16", text="Question 2a.").grid(row=0, column=0, sticky=W)
-		Label(f2one, font = "TkDefaultFont 16", text="Name three games you like-1").grid(row=1, column=0, sticky=W)
+		Label(f2one, font = "TkDefaultFont 16", text="Name a game you like").grid(row=1, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game1Entry = StringVar()
 		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=4)	#changed to listNames
@@ -101,13 +101,13 @@ class Gui:
 		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=24, column=1, sticky=S)
 		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=24, column=0,sticky=S)
 		
-		#question 2.2
+		#question 2b
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2two, image = pic)
 		w2.image = pic
 		w2.grid(row = 4, column = 1,rowspan=20, sticky = W)
 		Label(f2two, font = "TkDefaultFont 16", text="Question 2b.").grid(row=0, column=0, sticky=W)
-		Label(f2two, font = "TkDefaultFont 16", text="Name three games you like-2").grid(row=1, column=0, sticky=W)
+		Label(f2two, font = "TkDefaultFont 16", text="Name another game you like").grid(row=1, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
 		game2Entry = StringVar()
 		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
@@ -116,13 +116,13 @@ class Gui:
 		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=24, column=0, sticky=S)
 		
 		
-		#question 2.3
+		#question 2c
 		pic = PhotoImage(file = "img/scaryOwl1.gif") 
 		w2 = Label(f2three, image = pic)
 		w2.image = pic
 		w2.grid(row = 4, column = 1,rowspan=20, sticky = E)
 		Label(f2three, font = "TkDefaultFont 16", text="Question 2c.").grid(row=0, column=0, sticky=W)
-		Label(f2three, font = "TkDefaultFont 16", text="Name three games you like-3").grid(row=1, column=0, sticky=W)
+		Label(f2three, font = "TkDefaultFont 16", text="Name a third game you like").grid(row=1, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2,sticky=W)
 		game3Entry = StringVar()
 		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
@@ -135,7 +135,7 @@ class Gui:
 		w3 = Label(f3, image = pic)
 		w3.image = pic
 		w3.grid(row=3,column=1,rowspan=20,sticky=E)
-		Label(f3, font = "TkDefaultFont 16", text="Question 3.").grid(row=0,column=0)
+		Label(f3, font = "TkDefaultFont 16", text="Question 3.").grid(row=0,column=0, sticky=W)
 		Label(f3, font = "TkDefaultFont 16", text="What is the preferred number of players?").grid(row=1,column=0,columnspan=2,sticky=W)
 		num = Entry(f3)
 		num.grid(row=2,column=0)
@@ -170,18 +170,19 @@ class Gui:
 		def typesExplained():
 			popup = Tk()
 			popup.wm_title("Types explained")
-			Label(popup, text = "Thematic:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 0,sticky=W)
-			Label(popup, text = "Emphasis on narative", font = "TkDefaultFont 10", fg = "black").grid(row=0,column=1,sticky=W)
-			Label(popup, text = "Strategy:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 1,sticky=W)
-			Label(popup, text = "More complex games", font = "TkDefaultFont 10", fg = "black").grid(row=1,column=1,sticky=W)
-			Label(popup, text = "Wargame:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 2,sticky=W)
-			Label(popup, text = "Conflict simulation", font = "TkDefaultFont 10", fg = "black").grid(row=2,column=1,sticky=W)
+			Label(popup, text = "Strategy:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 0,sticky=W)
+			Label(popup, text = "More complex games", font = "TkDefaultFont 10", fg = "black").grid(row=0,column=1,sticky=W)
+			Label(popup, text = "Thematic:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 1,sticky=W)
+			Label(popup, text = "Emphasis on narative", font = "TkDefaultFont 10", fg = "black").grid(row=1,column=1,sticky=W)
+			Label(popup, text = "Customizable:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 2,sticky=W)
+			Label(popup, text = "Has collectibles (such as cards)", font = "TkDefaultFont 10", fg = "black").grid(row=2,column=1,sticky=W)
 			Label(popup, text = "Family:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 3,sticky=W)
 			Label(popup, text = "Fun for kids and adults", font = "TkDefaultFont 10", fg = "black").grid(row=3,column=1,sticky=W)
-			Label(popup, text = "Customizable:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 4,sticky=W)
-			Label(popup, text = "Has collectibles (such as cards)", font = "TkDefaultFont 10", fg = "black").grid(row=4,column=1,sticky=W)
-			Label(popup, text = "Party:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 5,sticky=W)
-			Label(popup, text = "Few rules, lots of laughs", font = "TkDefaultFont 10", fg = "black").grid(row=5,column=1,sticky=W)
+			Label(popup, text = "Party:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 4,sticky=W)
+			Label(popup, text = "Few rules, lots of laughs", font = "TkDefaultFont 10", fg = "black").grid(row=4,column=1,sticky=W)
+			Label(popup, text = "Wargame:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 5,sticky=W)
+			Label(popup, text = "Conflict simulation", font = "TkDefaultFont 10", fg = "black").grid(row=5,column=1,sticky=W)
+			
 			
 		
 		#question 5
@@ -191,9 +192,10 @@ class Gui:
 		w1.grid(row=3,column=1,rowspan=20,sticky=W)
 		Label(f5, font = "TkDefaultFont 16", text="Question 5.").grid(row=0,column=0,sticky=W)
 		Button(f5, font = "TkDefaultFont 16", text="What type of game do you want to play?", command= typesExplained).grid(row=1,column=0,columnspan=2,sticky=W)
+		Label(f5, font = "TkDefaultFont 10", text="(click on the question if you want a description of each type)").grid(row=2,column=0,columnspan=2,sticky=W)
 		gen = StringVar()
 		count = 0
-		r=2
+		r=3
 		for i in self.__ListType:		#loops through all game-types in database.
 			if count == 0:
 				gen.set(i)
@@ -342,7 +344,7 @@ class Gui:
 		pic = PhotoImage(file = "img/scaryOwlBig.gif")
 		master1 = Label(master, image = pic)
 		master1.image = pic
-		master1.pack(side = "left")
+		master1.pack(side = "left") 
 		count = 0
 		for i in finalGames:
 			if count >= 5: 
@@ -362,21 +364,18 @@ class Gui:
 		
 	def save_game1(self, master, g1, frame):
 		self.__game1 = g1.get()
-		print("first saved game ")
 		print(self.__game1)
 		raise_frame(frame)
 		master.update
 		
 	def save_game2(self, master, g2, frame):
 		self.__game2 = g2.get()
-		print("second saved game")
 		print(self.__game2)
 		raise_frame(frame)
 		master.update
 		
 	def save_game3(self, master, g3, frame):
 		self.__game3 = g3.get()
-		print("third saved game")
 		print(self.__game3)
 		raise_frame(frame)
 		master.update
