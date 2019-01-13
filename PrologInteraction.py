@@ -224,10 +224,10 @@ class PrologInteraction:
 			print("sorry, we couldn't find any games for you")	
 		
 		
-	def stringQuery(self, prolog, priorityLevel):	# to add, checkbox types - multiple queries
+	def stringQuery(self, prolog, priorityLevel):	
 		# to implement: for object in self.listTypes:
 			# call stringQuery where self.type = object
-			#priorityLevel indicates how precisely we want to meet the users requirements 
+			# priorityLevel indicates how precisely we want to meet the user's requirements 
 		if priorityLevel == "high":
 			stringQuery ='''
 			NUMBEROFPLAYERS = {},
@@ -295,7 +295,6 @@ class PrologInteraction:
 		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
 		
  
-#
 #game(name, min players, max players, minTime, maxTime, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
 
 	def selectFinalGames(self, listFinal, playedGames):
