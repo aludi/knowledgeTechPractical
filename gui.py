@@ -385,7 +385,7 @@ class Gui:
 			self.errorMessage()
 			return
 		self.__numPlayers = num.get()
-		if self.__numPlayers == '' or NA.get() == 1 or not(self.__numPlayers.isdigit()):
+		if self.__numPlayers == '' or NA.get() == 1:
 			self.__numPlayers = 0		#to change later, difference between "doesn't matter" and "nothing filled in"
 		raise_frame(frame)
 		master.update	
@@ -405,7 +405,7 @@ class Gui:
 			self.errorMessage()
 			return
 		self.__gameTime = time.get()
-		if self.__gameTime == '' or NA.get() == 1 or not(self.__gameTime.isdigit()):
+		if self.__gameTime == '' or NA.get() == 1:
 			self.__gameTime = 0
 		raise_frame(frame)
 		master.update
@@ -432,7 +432,7 @@ class Gui:
 			self.errorMessage()
 			return
 		self.__minAge = minA.get()
-		if self.__minAge == '' or NA.get() == 1 or not(self.__minAge.isdigit()):
+		if self.__minAge == '' or NA.get() == 1 :
 			self.__minAge = 100
 		raise_frame(frame)
 		master.update

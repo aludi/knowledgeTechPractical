@@ -53,4 +53,3 @@ if GUI.getFinished():
 	root = Tk()
 	root.wm_title("Board game recommendation")
 	GUI = gui.Gui(root, 1, finalList)
-
