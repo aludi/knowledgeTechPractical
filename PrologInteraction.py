@@ -323,7 +323,7 @@ class PrologInteraction:
 			self.stringQuery(Prolog, "low")
 			listFinal = self.selectFinalGames(listFinal,playedGames)
 			
-		if listFinal == []:
+		if len(listFinal) <= 3:
 			t = "Sorry, we couldn't find any games for you"
 			listFinal.append(str(t))
 		return listFinal

@@ -33,10 +33,9 @@ class Gui:
 		f5 = Frame(master)
 		f6 = Frame(master)
 		f7 = Frame(master)
-		f8 = Frame(master)
 		
 		
-		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7, f8):
+		for frame in (f0, f1, f2one, f2two, f2three, f3, f4, f5, f6, f7):
 		    frame.grid(row=0, column=0, sticky='news')
 		    
 		
@@ -49,8 +48,8 @@ class Gui:
 		self.__gameType = "strategy"
 		self.__gameTime = 60
 		self.__minAge = 100
-		self.__Coop = "true"
-		self.__Campaign = "true"
+		self.__Coop = "_"
+		self.__Campaign = "_"
 		self.__ListType = prologThing.getTypesForGUI() 		#getting types-lists (family, strategy) from prologInteraction
 		self.__ListNames = prologThing.getNamesGamesForGUI() #getting all names of all games from prologInteraction
 		self.__ListGenres = prologThing.getGenresForGUI()
@@ -238,26 +237,27 @@ class Gui:
 		Radiobutton(f7, font = "TkDefaultFont 16", text="No", padx = 20, variable=coop, value="false").grid(row=4,column=0,sticky=W)
 		Radiobutton(f7, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=coop, value="either").grid(row=5,column=0,sticky=W)
 		Button(f7, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f6)).grid(row=24,column=0,sticky=S)
-		Button(f7, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_coop(master,coop, f8)).grid(row=24,column=1,sticky=S)
+		#Button(f7, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_coop(master,coop, f8)).grid(row=24,column=1,sticky=S)
+		Button(f7, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_coop(master,coop)).grid(row=24,column=1,sticky=S)
 		
-		def campaign():
-			messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
+		#def campaign():
+			#messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
 		
 		#question 8
-		pic = PhotoImage(file = "img/scaryOwl1.gif") 
-		w1 = Label(f8, image = pic)
-		w1.image = pic
-		w1.grid(row=3,column=1,rowspan=20,sticky=W)
-		Label(f8, font = "TkDefaultFont 16", text="Question 8.").grid(row=0,column=0,sticky=W)
-		Button(f8, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).grid(row=1,column=0,columnspan=2,sticky=W)
-		Label(f8, font = "TkDefaultFont 10", text="(click on the question if you don't know what a campaign game is)").grid(row=2,column=0,columnspan=2,sticky=W)
-		cam = StringVar()
-		cam.set("true")
-		Radiobutton(f8, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").grid(row=3,column=0,sticky=W)
-		Radiobutton(f8, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").grid(row=4,column=0,sticky=W)
-		Radiobutton(f8, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=cam, value="either").grid(row=5,column=0,sticky=W)
-		Button(f8, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f7)).grid(row=24,column=0,sticky=S)
-		Button(f8, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_campaign(master,cam)).grid(row=24,column=1,sticky=S)
+		#pic = PhotoImage(file = "img/scaryOwl1.gif") 
+		#w1 = Label(f8, image = pic)
+		#w1.image = pic
+		#w1.grid(row=3,column=1,rowspan=20,sticky=W)
+		#Label(f8, font = "TkDefaultFont 16", text="Question 8.").grid(row=0,column=0,sticky=W)
+		#Button(f8, font = "TkDefaultFont 16", text="Do you want a game that has a campaign?",command=campaign).grid(row=1,column=0,columnspan=2,sticky=W)
+		#Label(f8, font = "TkDefaultFont 10", text="(click on the question if you don't know what a campaign game is)").grid(row=2,column=0,columnspan=2,sticky=W)
+		#cam = StringVar()
+		#cam.set("true")
+		#Radiobutton(f8, font = "TkDefaultFont 16", text="Yes", padx = 20, variable=cam, value="true").grid(row=3,column=0,sticky=W)
+		#Radiobutton(f8, font = "TkDefaultFont 16", text="No", padx = 20, variable=cam, value="false").grid(row=4,column=0,sticky=W)
+		#Radiobutton(f8, font = "TkDefaultFont 16", text="No preference", padx = 20, variable=cam, value="either").grid(row=5,column=0,sticky=W)
+		#Button(f8, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f7)).grid(row=24,column=0,sticky=S)
+		#Button(f8, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_campaign(master,cam)).grid(row=24,column=1,sticky=S)
 		
 		
 		raise_frame(f0)
@@ -352,9 +352,12 @@ class Gui:
 			if i == "Best Matching Games" or i == "Expanding Search..." or i == "Expanding Search Again...":
 				#Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 				Button(master, text = i, font = "TkDefaultFont 20 bold", fg = "black", padx = 20, command = partial(self.displayChanges,i)).pack(anchor = tk.W)
+			elif  i == "Sorry, we couldn't find any games for you":
+				Label(master, text=i, font = "TkDefaultFont 20", fg= "red", padx=20).pack(anchor=tk.W)		
 			else:
 				count = count+1
-				Button(master, text=i,font = "TkDefaultFont 20", fg = "red", padx = 20, command= partial(self.displayGameInfo,i)).pack(anchor=tk.W)		
+				Button(master, text=i,font = "TkDefaultFont 20", fg = "red", padx = 20, command= partial(self.displayGameInfo,i)).pack(anchor=tk.W)
+				
 		Button(master, font = "TkDefaultFont 16", text="Exit", command= master.destroy).pack(fill=X,padx=250, side="bottom")
 		master.mainloop()	
 		
@@ -410,12 +413,13 @@ class Gui:
 		raise_frame(frame)
 		master.update
 		
-	def save_coop(self, master, coop, frame):
+	def save_coop(self, master, coop):
 		self.__Coop = coop.get()
+		self.__finished=True
 		if self.__Coop == "either":
 			self.__Coop = "_"
 		print("coop", self.__Coop)
-		raise_frame(frame)
+		master.destroy()
 		master.update
 		
 	def save_campaign(self, master, cam):
