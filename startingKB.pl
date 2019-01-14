@@ -57,7 +57,7 @@ game("fields of arle",1,2,2,60,120,12,3.90,["Strategy"],65,false,false,["Economi
 game("five cucumbers", 3, 6, 5, 25, 25, 8, 1.32, ["Family"], 5, false, false, ["Card Game"]).
 game("five tribes",2,4,2,40,80,12,2.89,["Strategy"],40,false,false,["Animals","Arabian","Fantasy","Mythology"]).
 game("fluxx",2, 6, 4, 5, 30, 8, 1.39, ["Family", "Party"], 12, false, false, ["Card Game"]).
-game("frank's zoo",4, 7, 6, 60,60, 1.54, ["Family"], 14, false, false, ["Animals", "Card Game"]).
+game("frank's zoo",4, 7, 6, 60,60, 10, 1.54, ["Family"], 14, false, false, ["Animals", "Card Game"]).
 game("food chain magnate",2,5,3,120,240,14,4.19,["Strategy"],120,false,false,["Economic","Industry"]).
 game("forbidden stars",2,4,3,120,180,14,3.79,["Strategy"],120,false,false,["Bluffing","Science Fiction","Wargame"]).
 game("forbidden island", 1, 4, 4,30, 30, 8, 1.74, ["Family"],  10, true, false, ["Adventure", "Fantasy"]).
