@@ -38,7 +38,7 @@ game("codenames",4,9,6,15,15,10,1.32,["Party"],15,false,false,["Card Game","Dedu
 game("cockroach salad", 3, 6, 5, 10, 20, 6, 1.15, ["Party"], 10, false, false,["Action", "Card Game", "Humor", "Real-time"]).
 game("commands & colors: ancients",2,2,2,60,60,12,2.70,["Wargame"],45,false,false,["Ancient","Wargame"]).
 game("concordia",2,5,4,100,100,12,3.09,["Strategy"],50,false,false,["Ancient","Economic","Nautical"]).
-game("coup", 3, 6, 5, 15, 15, 10, 1.42 ["Family"], 8, false, false,["Bluffing", "Card Game", "Deduction", "Political"]).
+game("coup", 3, 6, 5, 15, 15, 10, 1.42, ["Family"], 8, false, false,["Bluffing", "Card Game", "Deduction", "Political"]).
 game("coloretto",2, 5, 4, 30, 30, 6, 1.29, ["Family"], 7, false, false, ["Animals", "Card Game"]).
 game("dead of winter: a crossroads game",3,5,4,60,120,12,3.00,["Thematic"],50,true,false,["Bluffing","Deduction","Horror"]).
 game("deckscape: test time", 1, 4, 2, 30, 90, 10, 1.48, ["Party", "Thematic"], 10, true, false, ["Card Game", "Puzzle", "Real-time"]).
@@ -181,7 +181,7 @@ game("twilight imperium (fourth edition)",3,6,6,240,480,14,4.15,["Strategy"],120
 game("twilight struggle",2,2,2,120,180,14,3.56,["Strategy","Wargame"],60,false,true,["Political","Modern Warfare"]).
 game("tzolk'in: the mayan calendar",2,4,4,90,90,12,3.64,["Strategy"],40,false,false,["Ancient","Civilization","Economic","Farming","Mythology"]).
 game("unstable unicorns", 2, 6, 5, 30, 45, 10, 1.65, ["Party"], 24, false, false, ["Card Game", "Humor", "Party Game"]).
-game("uno",2, 8, 5, 5, 1.13,["Family"],10, false, false, ["Card Game", "Number"]).
+game("uno",2, 8, 5, 30, 30, 5, 1.13,["Family"],10, false, false, ["Card Game", "Number"]).
 game("viticulture essential edition",1,6,4,45,90,12,2.92,["Strategy"],50,false,false,["Economic","Farming"]).
 game("war of the ring (first edition)",2,4,2,120,120,14,3.84,["Thematic","Wargame"],75,false,false,["Adventure","Fantasy","Novel-based","Territory Building","Wargame"]).
 game("war of the ring (second edition)",2,4,2,150,180,14,4.06,["Thematic","Wargame"],80,false,true,["Adventure","Fantasy","Novel-Based","Territory Building"]).
