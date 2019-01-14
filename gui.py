@@ -94,8 +94,9 @@ class Gui:
 		Label(f2one, font = "TkDefaultFont 16", text="Question 2a.").grid(row=0, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 16", text="Name a game you like").grid(row=1, column=0, sticky=W)
 		Label(f2one, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
+		Label(f2one, font = "TkDefaultFont 10 italic", text="Once you type in a letter or two, you can scroll down the drop-down menu").grid(row=3, column=0,columnspan=2, sticky=W)
 		game1Entry = StringVar()
-		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=4)	#changed to listNames
+		f2one.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum = 0, rowNum=5)	#changed to listNames
 		game1Entry = f2one.text
 		Button(f2one, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game1(master,game1Entry, f2two)).grid(row=24, column=1, sticky=S)
 		Button(f2one, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f1)).grid(row=24, column=0,sticky=S)
@@ -108,8 +109,9 @@ class Gui:
 		Label(f2two, font = "TkDefaultFont 16", text="Question 2b.").grid(row=0, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 16", text="Name another game you like").grid(row=1, column=0, sticky=W)
 		Label(f2two, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2, sticky=W)
+		Label(f2two, font = "TkDefaultFont 10 italic", text="Once you type in a letter or two, you can scroll down the drop-down menu").grid(row=3, column=0,columnspan=2, sticky=W)
 		game2Entry = StringVar()
-		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
+		f2two.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=5)	#changed to listNames
 		game2Entry = f2two.text
 		Button(f2two, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game2(master,game2Entry, f2three)).grid(row=24, column=1,sticky=S)
 		Button(f2two, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2one)).grid(row=24, column=0, sticky=S)
@@ -123,8 +125,9 @@ class Gui:
 		Label(f2three, font = "TkDefaultFont 16", text="Question 2c.").grid(row=0, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 16", text="Name a third game you like").grid(row=1, column=0, sticky=W)
 		Label(f2three, font = "TkDefaultFont 10 italic", text="If the game you like is not in the database, please leave the entry blank").grid(row=2, column=0,columnspan=2,sticky=W)
+		Label(f2three, font = "TkDefaultFont 10 italic", text="Once you type in a letter or two, you can scroll down the drop-down menu").grid(row=3, column=0,columnspan=2, sticky=W)
 		game3Entry = StringVar()
-		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=4)	#changed to listNames
+		f2three.build(entries=self.__ListNames, no_results_message="<No results found for '{}' >",columnNum=0,rowNum=5)	#changed to listNames
 		game3Entry = f2three.text
 		Button(f2three, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_game3(master,game3Entry, f3)).grid(row=24, column=1, sticky=S+W)
 		Button(f2three, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2two)).grid(row=24, column=0, sticky=S)
@@ -137,9 +140,9 @@ class Gui:
 		Label(f3, font = "TkDefaultFont 16", text="Question 3.").grid(row=0,column=0, sticky=W)
 		Label(f3, font = "TkDefaultFont 16", text="What is the preferred number of players?").grid(row=1,column=0,columnspan=2,sticky=W)
 		num = Entry(f3)
-		num.grid(row=2,column=0)
+		num.grid(row=2,column=0, sticky=W)
 		NA = IntVar()
-		Checkbutton(f3, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0)
+		Checkbutton(f3, font = "TkDefaultFont 16", text="No preference", variable = NA, onvalue=1, offvalue=0).grid(row=3,column=0, sticky=W)
 		Button(f3, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_numPlayers(master,num,NA,f4)).grid(row=23,column=1,sticky=S)
 		Button(f3, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f2three)).grid(row=23,column=0,sticky=S)
 		
@@ -181,7 +184,8 @@ class Gui:
 			Label(popup, text = "Few rules, lots of laughs", font = "TkDefaultFont 10", fg = "black").grid(row=4,column=1,sticky=W)
 			Label(popup, text = "Wargame:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 5,sticky=W)
 			Label(popup, text = "Conflict simulation", font = "TkDefaultFont 10", fg = "black").grid(row=5,column=1,sticky=W)
-			
+			Label(popup, text = "Abstract:", font = "TkDefaultFont 11 bold", fg = "black", padx=20,pady=2).grid(row = 6,sticky=W)
+			Label(popup, text = "Like Chess or Go", font = "TkDefaultFont 10", fg = "black").grid(row=6,column=1,sticky=W)
 			
 		
 		#question 5
@@ -239,6 +243,10 @@ class Gui:
 		Button(f7, font = "TkDefaultFont 16", text="Previous Question", command= lambda: raise_frame(f6)).grid(row=24,column=0,sticky=S)
 		#Button(f7, font = "TkDefaultFont 16", text="Next Question", command= lambda: self.save_coop(master,coop, f8)).grid(row=24,column=1,sticky=S)
 		Button(f7, font = "TkDefaultFont 16", text="Recommend me some games!", command= lambda: self.save_coop(master,coop)).grid(row=24,column=1,sticky=S)
+		
+		
+		### Question 8 was used in earlier versions of the program, but was removed after the validation session with the expert as it seemed to be unnecessary
+		
 		
 		#def campaign():
 			#messagebox.showinfo("Campaign games","Campaign games are games where the game and/or characters change over time, such that the results of one game may influence future plays.")
@@ -350,7 +358,6 @@ class Gui:
 			if count >= 5: 
 				break
 			if i == "Best Matching Games" or i == "Expanding Search..." or i == "Expanding Search Again...":
-				#Label(master, text=i,font = "TkDefaultFont 20 bold", fg = "black", padx = 20).pack(anchor=tk.W)
 				Button(master, text = i, font = "TkDefaultFont 20 bold", fg = "black", padx = 20, command = partial(self.displayChanges,i)).pack(anchor = tk.W)
 			elif  i == "Sorry, we couldn't find any games for you":
 				Label(master, text=i, font = "TkDefaultFont 20", fg= "red", padx=20).pack(anchor=tk.W)		
@@ -367,19 +374,16 @@ class Gui:
 		
 	def save_game1(self, master, g1, frame):
 		self.__game1 = g1.get()
-		print(self.__game1)
 		raise_frame(frame)
 		master.update
 		
 	def save_game2(self, master, g2, frame):
 		self.__game2 = g2.get()
-		print(self.__game2)
 		raise_frame(frame)
 		master.update
 		
 	def save_game3(self, master, g3, frame):
 		self.__game3 = g3.get()
-		print(self.__game3)
 		raise_frame(frame)
 		master.update
 	 
@@ -389,7 +393,7 @@ class Gui:
 			return
 		self.__numPlayers = num.get()
 		if self.__numPlayers == '' or NA.get() == 1:
-			self.__numPlayers = 0		#to change later, difference between "doesn't matter" and "nothing filled in"
+			self.__numPlayers = 0		
 		raise_frame(frame)
 		master.update	
 		
@@ -418,18 +422,17 @@ class Gui:
 		self.__finished=True
 		if self.__Coop == "either":
 			self.__Coop = "_"
-		print("coop", self.__Coop)
 		master.destroy()
 		master.update
 		
-	def save_campaign(self, master, cam):
-		self.__Campaign = cam.get()
-		self.__finished = True
-		if self.__Campaign== "either":
-			self.__Campaign = "_"
-		print("camp", self.__Campaign)
-		master.destroy()
-		master.update
+	#def save_campaign(self, master, cam):
+		#self.__Campaign = cam.get()
+		#self.__finished = True
+		#if self.__Campaign== "either":
+			#self.__Campaign = "_"
+		#print("camp", self.__Campaign)
+		#master.destroy()
+		#master.update
 
 	def save_minAge(self, master, minA, NA, frame):
 		if not (minA.get().isdigit() or minA.get() ==''):

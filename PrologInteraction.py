@@ -7,7 +7,7 @@ class PrologInteraction:
 
 	def __init__(self):
 		self.prolog = Prolog()
-		self.kb = self.prolog.consult('startingKB.pl')		#to change so you can select your own file?
+		self.kb = self.prolog.consult('startingKB.pl')		
 		prologRules = self.initPrologRules()
 		self.game1 = "some game"
 		self.game2 = "some game"
@@ -43,7 +43,7 @@ class PrologInteraction:
 		return self.y
 	
 	def getAllProperties(self, nameOfGame):
-		print("am in here")
+		#print("am in here")
 		x = self.prolog.query('''game({},MinP, MaxP, RecP, Mintime, Maxtime, Minage, Complexity, T, C, CO, CA, Listgenre)'''.format(nameOfGame))
 		for soln in x:
 			print(soln["MinP"], soln["MaxP"], soln["Mintime"], soln["Maxtime"], soln["Minage"], soln["Complexity"], soln["T"], soln["Listgenre"])
@@ -98,16 +98,16 @@ class PrologInteraction:
 			self.complexity = 3
 		else:
 			for y in listGame:
-				print("y IN AVERAGE COMPLEXITY", type(y))
+				#print("y IN AVERAGE COMPLEXITY", type(y))
 				x = self.prolog.query('''game("{}",_,_, _, _, _, _, Complexity, _,_, _,_, _)'''.format(y))
 				query = '''game("{}",_,_, _, _, _, _, Complexity, _,_, _,_, _)'''.format(y)
-				print(query)
-				print("x IN AVERAGE COMPLEXITY", type(x))
+				#print(query)
+				#print("x IN AVERAGE COMPLEXITY", type(x))
 				for soln in x:
 					comp = soln["Complexity"]
 				compAv = compAv + comp
 			self.complexity = compAv/len(listGame)
-		print("the average complexity of the three games is... ", self.complexity)
+		#print("the average complexity of the three games is... ", self.complexity)
 		return self.complexity
 		
 
@@ -162,7 +162,7 @@ class PrologInteraction:
 	def setBudget(self, budgetVal):
 		if budgetVal == 0:
 			budgetVal = 1000
-		self.budget = budgetVal #to implement: range of budgets
+		self.budget = budgetVal 
 		
 	def setType(self, typeGameSel):
 		self.typeGame = typeGameSel
@@ -225,9 +225,7 @@ class PrologInteraction:
 		
 		
 	def stringQuery(self, prolog, priorityLevel):	
-		# to implement: for object in self.listTypes:
-			# call stringQuery where self.type = object
-			# priorityLevel indicates how precisely we want to meet the user's requirements 
+		# priorityLevel indicates how precisely we want to meet the user's requirements 
 		if priorityLevel == "high":
 			stringQuery ='''
 			NUMBEROFPLAYERS = {},
@@ -291,8 +289,8 @@ class PrologInteraction:
 			Complexity >= AVERAGECOMPLEXITY - 1.5'''.format(self.numberOfPlayers, self.minAge, self.budget, self.typeGame,self.time, self.coop, self.camp, self.numTimeMatters, self.numPlayersMatter, self.complexity)
 			
 		self.y = prolog.query(stringQuery)
-		print(stringQuery)
-		print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
+		#print(stringQuery)
+		#print(self.numberOfPlayers, self.minAge, self.budget, self.typeGame, self.minTime, self.maxTime, self.coop, self.camp, self.complexity)
 		
  
 #game(name, min players, max players, minTime, maxTime, min age, complexity, type, budget, cooperativeTF, campaignTF, Listgenre)
