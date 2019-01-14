@@ -13,7 +13,7 @@ game("arkham horror: the card game",1,2,2,60,120,14,3.28,["Customizable","Themat
 game("azul",2,4,2,30,45,8,1.81,["Abstract","Family"],30,false,false,["Renaissance"]).
 game("battlestar galactica: the board game",4,6,5,120,300,14,3.23,["Thematic"],150,true,false,["Bluffing","Deduction","Political","Science Fiction","Space Exploration"]).
 game("betrayal at house on the hill",3,6,5,60,60,12,2.37,["Thematic"],30,true,false,["Adventure","Exploration","Horror"]).
-game("biberclan", 2, 6, 4, 20, 20, 7, 2.00, ["Uncategorized"], 11, false, false, ["Card Game"]).
+game("biberclan", 2, 6, 4, 20, 20, 7, 2.00, ["Family"], 11, false, false, ["Card Game"]).
 game("black stories", 3, 12, 5, 20, 20, 12, 1.28, ["Party", "Thematic"], 10, false, false,["Card Game", "Deduction", "Horror", "Humor", "Party Game","Murder/Mystery"]).
 game("blood rage",3,4,4,60,90,12,2.89,["Strategy","Thematic"],60,false,false,["Fantasy","Mythology"]).
 game("bohnanza", 3, 7, 5, 45, 45, 8, 1.67, ["Family"], 7, false, false,["Card Game", "Farming", "Negotiation"]).
@@ -21,7 +21,7 @@ game("brass: birmingham",2,4,3,60,120,14,3.88,["Strategy"],60,false,false,["Econ
 game("brass: lancashire",2,4,4,60,120,14,3.87,["Strategy"],60,false,false,["Economic","Transportation"]).
 game("captain sonar",6,8,8,45,60,10,2.11,["Party","Thematic"],40,false,false,["Deduction","Nautical"]).
 game("carcassonne",2,5,2,30,45,8,1.93,["Family"],30,false,false,["City Building","Medieval","Territory Building"]).
-game("capo della mafia",3, 7, 4, 30, 30, 10, 1.50, ["Uncategorized"], 14, false, false, ["Card Game", "Mafia"]).
+game("capo della mafia",3, 7, 4, 30, 30, 10, 1.50, ["Family"], 14, false, false, ["Card Game", "Mafia"]).
 game("cards against humanity", 4, 12, 7, 30, 30, 16, 1.22,["Party"], 25, false, false, ["Card Game", "Humor", "Mature"]).
 game("castles of mad ludwig",2,4,4,90,90,10,2.66,["Strategy"],40,false,false,["Post-Napoleonic","Puzzle"]).
 game("catan",3,4,4,60,120,8,2.34,["Family","Strategy"],45,false,false,["Negotiation"]).
@@ -30,10 +30,10 @@ game("caylus",2,5,3,60,150,12,3.82,["Strategy"],40,false,false,["City Building",
 game("champions of midgard",2,4,4,60,90,10,2.54,["Strategy"],45,false,false,["Adventure","Dice","Fantasy","Medieval","Mythology"]).
 game("chaos in the old world",3,4,4,60,120,14,3.18,["Strategy","Thematic"],60,false,false,["Fantasy","Horror","Mythology","Wargame"]).
 game("cheating moth", 4, 5, 5, 30, 30, 6, 1.16, ["Party"], 11, false, false, ["Action", "Card Game"]).
-game("claim",2, 2, 2, 25, 25, 8, 1.75, ["Uncategorized"], 5, false, false, ["Card Game", "Fantasy"]).
+game("claim",2, 2, 2, 25, 25, 8, 1.75, ["Family"], 5, false, false, ["Card Game", "Fantasy"]).
 game("clank!: a deck-building adventure",2,4,3,30,60,8,2.21,["Family","Strategy"],40,false,false,["Adventure","Fantasy"]).
 game("clans of caledonia",1,4,4,30,120,12,3.43,["Strategy"],50,false,false,["Economic"]).
-game("crooks", 2, 4, 4, 15, 15, 10, 1.43, ["Uncategorized"],11, false, false, ["Card Game", "Mafia"]).
+game("crooks", 2, 4, 4, 15, 15, 10, 1.43, ["Family"],11, false, false, ["Card Game", "Mafia"]).
 game("codenames",4,9,6,15,15,10,1.32,["Party"],15,false,false,["Card Game","Deduction","Word Game"]).
 game("cockroach salad", 3, 6, 5, 10, 20, 6, 1.15, ["Party"], 10, false, false,["Action", "Card Game", "Humor", "Real-time"]).
 game("commands & colors: ancients",2,2,2,60,60,12,2.70,["Wargame"],45,false,false,["Ancient","Wargame"]).
@@ -112,7 +112,7 @@ game("pandemic legacy: season 1",2,4,4,60,60,12,2.83,["Strategy","Thematic"],60,
 game("pandemic",1,4,4,45,45,10,2.42,["Family","Strategy"],35,true,false,["Medical"]).
 game("pandemic: iberia",1,5,4,45,45,10,2.64,["Strategy"],50,true,false,["Medical"]).
 game("pass the pigs",2, 10, 4, 30, 30, 6, 1.06, ["Family", "Party"], 5, false, false, ["Animals", "Dice", "Party Game"]).
-game("paku paku",3, 6, 4, 10, 10, 5, 1.00, ["Uncategorized"], 13, false, false, ["Dice"]).
+game("paku paku",3, 6, 4, 10, 10, 5, 1.00, ["Family"], 13, false, false, ["Dice"]).
 game("patchwork",2,2,2,15,30,6,1.69,["Abstract","Family"],25,false,false,["Puzzle"]).
 game("party animals", 3, 5, 4, 45, 45, 8, 1.18, ["Party"], 8, false, false, ["Animals", "Card Game", "Humor", "Party Game"]).
 game("panic lab",2, 10, 5, 10, 30, 6, 1.38, ["Family", "Party"], 12, false, false, ["Humor", "Puzzle", "Party Game", "Real-time"]).
@@ -173,7 +173,7 @@ game("through the ages: a story of civilization",2,4,3,240,240,14,4.17,["Strateg
 game("ticket to ride: europe",2,5,4,30,60,8,1.96,["Family"],45,false,false,["Trains"]).
 game("tigris & euphrates",2,4,4,90,90,12,3.53,["Strategy"],60,false,false,["Ancient","Civilization","Territory Building"]).
 game("trajan",2,4,4,60,120,12,3.68,["Strategy"],35,false,false,["Ancient","Political"]).
-game("tricky dungeon",2, 4, 3, 20, 40, 10, 2.00, ["Uncategorized"], 7, false, false, ["Bluffing", "Fantasy"]).
+game("tricky dungeon",2, 4, 3, 20, 40, 10, 2.00, ["Family"], 7, false, false, ["Bluffing", "Fantasy"]).
 game("triviant pursuit",2,6,4,90,90,12,1.66,["Family","Party"],30,false,false,["Trivia"]).
 game("troyes",2,4,3,90,90,12,3.46,["Strategy"],50,false,false,["Dice","Economic","Medieval"]).
 game("tooth terror", 2, 3, 3, 20, 20, 8, 1.00, ["Family"], 5, false, false, ["Card Game", "Humor", "Medical", "Party Game"]).
