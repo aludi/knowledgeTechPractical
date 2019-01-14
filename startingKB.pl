@@ -70,7 +70,7 @@ game("grand austria hotel",2,3,2,60,120,12,3.23,["Strategy"],80, false, false, [
 game("great western trail",2,4,3,75,150,12,3.69,["Strategy"],60,false,false,["Animals"]).
 game("gubs",2, 6, 3, 20, 20, 8, 1.39, ["Family"], 7, false, false, ["Card Game", "Fantasy", "Party Game"]).
 game("guillotine", 2, 5, 4, 30, 30, 10, 1.27, ["Family"], 11, false, false, ["Card Game", "Humor", "Napoleonic"]).
-game("gier", 4, 5, 5, 15, 15, 6, 1.67, ["Card Game"], 15, false, false, ["Card Game"]).
+game("gier", 4, 5, 5, 15, 15, 6, 1.67, ["Family"], 15, false, false, ["Card Game"]).
 game("halli galli", 3, 6, 4, 10, 10, 6, 1.01, ["Party"], 13, false, false, ["Action", "Cards"]).
 game("hanabi", 2, 5, 4, 25, 25, 10, 1.70, ["Family"],11, true, false, ["Card Game", "Deduction", "Memory"]).
 game("hive",2, 2, 2, 20, 20, 8, 2.34, ["Abstract", "Family"], 6, false, false, ["Abstract Strategy", "Animals"]).
